@@ -322,7 +322,7 @@
 					else {
 						let auctionUpcoming = await getAuctionByStatus("upcoming");
 						let auctionActive = await getAuctionByStatus("active");
-						auction = auctionUpcoming.concat(auctionActive);
+						auction = auctionActive.concat(auctionUpcoming);
 					}
 					if (existParam("category")) {
 						let alias = getParam("category");
@@ -338,10 +338,10 @@
 						if (sortBy === "price") {
 							let order = getParam("order");
 							if (order === "asc") {
-								return auction.sort((a,b) => a.auction.currentPrice - b.auction.currentPrice);
+								return auction.sort((a,b) => a.auction.bidPrice - b.auction.bidPrice);
 							}
 							if (order === "desc") {
-								return auction.sort((a,b) => b.auction.currentPrice - a.auction.currentPrice);
+								return auction.sort((a,b) => b.auction.bidPrice - a.auction.bidPrice);
 							}
 						}
 						if (sortBy === "time") {
@@ -430,7 +430,7 @@
 					for (let i = 0; i < $('.cur-format').length; i++) {
 						$('.cur-format').eq(i).html(Math.floor(Number($('.cur-format').eq(i).html())).toLocaleString('en'));
 					}
-					paginations({ pagerSelector: '#ListAuction', paginationSelector: '.pagination', perPage: 10 });
+					paginations({ pagerSelector: '#ListAuction', paginationSelector: '.pagination', perPage: 8 });
 				}
 				renderData();
 				let CountDownTime = function(timeElement) {

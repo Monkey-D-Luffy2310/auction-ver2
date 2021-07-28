@@ -655,7 +655,7 @@
 							<div class="form-group mt-6">
 								<div class="font-weight-bold">Số điện thoại </div>
 								<div class="position-relative">
-									<input id="NumberPhone" type="text" class="form-control input-email dg-password"
+									<input id="NumberPhone" type="text" class="form-control input-email dg-password" maxlength="12"
 										placeholder="Nhập số điện thoại" />
 								</div>
 								<div id="NumberPhoneAlert" class="text-danger mt-1"></div>
@@ -671,7 +671,7 @@
 								</label>
 							</div>
 
-							<div class="form-group mt-6" style="height: 45px;">
+							<div class="form-group mt-6 checkBox" style="height: 45px;">
 								<div class="custom-control custom-checkbox mb-2">
 									<input type="checkbox" class="custom-control-input" id="customCheck"
 										name="customCheck">
@@ -679,7 +679,7 @@
 										Tôi đồng ý các <a href="/AC-Auction/quy-dinh-su-dung">Điều khoản &amp; Quy
 											định</a>
 									</label>
-									<div id="checkAlert" class="text-danger mt-1"></div>
+									<div id="checkAlert" class="text-danger"></div>
 								</div>
 							</div>
 
@@ -716,8 +716,6 @@
 						<p class="mb-1 f-13 font-weight-600">Đã kích hoạt? <a class="open-modal-tab-login"
 								href="javascript:void(0)">Đăng nhập</a></p>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -819,12 +817,20 @@
 	            <a href="/dau-gia-da-thang" class="btn btn-primary font-weight-bold text-white pay-button" th:if="${addresses != null}">
 	                  Thanh toán ngay
                 </a>
-                <div th:if="${addresses == null}" style="text-align: center; font-size: 20px;">Vui lòng điền <a href="javascript:void(0)" class="tranferInformation">thông tin vận chuyển.</a></div>
+                <div th:if="${addresses == null}" style="text-align: center; font-size: 30px;">Vui lòng điền <a href="javascript:void(0)" style="font-size: 25px;" class="tranferInformation">thông tin vận chuyển.</a></div>
 	        </div>
 	    </div>
 	</div>
 	<!-- END: MODAL CONGRATULATION -->
-
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+			$(".tranferInformation").click(() => {
+				$("#MdlCongratulation").modal("hide");
+				$("#modalAddAddress").modal("show");
+			});
+		})
+	</script>
 	<script>
 
 		function CheckNumberAddress() {

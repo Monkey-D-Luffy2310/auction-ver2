@@ -449,7 +449,7 @@ public class LightWalletService implements WalletService {
     }
   }
 
-  public static String getBankNameFromCode(String code) {
+  public String getBankNameFromCode(String code) {
     HashMap<String, String> listBank = new HashMap<>();
     listBank.put("422589", "CIMB");
     listBank.put("970400", "SAIGONBANK");
@@ -497,7 +497,7 @@ public class LightWalletService implements WalletService {
     } else return null;
   }
 
-  public static String getBankCodeFromName(String name) {
+  public String getBankCodeFromName(String name) {
     HashMap<String, String> listBank = new HashMap<>();
     listBank.put("CIMB", "422589");
     listBank.put("SAIGONBANK", "970400");

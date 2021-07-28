@@ -210,12 +210,12 @@
 	                                </div>
 	                            </div>
 	                            <div class="dg-detail-auction-footer">
-	                               	<a href="" class="auction-now-active" data-toggle="modal" th:attrappend="data-target=${user} ? '#MdlDeposit' : '#modalLogin'">
+	                               	<button class="auction-now-active" data-toggle="modal" th:attrappend="data-target=${user} ? '#MdlDeposit' : '#modalLogin'">
 	                                    <div href="mr-5" class="text-white">
 	                                        <img src="/images/ac-img/auction.svg" alt="">
 	                                        THAM GIA ĐẤU GIÁ
 	                                    </div>
-	                                </a>
+	                                </button>
 	                                <div class="AlertRegister mt-2 mb-0"></div>
                                 </div>
 	                        </div>
@@ -833,16 +833,20 @@
 	        	// submit register auction
 				$("#SubmitRegisterAuction").click(function(event) {
 					$('.auction-now').attr("disabled", true);
+					$('.auction-now-active').attr("disabled", true);
 					event.preventDefault();
 					if (!checkUserLoggedIn()) {
 						$("#modalLogin").modal("show");
 						$('.auction-now').attr("disabled", false);
+						$('.auction-now-active').attr("disabled", false);
 					} 
 					else {
 						if(Number($(".getBonusBalance").html()) >= Number($(".registrationFee").html().replace(/,/g, ''))) {
 							fetch('/auction_registration/' + auction_id, {
 							  method: 'POST',
-							}).then(res => res.text()).then(results => {
+							})
+							.then(res => res.text())
+							.then(results => {
 								if (results === "OK") {
 									$('#ContextualStatus').removeClass('d-none');
 									$('.cancel-auction').removeClass('d-none');
@@ -853,6 +857,7 @@
 									$(".AlertRegister").fadeIn('slow');
 									setTimeout(() => location.reload(), 10000);
 									$('.auction-now').attr("disabled", false);
+									$('.auction-now-active').attr("disabled", false);
 								} 
 								else {
 									$(".AlertRegister").addClass("alert alert-danger");
@@ -861,6 +866,7 @@
 									$(".AlertRegister").fadeIn('slow');
 									setTimeout(() => $(".AlertRegister").fadeOut('slow'),8000);
 									$('.auction-now').attr("disabled", false);
+									$('.auction-now-active').attr("disabled", false);
 									if (results.indexOf("Hệ thống đang bận") > -1) {
 										setTimeout(() => window.location.reload(), 8000);
 									}
@@ -876,6 +882,7 @@
 							$(".AlertRegister").fadeIn('slow');
 							setTimeout(() => $(".AlertRegister").fadeOut('slow'),10000);
 							$('.auction-now').attr("disabled", false);
+							$('.auction-now-active').attr("disabled", false);
 						}
 					}
 				});
@@ -1000,11 +1007,13 @@
 				//rate star in feedback
 				var resultRate = 0;
 				var rater = document.getElementById('rate');
-				var stars = Array.from(rater.children);
-				rater.addEventListener('touchmove', raterEnd);
-				stars.forEach(function (item) {
-					item.addEventListener('mousemove', rateStar.bind(null, item, showResult));
-				});
+				if (rater) {
+					var stars = Array.from(rater.children);
+					rater.addEventListener('touchmove', raterEnd);
+					stars.forEach(function (item) {
+						item.addEventListener('mousemove', rateStar.bind(null, item, showResult));
+					});
+				}
 				function raterEnd(e) {
 					e.preventDefault();
 					e.stopPropagation();

@@ -78,7 +78,7 @@
 			                                        <img src="/images/ac-img/more.svg" alt="">
 			                                    </div>
 			                                </div>
-			                                <div class="dg-detail-auction-highest-price cur-format font-weight-bold currentPrice" th:text="${auc.auction.currentPrice == 0 ? ac.auction.bidPrice : ac.auction.currentPrice}">
+			                                <div class="dg-detail-auction-highest-price cur-format font-weight-bold currentPrice" th:text="${auc.auction.currentPrice == 0 ? auc.auction.bidPrice : auc.auction.currentPrice}">
 			                                    <div></div>
 			                                    <div>5</div>
 			                                    <div>3,</div>
@@ -135,10 +135,10 @@
 			                                            +
 			                                        </div>
 			                                    </div>
-			                                    <h3 class="curPrice d-none" th:text="${auc.auction.currentPrice == 0 ? ac.auction.bidPrice : ac.auction.currentPrice}"></h3>
-			                                    <button class="dg-detail-payment-now buttonBid" data-toggle="modal" th:attrappend="data-target=${user} ? '#MdlBidAuction' : '#modalLogin'">
+			                                    <h3 class="curPrice d-none" th:text="${auc.auction.currentPrice == 0 ? auc.auction.bidPrice : auc.auction.currentPrice}"></h3>
+			                                    <button class="dg-detail-payment-now buttonBid" data-toggle="modal" th:attrappend="data-target=${user} ? '#MdlBidAuction' + ${auc.auction.id} : '#modalLogin'">
 			                                        ĐẶT <span class="cur-format font-weight-bold BidPrice" 
-			                                        th:text="${auction.currentPrice == 0 ? auction.bidPrice + (auction.stepPrice * (auction.currentPrice == 0 ? 0 : 1)) : auction.currentPrice + (auction.stepPrice * (auction.currentPrice == 0 ? 0 : 1))}"></span> VNDT
+			                                        th:text="${auc.auction.currentPrice == 0 ? auc.auction.bidPrice + (auc.auction.stepPrice * (auc.auction.currentPrice == 0 ? 0 : 1)) : auc.auction.currentPrice + (auc.auction.stepPrice * (auc.auction.currentPrice == 0 ? 0 : 1))}"></span> VNDT
 			                                    </button>
 			                                </div>
 		                                    <div class="errorBidStep text-danger"></div>

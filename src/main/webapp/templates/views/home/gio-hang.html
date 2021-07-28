@@ -74,11 +74,19 @@
                                             </div>
                                         </div>
                                         <div class="item-hover">
-                                            <div class="image-wrapper d-flex justify-content-center align-items-center" th:attr="data-id=${win_auctions.id}" onclick="pay(this)">
-                                                <img src="/images/ac-img/card.svg"  alt="">
+                                            <div class="image-wrapper d-flex justify-content-center align-items-center"
+                                                th:attr="data-id=${win_auctions.id}" onclick="pay(this)">
+                                                <img src="/images/ac-img/card.svg" alt="">
                                             </div>
-                                            <div class="image-wrapper d-flex justify-content-center align-items-center" th:attr="data-id=${win_auctions.id}" onclick="sellOff(this)">
-                                                <img src="/images/ac-img/cart-up.svg"  alt="">
+                                            <div class="image-wrapper d-flex justify-content-center align-items-center"
+                                                th:attr="data-id=${win_auctions.id}" onclick="sellOff(this)">
+                                                <img src="/images/ac-img/cart-up.svg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="item-hover" style="margin-left: 10px !important;">
+                                            <div class="image-wrapper d-flex justify-content-center align-items-center"
+                                                th:attr="data-id=${win_auctions.id}" onclick="defuse(this)">
+                                                <i class="las la-times text-danger"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +128,8 @@
                                         <div class="number font-weight-bold"><span
                                                 class="cur-format number font-weight-bold"
                                                 id="total-amount-show"></span> VNDT</div>
-                                        <div class="text font-italic">(Tương đương: <span class="readNumber">0 VNDT</span>)
+                                        <div class="text font-italic">(Tương đương: <span class="readNumber">0
+                                                VNDT</span>)
                                         </div>
                                     </div>
                                 </div>
@@ -172,6 +181,45 @@
                 </div>
             </div>
         </div>
+        <!-- BEGIN: MODAL PAY -->
+        <div class="modal fade" id="modalPay" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true" style="top:-30rem !important;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="md-header d-flex justify-content-between align-items-center">
+                            <div class="txt-1">Thanh toán</div>
+                            <a href="javascript:void(0)" data-dismiss="modal"><img
+                                    src="/images/thong-tin-ca-nhan/close.svg" alt="" /></a>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="image">
+                                <img src="/images/ac-img/product.svg" alt="" width="116" height="69">
+                            </div>
+                            <div class="info">
+                                <h5 class="title">Robot hút bụi Xiaomi Vacuuma sda sdsa dasd Mop 3502...</h5>
+                                <div class="amount">Số lượng: 01</div>
+                                <div class="win-at"><span class="">Thời gian thắng đấu giá:</span> 30/04/2021 10:20 AM
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="title">Giá thắng: 10,030,000 VNDT</div>
+                            <div class="deposited-at">Đã đặt cọc: 1,003,000 VNDT</div>
+                            <div>Số tiền còn thiếu để thanh toán là: 12123sad</div>
+                            <div class="payment-timing">
+                                <span class="mobile-hidden">Thời gian thanh toán:</span>
+                                <span class="time">5 ngày <span class="mobile-show">còn lại</span></span>
+                            </div>
+                        </div>
+                        <div class="box-btn">
+                            <button class="btn btn-add" id="addNewAddress" style="position: relative;">Thêm mới</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: MODAL PAY -->
     </div>
 </body>
 
@@ -180,8 +228,9 @@
     /*[+
     var balance = [[${user.getVNDTBalance()}]];
     +]*/
+    // $('#modalPay').modal('show');
     var amount = 0;
-    paginations({ pagerSelector: '#listPaidAuction', paginationSelector: '.pagination', perPage: 4, scrollPage    : false });
+    paginations({ pagerSelector: '#listPaidAuction', paginationSelector: '.pagination', perPage: 4, scrollPage: false });
     function totalAmount(val) {
         amount += Number(val.getAttribute('data-amount'));
         val.setAttribute('data-amount', -val.getAttribute('data-amount'));
@@ -194,7 +243,7 @@
             alert('Đéo đủ');
         else alert('Quá đụ');
     }
-    function changeToText(amount){
+    function changeToText(amount) {
         let num = amount + '';
         let needZeroCount = num.length % 3;
         if (needZeroCount != 0)
@@ -269,7 +318,7 @@
     function pay(val) {
         console.log(val.getAttribute('data-id'));
     }
-    function sellOff(val){
+    function sellOff(val) {
         console.log(val.getAttribute('data-id'));
     }
 </script>

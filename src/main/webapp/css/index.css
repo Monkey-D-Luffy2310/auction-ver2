@@ -1651,7 +1651,7 @@ body {
 
 .dg-detail-wrapper .dg-detail .dg-detail-product-content-left-footer .dg-detail-info-wrapper
 	{
-	width: 75%;
+	width: 70%;
 }
 
 .dg-detail-wrapper .dg-detail .dg-detail-product-content-left-footer .dg-detail-info-wrapper .dg-detail-product-title
@@ -1659,6 +1659,11 @@ body {
 	font-weight: bold;
 	font-size: 18px;
 	color: #403946;
+	display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 .dg-detail-wrapper .dg-detail .dg-detail-product-content-left-footer .dg-detail-info
@@ -1866,8 +1871,10 @@ body {
 	padding: 0 52px;
 }
 
-.dg-detail-wrapper .dg-detail .dg-detail-product-content-right .auction-now-active {
+.dg-detail-wrapper .dg-detail .dg-detail-product-content-right .auction-now-active
+	{
 	transform: translate(50%);
+	cursor: pointer;
 	background: #FAB414;
 	border-radius: 8px;
 	height: 48px;
@@ -1878,6 +1885,14 @@ body {
 	padding: 15px 20px;
 	font-weight: 700;
 	margin-right: 29px;
+	border: none;
+	outline: none;
+	opacity: 1;
+	transition: opacity .25s linear;
+}
+.dg-detail-wrapper .dg-detail .dg-detail-product-content-right .auction-now-active:disabled
+	{
+	opacity: 0.7;
 }
 
 .dg-detail-wrapper .dg-detail .dg-detail-product-content-right .dg-detail-auction-footer-wrapper-header
@@ -2838,6 +2853,28 @@ body {
 	transition: opacity .25s linear;
 }
 .dg-detail-product-auction-right .dg-detail-product-detail .auction-now:disabled
+	{
+	opacity: 0.7;
+}
+.dg-detail-product-auction-right .dg-detail-product-detail .auction-now-active
+	{
+	cursor: pointer;
+	background: #FAB414;
+	border-radius: 8px;
+	height: 48px;
+	display: inline-block;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 15px 20px;
+	font-weight: 700;
+	margin-right: 29px;
+	border: none;
+	outline: none;
+	opacity: 1;
+	transition: opacity .25s linear;
+}
+.dg-detail-product-auction-right .dg-detail-product-detail .auction-now-active:disabled
 	{
 	opacity: 0.7;
 }
@@ -6154,7 +6191,72 @@ body {
 		padding: 28px 32px !important;
 	}
 }
+/* modal chung */
+.modal {
+	padding-right: 0 !important;
+}
 
+ .modal-dialog {
+	max-width: 624px;
+}
+
+ .modal-dialog .modal-body {
+	padding: 56px 95px;
+}
+
+ .modal-dialog .modal-body .md-header {
+	margin-bottom: 8px;
+}
+
+ .modal-dialog .modal-body .md-header .txt-1 {
+	font-weight: bold;
+	font-size: 24px;
+	color: #521780;
+}
+
+.modal-dialog .modal-body .input-cus {
+	height: 50px;
+	border: 1px solid #B8B3BC;
+	background: white;
+	padding: 0 24px;
+	border-radius: 8px;
+	margin-bottom: 24px;
+}
+
+.modal-dialog .modal-body input::placeholder {
+	color: #B8B3BC;
+	opacity: 1;
+}
+.modal-dialog .modal-body input::-ms-input-placeholder
+	{
+	color: #B8B3BC;
+}
+
+.modal-dialog .modal-body input::-ms-input-placeholder
+	{
+	color: #B8B3BC;
+}
+
+.modal-dialog .modal-body .box-1 {
+	color: #B8B3BC;
+	margin-top: -4px;
+}
+
+.modal-dialog .modal-body .box-btn {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal-dialog .modal-body .box-btn .btn-add {
+	justify-content: center;
+	width: 127px;
+	display: flex;
+	align-items: center;
+	height: 36px;
+	color: white;
+	background: #FAB414;
+	border-radius: 8px;
+}
 @media screen and (max-width: 580px) {
 	.dg-change-password .box-change-password {
 		padding: 32px 28px !important;
@@ -8235,6 +8337,10 @@ body {
 	}
 	.dg-cart .paid .item .right .pay-at {
 		font-size: 10px;
+	}
+	.form-group.checkBox {
+		height: 85px!important;
+		text-align: center;
 	}
 }
 

@@ -507,7 +507,6 @@ $(document).ready(function (){
 		let dateStr = timeArr[3] + ':' + timeArr[4] + ':' + timeArr[5] + ' ' + timeArr[2] + '-' + timeArr[1] + '-' + timeArr[0];
 		$('.time-format-history').eq(i).html(dateStr);
 	}
-	
 	//log out
 	$('.logOut').click(function() {
 		setCookie("AC-ACCESS-KEY", '', 0);
@@ -594,11 +593,7 @@ $(document).ready(function (){
 					});
 					
 					// count down time when user bid auction
-					let countDownDate = new Date($(`[data-auction-id='${results.auction}']`).find(".time-auction").get(0).getAttribute("data-action-time")+":00z");
-					if (Number.isNaN(countDownDate.getTime())) { // Safari browser cannot parse above date
-						countDownDate = new Date($(`[data-auction-id='${results.auction}']`).find(".time-auction").get(0).getAttribute("data-action-time") + ":00");
-					};
-					countDownDate = new Date(countDownDate.getTime() + (countDownDate.getTimezoneOffset()*60*1000));
+					let countDownDate = new Date($(`[data-auction-id='${results.auction}']`).find(".time-auction").get(0).getAttribute("data-action-time"));
 					fetch("/system-time")
 						.then(res => res.text())
 						.then(timeNow => {
