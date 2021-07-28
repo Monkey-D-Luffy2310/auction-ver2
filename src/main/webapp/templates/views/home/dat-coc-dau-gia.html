@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Đặt cọc đấu giá</title>
+    <style>
+        .qrcode {
+            border: solid 1px #B8B3BC;
+            border-radius: 8px;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="dg-content">
+            <div class="dg-balance">
+                <div class="list-account-wrapper d-flex align-items-center">
+                    <div class="main-account-wrapper">
+                        <div class="main-account-content">
+                            <div class="main-account-content-left">
+                                <img src="/images/ac-img/main-account.svg" alt="">
+                            </div>
+                            <div class="main-account-content-right">
+                                <div class="title">Tài khoản chính</div>
+                                <div class="surplus"><span class="cur-format"
+                                        th:text="${(user.getVNDTBalance() + user.getVNDTFreeze())}">10,000,000</span>
+                                    VNDT</div>
+                                <input type="hidden" id="balance" name="balance" th:value="${user.getVNDTBalance()}">
+                                <div class="deposited">Đã đặt cọc: <span class="cur-format"
+                                        th:text="${user.getVNDTFreeze()}">5,000,000</span> VNDT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="switch-account d-flex align-items-center justify-content-center" data-toggle="modal"
+                        data-target="#switch-account" style="visibility: hidden">
+                        <img src="/images/ac-img/ic-next.svg" alt="">
+                    </div>
+                    <div class="second-account-wrapper">
+                        <div class="second-account-content">
+                            <div class="second-account-content-left">
+                                <img src="/images/ac-img/second-account.svg" alt="">
+                            </div>
+                            <div class="second-account-content-right">
+                                <div class="title">Tài khoản phụ</div>
+                                <div class="surplus"><span class="cur-format"
+                                        th:text="${user.getBonusBalance()}">100,000</span> VNDT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ac-wallet-wrapper">
+                        <div class="ac-wallet-content">
+                            <div class="ac-wallet-content-left">
+                                <img src="/images/ac-img/ac-wallet.svg" alt="" class="qrcode">
+                            </div>
+                            <div class="ac-wallet-content-right" style="margin-left: 10px;">
+                                <div class="title">Địa chỉ ví VNDT</div>
+                                <input type="text" class="form-control" th:value=${user.walletAddress} disabled>
+                                <!--                            <div class="ac-wallet-address d-flex justify-content-center align-items-center">-->
+
+                                <!--                            </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-account-wrapper-mobile">
+                    <div class="ac-wallet-wrapper-mobile">
+                        <div class="ac-wallet-content d-flex">
+                            <div class="ac-wallet-content-left">
+                                <img src="/images/ac-img/ac-wallet.svg" alt="" class="qrcode">
+                            </div>
+                            <div class="ac-wallet-content-right">
+                                <div class="title">Địa chỉ ví VNDT</div>
+                                <input type="text" class="form-control" th:value=${user.walletAddress} disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="main-account-wrapper">
+                            <div class="main-account-content">
+                                <img src="/images/ac-img/main-account.svg" alt="">
+                                <div class="title">Tài khoản chính</div>
+                                <div class="surplus font-weight-bold"><span>10,000,000</span> VNDT</div>
+                                <div class="deposited">Đã đặt cọc: <span class="font-weight-bold">5,000,000</span> VNDT
+                                </div>
+                            </div>
+                        </div>
+                        <div class="switch-account align-items-center justify-content-center" data-toggle="modal"
+                            data-target="#switch-account">
+                            <div class="d-flex">
+                                <img src="/images/ac-img/ic-next.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="second-account-wrapper">
+                            <div class="second-account-content">
+                                <img src="/images/ac-img/second-account.svg" alt="">
+                                <div class="title">Tài khoản phụ</div>
+                                <div class="surplus font-weight-bold"><span class="font-weight-bold">100,000</span> VNDT
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transfer-history-wrapper">
+                    <div class="title">Lịch sử đặt cọc</div>
+                    <div class="list-transfer-history">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Đấu giá</td>
+                                    <td>Số lượng (VNDT)</td>
+                                    <td class="hidden-mobile">Tỉ lệ đặt cọc</td>
+                                    <td class="hidden-mobile">Ngày tháng</td>
+                                    <td>Trạng thái</td>
+                                </tr>
+                            </thead>
+                            <tbody id="listTransactions">
+                                <tr class="transfer-history-detail" th:each="warranty : ${warranties}"
+                                    th:attr="data-id=${warranty.id}" onclick="showDetail(this)" th:if="${warranty.isDeleted==false}">
+                                    <td th:text="${warranty.id}"></td>
+                                    <td th:href="@{/chi-tiet-dau-gia/{id}(id = ${warranty.auction.id})}"
+                                    th:text="${warranty.auction.getAssest().name}"></td>
+                                    <td class="cur-format" th:text="${warranty.warranty}"></td>
+                                    <td class="hidden-mobile" th:text="${warranty.auction.percent + '%'}"></td>
+                                    <td class="hidden-mobile time-format" th:text="${warranty.updated}"></td>
+                                    <td class="deposit" th:if="${warranty.isDeleted==false}">Đang đặt cọc</td>
+                                    <td class="" th:if="${warranty.isDeleted==true}">Đã rút cọc</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal fade" th:each="warranty : ${warranties}"
+                            th:id="'box-transfer-history' + ${warranty.id}" tabindex="-1" role="dialog"
+                            aria-hidden="true" style="top:-20rem !important;">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="title-wrapper d-flex align-items-center">
+                                        <div class="title">
+                                            Chi tiết đặt cọc
+                                        </div>
+                                        <div data-dismiss="modal" aria-label="Close" class="close-modal"
+                                            style="cursor: pointer">
+                                            <img src="/images/ac-img/exit.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="amount row">
+                                        <div class="left col-6">
+                                            <div class="title"><a
+                                                th:href="@{/chi-tiet-dau-gia/{id}(id = ${warranty.auction.id})}"
+                                                th:text="${warranty.auction.getAssest().name}"></a></div>
+                                            <div id="transfer-id" th:text="'ID: ' + ${warranty.id}"></div>
+                                        </div>
+                                        <div class="right col-6">
+                                            <div id="amount" class="cur-format" th:text=" ${warranty.warranty}"></div>
+                                            <div th:if="${warranty.isDeleted==false}">
+                                                Đang đặt cọc</div>
+                                            <div th:if="${warranty.isDeleted==true}">
+                                                Đã rút cọc</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="warning" id="message" th:text="${transaction.note}"></div> -->
+                                    <div class="transfer-at time-format" id="transfer-at"
+                                        th:text="${warranty.updated}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dg-paginate mt-4 d-flex justify-content-center">
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            /*[+
+            let walletaddress = [[${user.walletAddress}]];
+            let bonusaddress = [[${user.bonusAddress}]];
+            let id = [[${user.id}]];
+            +]*/
+            console.log(walletaddress);
+            document.addEventListener('DOMContentLoaded', (event) => {
+                paginations({ pagerSelector: '#listTransactions', paginationSelector: '.pagination', perPage: 10, scrollPage: false });
+                $(".qrcode").attr("src", "https://chart.googleapis.com/chart?chs=82x82&cht=qr&chl=" + walletaddress + "&choe=UTF-8");
+
+                $("#amountTranfer").keyup(function () {
+                    formetAmount('#amountTranfer');
+                });
+                $("#amountTranfer").blur(function () {
+                    checkAmount();
+                });
+                $(".alert").fadeOut();
+            });
+            function showDetail(val) {
+                var id = val.getAttribute('data-id');
+                $('#box-transfer-history' + id).modal();
+            }
+        </script>
+    </div>
+</body>
+
+</html>

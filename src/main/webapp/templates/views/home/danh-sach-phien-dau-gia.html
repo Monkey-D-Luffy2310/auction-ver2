@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta charset="UTF-8">
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<style>
+			#ListAuction {
+				position: relative;
+				min-height: 100px;
+			}
+			#ListAuction.spinning .product-item {
+				z-index: 0;
+			}
+			#ListAuction .product-item {
+				z-index: 10;
+			}
+			#ListAuction:after {
+				content: "";
+			    width: 100%;
+			    height: 100%;
+			    position: absolute;
+			    background-color: #ededede0;
+				opacity: 0;
+				top: 0;
+				left: 0;
+			    transition: opacity .5s linear;
+			}
+			#ListAuction.spinning:after {
+				opacity: 1;
+			}
+			#ListAuction:before {
+				content: "";
+				width: 0px;
+				height: 0px;
+				border-radius: 50%;
+				left: 45%;
+				top: 30px;
+				border: 3px solid white;
+				border-right: 4px solid #2A0A42;
+				position: absolute;
+				animation: rotate360 1s infinite linear, exist 0.2s forwards ease;
+				opacity: 0;
+				z-index: 1;
+			}
+			#ListAuction.spinning:before {
+				transition: opacity .1s linear;
+				opacity: 1;
+			}
+		
+			@keyframes rotate360 {
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		
+			@keyframes exist {
+				100% {
+					width: 50px;
+					height: 50px;
+					margin: -8px 50px 0 0;
+				}
+			}
+		</style>
+        <div class="dg-content">
+	        <div class="dg-list">
+	            <div class="dg-content-custom">
+	                <div class="container-fluid">
+	                    <div class="box-dg-list">
+	                        <div class="title">Tất cả sản phẩm</div>
+	
+	                        <div class="dg-content-list">
+	                            <div class="row">
+	                                <div class="col-xl-2 col-lg-3 col-md-12 box-left">
+	                                    <div class="dg-content-left">
+	                                        <div class="header-1">
+	                                            <img src="/images/danh-sach/list.svg" alt="" />
+	                                            Danh mục sản phẩm
+	                                        </div>
+	                                        <div class="menu-1">
+	                                            <div class="sortByCategory" th:each="ctg : ${categoryAll}" th:attr="data-category=${ctg.alias}">
+	                                                <div class="mn-item-1" th:classappend="${category == ctg.alias ? 'mn-active' : ''}">
+	                                                    <div class="mn-dot"></div>
+	                                                    <span th:text="${ctg.name}"></span>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	
+	                                <div class="col-xl-10 col-lg-9 col-md-12 box-right">
+	                                    <div class="dg-content-right">
+	                                        <div class="box-filter-mobile d-none">
+	                                            <div class="t-1">Tất cả sản phẩm</div>
+	                                            <div class="d-flex">
+	                                                <div class="dg-select-custom dg-select-sort">
+	                                                	<span class="dg-select-picker">Sắp xếp</span>
+	                                                    <div class="dg-select-dropdown">
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByTime">
+	                                                        	<span>Mới nhất</span>
+	                                                        	<svg th:if="${sortBy == 'time'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByPriceAsc">
+	                                                        	<span>Giá: Thấp đến cao</span>
+	                                                        	<svg th:if="${order == 'asc'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByPriceDesc">
+	                                                        	<span>Giá: Cao đến thấp</span>
+	                                                        	<svg th:if="${order == 'desc'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByUpcoming">
+	                                                        	<span>Đấu giá sắp bắt đầu</span>
+	                                                        	<svg th:if="${status == 'upcoming'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByActive">
+	                                                        	<span>Đang đấu giá</span>
+	                                                        	<svg th:if="${status == 'active'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                    </div>   
+	                                                    <div class="icn-down"><img src="/images/danh-sach/down.svg" alt="" /></div>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	
+	                                        <div class="box-filter">
+	                                            <div class="d-flex">
+	                                                <div class="dg-select-custom select-date sortByTime" th:classappend="${sortBy == 'time' ? 'select-active' : ''}">
+	                                                   <span class="dg-select-picker">Mới nhất</span>
+	                                                </div>
+	                                                <div class="dg-select-custom select-price" th:classappend="${sortBy == 'price' ? 'select-active' : ''}">
+                                                    	<span class="dg-select-picker" 
+                                                    		th:text="${sortBy == 'price' ? (order == 'asc' ? 'Giá: Thấp đến cao' : 'Giá: Cao đến thấp') : 'Giá'}">
+                                                    	</span>
+	                                                    <div class="icn-down"><img src="/images/danh-sach/down.svg" alt="" /></div>
+	                                                    <div class="dg-select-dropdown">
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByPriceAsc">
+	                                                        	<span>Giá: Thấp đến cao</span>
+	                                                        	<svg th:if="${order == 'asc'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByPriceDesc">
+	                                                        	<span>Giá: Cao đến thấp</span>
+	                                                        	<svg th:if="${order == 'desc'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                    </div>   
+	                                                </div>
+	                                                <div class="dg-select-custom select-status"  th:classappend="${(status == 'active' || status == 'upcoming') ? 'select-active' : ''}">
+	                                                    <span class="dg-select-picker" th:text="${status == 'active' ? 'Đang đấu giá' : (status == 'upcoming' ? 'Đấu giá sắp bắt đầu' : 'Trạng thái')}"></span>
+	                                                    <div class="icn-down"><img src="/images/danh-sach/down.svg" alt="" /></div>
+	                                                    <div class="dg-select-dropdown">
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByUpcoming">
+	                                                        	<span>Đấu giá sắp bắt đầu</span>
+	                                                        	<svg th:if="${status == 'upcoming'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                        <div class="dg-select-item d-flex justify-content-between sortByActive">
+	                                                        	<span>Đang đấu giá</span>
+	                                                        	<svg th:if="${status == 'active'}" enable-background="new 0 0 12 12" viewBox="0 0 12 12" x="0" y="0"><g>
+	                                                        		<path d="m5.2 10.9c-.2 0-.5-.1-.7-.2l-4.2-3.7c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l3.4 3 5.1-7c .3-.4 1-.5 1.4-.2s.5 1 .2 1.4l-5.7 7.9c-.2.2-.4.4-.7.4 0-.1 0-.1-.1-.1z">
+	                                                        		</path></g>
+	                                                        	</svg>
+	                                                        </div>
+	                                                    </div>   
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	
+	                                        <div class="list-product spinning" id="ListAuction">
+	                                        </div>
+	
+	                                        <div style="clear: both"></div>
+	
+	                                        <div class="dg-paginate mt-4 d-flex justify-content-center">
+	                                            <nav aria-label="...">
+	                                                <ul class="pagination">
+	                                                </ul>
+	                                            </nav>
+	                                        </div>
+	
+	
+	                                    </div>
+	                                </div>
+	                            </div>
+	
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <script>
+	    	let toggleLike = true;
+		    function likeAuction(e) {
+		    	if (!checkUserLoggedIn()) $('#modalLogin').modal('show');
+				else if (toggleLike) {
+					toggleLike = false;
+					let auctionId = e.attr("data-id");
+					console.log(auctionId)
+					if (e.hasClass('active-favorite')) {
+						$(`[data-auction-id='${auctionId}']`).find('.favorite').removeClass('active-favorite');
+						$(`[data-auction-id='${auctionId}']`).find('.favorite').children().attr("src", "/images/ac-img/like.svg")
+						fetch('/user/liked_auction/auction/' + auctionId,{
+							method: 'DELETE',
+						})
+							.then(res => res.text())
+							.then(result => {
+								if (result === "OK") {
+									toggleLike = true;
+								}
+							})
+							.catch(error => {
+								console.log("Error: " + error);
+							});
+					}
+					else {
+						$(`[data-auction-id='${auctionId}']`).find('.favorite').addClass('active-favorite');
+						$(`[data-auction-id='${auctionId}']`).find('.favorite').children().attr("src", "/images/ac-img/liked.svg");
+						fetch('/user/liked_auction/add/' + auctionId)
+							.then(res => res.text())
+							.then(result => {
+								if (result === "OK") {
+									toggleLike = true;
+								}
+							})
+							.catch(error => {
+								console.log("Error: " + error);
+							});
+					}
+				}
+			}
+		    document.addEventListener('DOMContentLoaded', (event) => {
+	            const url = new URL(window.location);
+	            function setPathVariable(name, value) {
+					url.searchParams.set(name, value);
+					window.history.pushState({}, '', url);
+					window.location.reload();
+	        	}
+				$('.sortByPriceAsc').on('click', function() {
+					setPathVariable('sortBy', 'price');
+					setPathVariable('order', 'asc');
+				});
+				$('.sortByPriceDesc').on('click', function() {
+					setPathVariable('sortBy', 'price');
+					setPathVariable('order', 'desc');
+				});
+				$('.sortByTime').on('click', function() {
+					url.searchParams.delete("order");
+					setPathVariable('sortBy', 'time');
+				});
+				$('.sortByUpcoming').on('click', function() {
+					setPathVariable('status', 'upcoming');
+				});
+				$('.sortByActive').on('click', function() {
+					setPathVariable('status', 'active');
+				});
+				$('.sortByCategory').on('click', function() {
+					setPathVariable('category', $(this).attr("data-category"));
+				});
+				
+				function existParam(param) {
+					return url.searchParams.has(param);
+				}
+				function getParam(param) {
+					return url.searchParams.get(param);
+				}
+				//get auction upcoming
+				async function getAuctionByStatus(status) {
+					const response = 
+						await fetch("/auction/auction_status/" + status)
+							.then(res => res.json())
+							.then(results => results)
+							.catch(error => {
+								console.log("Error: " + error);
+							});
+					return response;					
+				}
+				async function getCategoryByAlias(alias) {
+					const response = 
+						await fetch("/category")
+							.then(res => res.json())
+							.then(results => {
+								for (let i = 0; i < results.length; i++) {
+									if (results[i].alias === alias) return results[i].name;
+								}
+							})
+							.catch(error => {
+								console.log("Error: " + error);
+							});
+					return response;
+				}
+				async function getData() {
+					let auction, category;
+					if (existParam("status")) {
+						let status = getParam("status");
+						auction = await getAuctionByStatus(status);
+					}
+					else {
+						let auctionUpcoming = await getAuctionByStatus("upcoming");
+						let auctionActive = await getAuctionByStatus("active");
+						auction = auctionUpcoming.concat(auctionActive);
+					}
+					if (existParam("category")) {
+						let alias = getParam("category");
+						category = await getCategoryByAlias(alias);
+						return auction.filter(auc =>  auc.auction.category === category)
+					}
+					return auction;
+				}
+				async function sortData() {
+					const auction = await getData();
+					if (existParam("sortBy")) {
+						let sortBy = getParam("sortBy");
+						if (sortBy === "price") {
+							let order = getParam("order");
+							if (order === "asc") {
+								return auction.sort((a,b) => a.auction.currentPrice - b.auction.currentPrice);
+							}
+							if (order === "desc") {
+								return auction.sort((a,b) => b.auction.currentPrice - a.auction.currentPrice);
+							}
+						}
+						if (sortBy === "time") {
+							 return auction.sort((a,b) => new Date(b.auction.created) - new Date(a.auction.created));
+						}
+					}
+					return auction;
+				}
+				
+				async function renderData() {
+					const auction = await sortData();
+					
+					let productItem = ``;
+					
+					auction.forEach(auc => {
+				    	let html =  ` <div class="product-item" data-auction-id="${auc.auction.id}">`
+				                    +`    <a href="/chi-tiet-dau-gia/${auc.auction.id}" class="product-item-top">`
+				                	+`    	  <div class="blur-img"></div>`
+				                	+`    	  <div class="box-date ` + (auc.auction.status === 'Upcoming' ? 'ac-coming' : '') + `" data-action-time="` + (auc.auction.status === 'Upcoming' ? auc.auction.startAt : auc.auction.endAt) + `">`
+				                	+`		      <span class="time-num"></span>&nbsp<span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>`
+				                	+`	      </div>`
+				                	+`    	  <a href="javascript:void(0)">`
+				                	+`        	  <div class="box-heart favorite" onclick="likeAuction($(this))" data-id="${auc.auction.id}"><img src="/images/danh-sach/heart.svg" /></div>`
+				                	+`    	  </a>`
+				                	+`    	  <div class="product-img">`
+				                	+`        	  <a href="/chi-tiet-dau-gia/${auc.auction.id}"><img src="${auc.asset.images}" alt="" /></a>`
+				                	+`    	  </div>`
+				                	+`	  </a>`
+			                	    +`	  <div class="product-name">`
+				                	+`    	  <a href="/chi-tiet-dau-gia/${auc.auction.id}">${auc.asset.name}</a>`
+				                	+`	  </div>`
+				                	+`	  <div class="product-info d-flex justify-content-between">`
+				                	+`    	  <div class="product-price"><span class="currentPrice">${auc.auction.status === 'upcoming' ? auc.auction.bidPrice : (auc.auction.currentPrice == 0 ? auc.auction.bidPrice : auc.auction.currentPrice)}</span> VNDT</div>`
+				                	+`        <div class="product-user d-flex align-items-center">`
+				                	+`        	  <img src="/images/danh-sach/user.svg" alt="" class="mr-6" />`
+				                	+`        	  <span class="numRegister" data-register-auction-id="${auc.auction.id}"></span>`
+			                	    +`    	  </div>`
+				                	+`	  </div>`
+				                	+`</div>`;
+						productItem += html;
+					});
+					$(".list-product").removeClass("spinning");
+					if (productItem) {
+	                	$(".list-product").html(productItem);
+					}
+					else { 
+						$(".list-product").addClass("text-center");
+						$(".list-product").css("font-size", "20px");
+						$(".list-product").html("Không tìm thấy sản phẩm phù hợp.");
+					}
+	             	// Countdown timer
+					let timeBoxElement = $(".box-date");
+					for (let i = 0; i < timeBoxElement.length; i++) {
+						CountDownTime(timeBoxElement.get(i));
+					}
+					
+					//get num of register user
+					if ($(".numRegister").size() > 0) {
+						$(".numRegister").each((i, e) => {
+							let id = e.getAttribute("data-register-auction-id");
+							fetch("/auction_registrations/auction/" + id)
+								.then(res => res.status === 200 ? res.json() : [])
+								.then(results => e.innerHTML = results.length < 10 ? '0' + results.length : results.length);
+						});
+					}
+					
+					if (checkUserLoggedIn()) {
+						// add liked auction 
+						fetch('/user/liked_auction')
+							.then(res => res.json())
+							.then(results => {
+								if (results) {
+									for(let i = 0; i < results.length; i++) {
+										if (results[i].delete == false) {
+											$(`[data-auction-id='${results[i].auction.id}']`).find('.favorite').addClass('active-favorite');
+											$(`[data-auction-id='${results[i].auction.id}']`).find('.favorite').children().attr("src", "/images/ac-img/liked.svg");
+										}
+									}
+								}
+							})
+							.catch(error => {
+									console.log("Error: " + error);
+							});
+						}
+					// Format currency
+					for (let i = 0; i < $('.cur-format').length; i++) {
+						$('.cur-format').eq(i).html(Math.floor(Number($('.cur-format').eq(i).html())).toLocaleString('en'));
+					}
+					paginations({ pagerSelector: '#ListAuction', paginationSelector: '.pagination', perPage: 10 });
+				}
+				renderData();
+				let CountDownTime = function(timeElement) {
+					let timeNow = $("#timeNow").html()
+					let countDownDate = new Date(timeElement.getAttribute("data-action-time"));
+					let distance = countDownDate - timeNow;
+					let x = setInterval(function() {
+						distance -= 1000;
+						let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+						let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+						let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+						let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+						if (hours < 10) hours = `0${hours}`
+						if (minutes < 10) minutes = `0${minutes}`
+						if (seconds < 10) seconds = `0${seconds}`
+						if (days > 0) {
+							timeElement.querySelectorAll('.time-num')[0].innerHTML = days + "n";
+						}
+						else {
+							timeElement.querySelectorAll('.time-num')[0].innerHTML = "";
+						}
+						timeElement.querySelectorAll('.time-num')[1].innerHTML = hours;
+						timeElement.querySelectorAll('.time-num')[2].innerHTML = minutes;
+						timeElement.querySelectorAll('.time-num')[3].innerHTML = seconds;
+						if (distance < 0) {
+							clearInterval(x);
+							timeElement.querySelectorAll('.time-num')[0].innerHTML = "00";
+							timeElement.querySelectorAll('.time-num')[1].innerHTML = "00";
+							timeElement.querySelectorAll('.time-num')[2].innerHTML = "00";
+							timeElement.querySelectorAll('.time-num')[3].innerHTML = "00";
+						}
+					}, 1000);
+				}
+	        });
+	    </script>
+	</div>
+</body>
+</html>

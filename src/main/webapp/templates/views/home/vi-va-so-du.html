@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ví và số dư</title>
+    <style>
+        .qrcode {
+            border: solid 1px #B8B3BC; 
+            border-radius: 8px;
+            padding:2px;
+        }
+    </style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="dg-content">
+            <div class="dg-balance">
+                <div class="list-account-wrapper d-flex align-items-center">
+                    <div class="main-account-wrapper">
+                        <div class="main-account-content">
+                            <div class="main-account-content-left">
+                                <img src="/images/ac-img/main-account.svg" alt="">
+                            </div>
+                            <div class="main-account-content-right">
+                                <div class="title">Tài khoản chính</div>
+                                <div class="surplus"><span class="cur-format"
+                                        th:text="${(user.getVNDTBalance() + user.getVNDTFreeze())}">10,000,000</span>
+                                    VNDT</div>
+                                    <input type="hidden" id="balance" name="balance" th:value="${user.getVNDTBalance()}">
+                                <div class="deposited">Đã đặt cọc: <span class="cur-format"
+                                        th:text="${user.getVNDTFreeze()}">5,000,000</span> VNDT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="switch-account d-flex align-items-center justify-content-center" data-toggle="modal"
+                        data-target="#switch-account">
+                        <img src="/images/ac-img/ic-next.svg" alt="">
+                    </div>
+                    <div class="second-account-wrapper">
+                        <div class="second-account-content">
+                            <div class="second-account-content-left">
+                                <img src="/images/ac-img/second-account.svg" alt="">
+                            </div>
+                            <div class="second-account-content-right">
+                                <div class="title">Tài khoản phụ</div>
+                                <div class="surplus"><span class="cur-format"
+                                        th:text="${user.getBonusBalance()}">100,000</span> VNDT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ac-wallet-wrapper">
+                        <div class="ac-wallet-content">
+                            <div class="ac-wallet-content-left">
+                                <img src="/images/ac-img/ac-wallet.svg" alt="" class="qrcode">
+                            </div>
+                            <div class="ac-wallet-content-right" style="margin-left: 10px;">
+                                <div class="title">Địa chỉ ví VNDT</div>
+                                <input type="text" class="form-control" th:value=${user.walletAddress} disabled>
+                                <!--                            <div class="ac-wallet-address d-flex justify-content-center align-items-center">-->
+
+                                <!--                            </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-account-wrapper-mobile">
+                    <div class="ac-wallet-wrapper-mobile">
+                        <div class="ac-wallet-content d-flex">
+                            <div class="ac-wallet-content-left">
+                                <img src="/images/ac-img/ac-wallet.svg" alt="" class="qrcode">
+                            </div>
+                            <div class="ac-wallet-content-right">
+                                <div class="title">Địa chỉ ví VNDT</div>
+                                <input type="text" class="form-control" th:value=${user.walletAddress} disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="main-account-wrapper">
+                            <div class="main-account-content">
+                                <img src="/images/ac-img/main-account.svg" alt="">
+                                <div class="title">Tài khoản chính</div>
+                                <div class="surplus font-weight-bold"><span>10,000,000</span> VNDT</div>
+                                <div class="deposited">Đã đặt cọc: <span class="font-weight-bold">5,000,000</span> VNDT
+                                </div>
+                            </div>
+                        </div>
+                        <div class="switch-account align-items-center justify-content-center" data-toggle="modal"
+                            data-target="#switch-account">
+                            <div class="d-flex">
+                                <img src="/images/ac-img/ic-next.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="second-account-wrapper">
+                            <div class="second-account-content">
+                                <img src="/images/ac-img/second-account.svg" alt="">
+                                <div class="title">Tài khoản phụ</div>
+                                <div class="surplus font-weight-bold"><span class="font-weight-bold">100,000</span> VNDT
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="switch-account" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="top:-20rem !important;">
+                        <div class="modal-content">
+                            <div class="box-second-wallet">
+                                <form>
+                                    <div class="title-wrapper d-flex align-items-center">
+                                        <div class="title">
+                                            Chuyển sang tài khoản phụ
+                                        </div>
+                                        <div data-dismiss="modal" aria-label="Close" class="close-modal"
+                                            style="cursor: pointer">
+                                            <img src="/images/ac-img/exit.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="amount d-flex justify-content-center align-items-center">
+                                        <input type="text" placeholder="Số tiền muốn chuyển" class="form-control"
+                                            id="amountTranfer">
+                                        <span>VNDT</span>
+                                    </div>
+                                    <div class="warning">
+                                        * Cảnh báo: Số dư trong tài khoản phụ là không thể rút.
+                                    </div>
+                                    <div id="amountAlert" class="alert alert-danger"></div>
+                                </form>
+                                <div class="text-center mt-2 acceptTranferLoading" style="position: relative;"></div>
+                                <button class="btn text-white acceptTranfer text-center" onclick="acceptTranfer()">Xác nhận chuyển</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transfer-history-wrapper">
+                    <div class="title">Lịch sử giao dịch</div>
+                    <div class="list-transfer-history">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Số lượng (VNDT)</td>
+                                    <td>Giao dịch</td>
+                                    <td class="hidden-mobile">Ngày tháng</td>
+                                    <td class="hidden-mobile">Tin nhắn</td>
+                                    <td>Trạng thái</td>
+                                </tr>
+                            </thead>
+                            <tbody id="listTransactions">
+                                <tr class="transfer-history-detail" th:each="transaction : ${transaction3}" th:attr="data-id=${transaction.id}" onclick="showDetail(this)">
+                                    <td th:text="${transaction.id}"></td>
+                                    <td th:if="${transaction.toUser} == ${user.id}" class="withdrawal">+ <span
+                                            class="cur-format" th:text="${transaction.amount}"></span></td>
+                                    <td th:if="${transaction.fromUser} == ${user.id}" class="deposit">- <span
+                                            class="cur-format" th:text="${transaction.amount}"></span></td>
+                                    <td th:if="${transaction.toUser} == ${user.id}" class="withdrawal">Nạp tiền</td>
+                                    <td th:if="${transaction.fromUser} == ${user.id}" class="deposit">Rút tiền</td>
+                                    <td class="hidden-mobile time-format" th:text="${transaction.created}"></td>
+                                    <td class="hidden-mobile" th:text="${transaction.note}">Hoàn phí đăng ký đấu giá
+                                        101030</td>
+                                    <td class="completed" th:if="${transaction.status=='complete'}">Hoàn thành</td>
+                                    <td class="Pending" th:if="${transaction.status=='Pending'}">Đang xử lý</td>
+                                    <td class="error" th:if="${transaction.status=='false'}">Lỗi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal fade" th:each="transaction : ${transaction3}" th:id="'box-transfer-history' + ${transaction.id}" tabindex="-1" role="dialog"
+                            aria-hidden="true" style="top:-20rem !important;">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="title-wrapper d-flex align-items-center">
+                                        <div class="title">
+                                            Chi tiết giao dịch
+                                        </div>
+                                        <div data-dismiss="modal" aria-label="Close" class="close-modal"
+                                            style="cursor: pointer">
+                                            <img src="/images/ac-img/exit.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="amount row">
+                                        <div class="left col-6">
+                                            <div class="title" id="title" th:if="${transaction.toUser} == ${user.id}">Nạp tiền</div>
+                                            <div class="title" id="title" th:if="${transaction.fromUser} == ${user.id}">Rút tiền</div>
+                                            <div id="transfer-id" th:text="'ID: ' + ${transaction.id}"></div>
+                                        </div>
+                                        <div class="right col-6">
+                                            <div id="amount" th:if="${transaction.toUser} == ${user.id}" class="cur-format" th:text=" ${transaction.amount}"></div>
+                                            <div id="amount" th:if="${transaction.fromUser} == ${user.id}" class="cur-format" th:text=" ${transaction.amount}"></div>
+                                            <div class="completed" th:if="${transaction.status=='complete'}">Hoàn thành</div>
+                                            <div class="Pending" th:if="${transaction.status=='Pending'}">Đang xử lý</div>
+                                            <div class="error" th:if="${transaction.status=='false'}">Lỗi</div>
+                                        </div>
+                                    </div>
+                                    <div class="warning" id="message" th:text="${transaction.note}"></div>
+                                    <div class="transfer-at time-format" id="transfer-at" th:text="${transaction.created}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dg-paginate mt-4 d-flex justify-content-center">
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            /*[+
+            let walletaddress = [[${user.walletAddress}]];
+            let bonusaddress = [[${user.bonusAddress}]];
+            let id = [[${user.id}]];
+            +]*/
+            console.log(walletaddress);
+            document.addEventListener('DOMContentLoaded', (event) => {
+                paginations({ pagerSelector: '#listTransactions', paginationSelector: '.pagination', perPage: 10, scrollPage    : false });
+                $(".qrcode").attr("src", "https://chart.googleapis.com/chart?chs=82x82&cht=qr&chl=" + walletaddress + "&choe=UTF-8");
+
+                $("#amountTranfer").keyup(function () {
+                    formetAmount('#amountTranfer');
+                });
+                $("#amountTranfer").blur(function () {
+                    checkAmount();
+                });
+                $(".alert").fadeOut();
+            });
+            function formetAmount(id) {
+                var amountFormat = $(id).val().replace(/[^\d]/g, '').replace(/^0+/, '');
+                $(id).val("");
+                if (amountFormat != '') {
+                    var format = amountFormat.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    $(id).val(format);
+                }
+            }
+            function checkAmount() {
+                var VNDTBalance = $('#balance').val();
+                var amountInput = $('#amountTranfer').val().replace(',', '');
+                var alertId = '';
+
+                if (amountInput != '' && amountInput != null) {
+                    if (Number(VNDTBalance) >= Number(amountInput)) {
+                        return true;
+                    } else {
+                        $("#amountAlert").html("Số tiền trong tài khoản không đủ để thực hiện giao dịch!");
+                        $("#amountAlert").fadeIn('slow');
+                        setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+                        return false;
+                    }
+
+                } else {
+                    $("#amountAlert").html("Vui lòng nhập số tiền!");
+                    $("#amountAlert").fadeIn('slow');
+                    setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+                    return false;
+                }
+            }
+            function acceptTranfer() {
+                if (checkAmount()) {
+                    $('.acceptTranfer').hide();
+                    $('.acceptTranferLoading').addClass('spinning');
+                    fetch('/wallet/transfer/' + $('#amountTranfer').val().replaceAll(',', ''), {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => res.text())
+                        .then(results => {
+                            $('.acceptTranferLoading').removeClass('spinning');
+                            if (results == "OK") {
+                                $('.acceptTranferLoading').removeClass('alert alert-danger');
+                                $('.acceptTranferLoading').addClass('alert alert-success');
+                                $('.acceptTranferLoading').html('Chuyển tiền thành công. Vui lòng chờ giây lát');
+                                $(".acceptTranferLoading").fadeIn("slow");
+							    setTimeout(() => $(".acceptTranferLoading").fadeOut("slow"), 4000);
+                                setTimeout(() => location.reload(), 4000);
+                            }
+                            else {
+                                console.log(results);
+                                $('.acceptTranferLoading').removeClass('alert alert-success');
+                                $('.acceptTranferLoading').addClass('alert alert-danger');
+                                $('.acceptTranferLoading').html('Chuyển tiền thất bại.');
+                                $(".acceptTranferLoading").fadeIn("slow");
+							    setTimeout(() => $(".acceptTranferLoading").fadeOut("slow"), 4000);
+                                $('.acceptTranfer').show();
+                            }
+                        });
+                }
+            }
+            function showDetail(val) {
+                var id = val.getAttribute('data-id');
+                $('#box-transfer-history' + id).modal();
+            }
+
+        </script>
+    </div>
+</body>
+
+</html>

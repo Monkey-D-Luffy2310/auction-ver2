@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Tin tức</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="dg-content">
+            <div class="dg-news">
+                <div class="dg-content-custom w-100">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                <div class="dg-news-left">
+                                    <div class="title-1 title-1-mbl">Bài viết mới</div>
+                                    <div class="big-img">
+                                        <img th:src="${news_1st.image}" alt="" />
+                                        <a th:href="@{/chi-tiet-tin-tuc/{alias}(alias = ${news_1st.alias})}">
+                                            <div class="news-inf">
+                                                <div class="news-title" th:text="${news_1st.tittle}"></div>
+                                                <div class="news-desc" th:text="${news_1st.summary}"></div>
+                                            </div>
+                                        </a>
+                                        <div class="news-box-bottom">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="dg-news-date time-format" th:text="${news_1st.created}">
+                                                </div>
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-21"><img src="images/tin-tuc/twitter2.svg"
+                                                            alt="" /></a>
+                                                    <a href="#" class="mr-21"><img src="images/tin-tuc/fb2.svg"
+                                                            alt="" /></a>
+                                                    <a href="#"><img src="images/tin-tuc/link2.svg" alt="" /></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-fade"></div>
+                                    </div>
+
+                                    <div class="news-title-2">Tin tức</div>
+
+                                    <div class="list-news" id="ListNews">
+                                        <div th:each="news : ${news}" class="news-item row ml-0 mr-0"
+                                            th:if="${news.tittle != news_1st.tittle}">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 pl-0 pr-0 ct-left">
+                                                <div class="box-img">
+                                                    <img class="news-img" th:src="${news.image}" alt="" />
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="col-xl-6 col-lg-6 col-md-12 pl-0 pr-0 ct-right d-flex align-items-center">
+                                                <div class="news-info">
+                                                    <div class="news-title" th:text="${news.tittle}"></div>
+                                                    <div class="news-description" th:text="${news.summary}"></div>
+                                                    <a th:href="@{/chi-tiet-tin-tuc/{alias}(alias = ${news.alias})}"
+                                                        class="show-more">Xem thêm</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dg-paginate mt-4 d-flex justify-content-center">
+                                        <nav aria-label="...">
+                                            <ul class="pagination">
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="dg-news-right">
+                                    <!-- begin: xem nhiều nhất -->
+                                    <div class="top-view">
+                                        <div class="title">Được xem nhiều nhất</div>
+
+                                        <a th:href="@{/chi-tiet-tin-tuc/{alias}(alias = ${news_top3.alias})}"
+                                            th:each="news_top3 : ${news_top3}">
+                                            <div class="top-view-item" style="border-radius: 8px !important;">
+                                                <div class="box-img">
+                                                    <img class="news-img" th:src="${news_top3.image}" alt="" />
+                                                </div>
+                                                <div class="top-view-info">
+                                                    <div class="top-view-title" th:text="${news_top3.tittle}"></div>
+                                                    <div class="top-view-desc" th:text="${news_top3.summary}"></div>
+                                                    <div class="top-view-date time-format"
+                                                        th:text="${news_top3.created}"></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- end: xem nhiều nhất -->
+
+                                    <!-- begin: sắp đấu giá -->
+                                    <div class="box-auction mt-51" th:if="${!auction_is_comming.isEmpty()}">
+                                        <div class="title">Sắp đấu giá</div>
+
+                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction_is_comming_top2.id})}"
+                                            th:each="auction_is_comming_top2 : ${auction_is_comming}">
+                                            <div class="item-type-2">
+                                                <img th:src="${auction_is_comming_top2.getAssest().images}" alt="" />
+                                                <div class="auction-info">
+                                                    <div class="auction-name"
+                                                        th:text="${auction_is_comming_top2.getAssest().name}"></div>
+                                                    <div class="auction-price">
+                                                        <span class="cur-format"
+                                                            th:text="${auction_is_comming_top2.getAssest().currentPrice}"></span>
+                                                        VNDT
+                                                    </div>
+                                                    <div class="auction-time-green">
+                                                        <div class="timing"
+                                                            th:attr="data-action-time=${auction_is_comming_top2.endAt}">
+                                                            <span class="time-num"></span> <span
+                                                                class="time-num"></span>:<span
+                                                                class="time-num"></span>:<span class="time-num"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- end: sắp đấu giá -->
+
+                                    <!-- begin: đang đấu giá -->
+                                    <div class="box-auction mt-75" th:if="${!auction_is_active.isEmpty()}">
+                                        <div class="title">Đang đấu giá</div>
+
+                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction_is_active_top2.id})}"
+                                            th:each="auction_is_active_top2 : ${auction_is_active}">
+                                            <div class="item-type-2">
+                                                <img th:src="${auction_is_active_top2.getAssest().images}" alt="" />
+                                                <div class="auction-info">
+                                                    <div class="auction-name"
+                                                        th:text="${auction_is_active_top2.getAssest().name}"></div>
+                                                    <div class="auction-price">
+                                                        <span class="cur-format"
+                                                            th:text="${auction_is_active_top2.getAssest().currentPrice}"></span>
+                                                        VNDT
+                                                    </div>
+                                                    <div class="auction-time-red">
+                                                        <div class="timing"
+                                                            th:attr="data-action-time=${auction_is_active_top2.endAt}">
+                                                            <span class="time-num"></span> <span
+                                                                class="time-num"></span>:<span
+                                                                class="time-num"></span>:<span class="time-num"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!-- end: đang đấu giá -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', (event) => {
+                        paginations({ pagerSelector: '#ListNews', paginationSelector: '.pagination', perPage: 10, scrollPage    : true });
+                        $('li .page-link').click(function () {
+                            $('html,body').animate({ scrollTop: $('#ListNews').offset().top - 150 }, 1400);
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+</body>
+
+</html>

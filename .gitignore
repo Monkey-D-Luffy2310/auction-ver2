@@ -1,0 +1,33 @@
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+*.json
+rebel.xml
+## STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/bin/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/.metadata/
+logs/
+
+.vscode
+/logs
+/logs

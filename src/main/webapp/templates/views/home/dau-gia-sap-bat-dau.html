@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta charset="UTF-8">
+
+    <!-- Main Tag -->
+    <title>Danh mục</title>
+
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+	    <!-- Title Page -->
+	    <section id="title">
+	        <div class="fw-box">
+	            <div class="container-fluid">
+	                <div class="title-page d-sm-flex align-items-center bd-highlight pt-4 pb-2">
+	                    <h1 class="bd-highlight f-26">Đấu giá sắp bắt đầu</h1>
+	                    <div class="breadcrumb-box bd-highlight  ml-auto">
+	                        <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-lg-flex ">
+	                            <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+	                                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+	                                <li class="breadcrumb-item active" aria-current="page">Đấu giá sắp bắt đầu</li>
+	                            </ol>
+	                        </nav>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <!-- Title Page -->
+
+        <!-- Grid pro  -->
+        <!-- schedule  -->
+        <section id="schedule" class="pb-1">
+
+            <div class="fw-box">
+                <div class="container-fluid">
+
+                    <!-- Sort & View  -->
+                    <div class="pro-filter pt-2 pr-3 pl-3 pb-0 bg-white mg-b-20">
+                        <div>
+                            <div class="d-sm-flex align-items-center bd-highlight">
+
+                                <div class="sort-link bd-highlight">
+                                    <ul class="list-inline f-13 pb-2 mb-0">
+                                        <li class="list-inline-item active d-none d-sm-inline-block">
+                                            Sắp xếp:
+                                        </li>
+		                                <li class="list-inline-item sortByTime" th:classappend="${(sortBy == 'ctime' || sortBy == null) ? 'active' : ''}">
+									  	    <a href="">
+		                                    	Ngày đăng
+		                                    	<i class="las la-arrow-down" th:if="${(sortBy == 'ctime' || sortBy == null)}"></i>
+		                                    </a>
+		                                </li>
+		                                <li class="list-inline-item sortByPrice" th:classappend="${sortBy == 'price' ? 'active' : ''}">
+		                                    <a href="">
+		                                        Giá bán
+		                                        <i class="las la-arrow-down" th:if="${sortBy == 'price'}"></i>
+		                                    </a>
+		                                </li>
+                                    </ul>
+                                </div>
+
+                                <div class="view-link bd-highlight ml-auto d-none d-sm-inline-flex">
+                                    <ul class="list-inline f-13 d-flex align-items-center bd-highlight mb-2">
+                                        <li class="list-inline-item ">
+                                            Xem dạng
+                                        </li>
+                                        <li class="list-inline-item f-22 lh-1 grid-view" th:classappend="${(style == 'grid' || style == null) ? 'active' : ''}">
+                                            <a href="">
+                                                <i class="las la-border-all"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item f-22 lh-1 list-view" th:classappend="${style == 'list' ? 'active' : ''}">
+                                            <a href="">
+                                                <i class="las la-bars"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sort & View -->
+                    <div class="start-pro-list mini-col" th:if="${style == null || style == 'grid'}">
+                        <div id="ListAuction" class="row">
+                            <!-- Pro item -->
+                            <div class="col-12 col-xl-6 col-lg-4 col-md-6" 
+                            	th:each="auction : ${(sortBy == 'price') ? auctionSortByPrice : auctionSortByTime}">
+                                <div class="start-pro-item shadow-sm bg-white none-col mg-b-20" th:id="${auction.id}">
+                                    <div class="row">
+                                        <div class="col-12 col-xl-6 col-lg-12 col-md-12">
+                                            <div class="start-img-box">
+                                                <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="d-block">
+                                                    <img class="w-100" th:src="${#strings.arraySplit(auction.getAssest().images, ',')[0]}" 
+                                                    	alt="Card image cap" style="height:200px; object-fit: contain;">
+                                                </a>
+                                                <span class="like-box d-inline-block" th:attr="data-id=${auction.id}">
+                                                    <i class="las la-heart"></i>
+                                                </span>
+                                                <span class="registered d-none">
+                                                    <i class="las la-check-circle"></i>
+                                                    <span>Đã đăng ký</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-6 col-lg-12 col-md-12">
+                                            <div class="start-pro-info p-3 p-xl-3 p-lg-4 p-md-4 h-100 d-flex align-items-center">
+                                                <div class="w-100">
+                                                    <h3 class="f-17 mb-3 mb-xl-2 font-weight-bold">
+                                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="d-block" th:text="${auction.getAssest().name}"></a>
+                                                    </h3>
+                                                    <div class="pri-bid mb-3 mb-xl-2">
+                                                        <span class="text-secondary f-13 mr-1 d-block mb-1">Giá khởi điểm: </span>
+                                                        <strong class="text-danger font-weight-800 d-block lh-1 f-16"><span th:text="${auction.bidPrice}" class="cur-format"></span> VNDT</strong>
+                                                    </div>
+                                                    <div class="pri-bid mb-3 mb-xl-2">
+                                                        <div class="">
+                                                            <span class="text-secondary f-13 mr-1 d-block mb-1">Thời gian bắt đầu đấu giá còn: </span>
+                                                            <span class="time-box time-box-light time-box-sm lh-1 d-block" th:attr="data-action-time=${auction.startAt}">
+	                                                            <span class="time-info">
+	                                                                <span class="time-num">
+	                                                                </span>
+	                                                                <span class="time-name">
+	                                                                    Ngày
+	                                                                </span>
+	                                                            </span>
+	                                                            <span class="time-info">
+	                                                                <span class="time-num">
+	                                                                </span>
+	                                                                <span class="time-name">
+	                                                                    Giờ
+	                                                                </span>
+	                                                            </span>
+	                                                            <span class="time-info">
+	                                                                <span class="time-num">
+	                                                                </span>
+	                                                                <span class="time-name">
+	                                                                    Phút
+	                                                                </span>
+	                                                            </span>
+	                                                            <span class="time-info">
+	                                                                <span class="time-num">
+	                                                                </span>
+	                                                                <span class="time-name">
+	                                                                    Giây
+	                                                                </span>
+	                                                            </span>
+	                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="link-box">
+                                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="text-violet f-13 font-weight-600">
+                                                            Xem chi tiết
+                                                            <i class="las la-arrow-right"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Pro item -->
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Products danh-sach -->
+                    <div class="start-pro-list cat-pro-list mini-col" th:if="${style == 'list'}" id="ListAuction">
+                    
+                        <!-- Pro Item -->
+                        <div class="start-pro-item shadow-sm bg-white none-col mg-b-20"
+                        	th:each="auction : ${(sortBy == 'price') ? auctionSortByPrice : auctionSortByTime}">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 col-md-6">
+                                    <div class="start-img-box">
+                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="d-block">
+                                            <img class="w-100" th:src="${#strings.arraySplit(auction.getAssest().images, ',')[0]}" alt="Card image cap" style="height: 250px; object-fit: contain;">
+                                        <span class="live-bid" th:if="${auction.liveStream  == true}">
+			                                <span class="d-flex align-items-center">
+			                                    <span><i class="las la-dot-circle"></i></span>
+			                                    <span>Trực tiếp</span>
+			                                 </span>
+			                            </span>
+                                        </a>
+                                        <span class="like-box d-inline-block" th:attr="data-id=${auction.id}">
+                                            <i class="las la-heart"></i>
+                                        </span>
+                                        <span class="registered f-11 pt-1 pb-1 pr-2 pl-2 d-none" th:if="${auction.status == 'Active' || auction.status == 'Upcoming'}">
+                                            <i class="las la-check-circle"></i>
+                                            <span>Đã đăng ký</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-9 col-md-6">
+                                    <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+                                        <div class="row h-100 align-items-center">
+                                            <div class="col-12 col-xl-7 col-lg-7">
+                                                <h3 class="f-17 mb-2 font-weight-bold">
+                                                    <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="d-block" th:text="${auction.getAssest().name}"></a>
+                                                </h3>
+                                                <div class="pri-bid mb-3 mb-sm-0">
+                                                    <span class="text-secondary f-13 mr-1 d-block mb-1">Thời gian đấu giá còn: </span>
+                                                    <span class="time-box time-box-light time-box-sm lh-1 d-block" th:attr="data-action-time=${auction.endAt}">
+                                                  <span class="time-info">
+                                                      <span class="time-num">
+                                                      </span>
+                                                      <span class="time-name">
+                                                          Ngày
+                                                      </span>
+                                                  </span>
+                                                  <span class="time-info">
+                                                      <span class="time-num">
+                                                      </span>
+                                                      <span class="time-name">
+                                                          Giờ
+                                                      </span>
+                                                  </span>
+                                                  <span class="time-info">
+                                                      <span class="time-num">
+                                                      </span>
+                                                      <span class="time-name">
+                                                          Phút
+                                                      </span>
+                                                  </span>
+                                                  <span class="time-info">
+                                                      <span class="time-num">
+                                                      </span>
+                                                      <span class="time-name">
+                                                          Giây
+                                                      </span>
+                                                  </span>
+                                                    </span>
+                                                    <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết thúc lúc: <strong class="text-violet" th:text="${#dates.format(new java.util.Date(auction.endAt), 'HH: mm dd-MM-yyyy')}"></strong> </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-xl-5 col-lg-5">
+                                                <div class="text-right bid-pri-box">
+                                                    <div class="pri-bid mb-2">
+                                                        <span class="text-secondary f-13 mr-1 d-block mb-1">Giá khởi điểm: </span>
+                                                        <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span class="cur-format" th:text="${auction.getAssest().initPrice}"></span> VNDT</strong>
+                                                    </div>
+                                                    <div class="link-box">
+                                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="text-violet f-13 font-weight-600">
+                                                            Xem chi tiết
+                                                            <i class="las la-arrow-right"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <!-- Pro Item -->
+                        
+                    </div> 
+                    <!-- Products -->
+                            
+                    <!-- Pagination -->
+                    <div class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center mb-0">
+                            </ul>
+                        </nav>
+                        <div class="on-page f-13 d-none d-xl-block">
+                            Đang ở trang <span class="font-weight-bold currPage"></span>
+                            của
+                            <span class="font-weight-bold numPages"></span> trang
+                            <span class="ml-2 mr-2">|</span>
+                            Có <span class="font-weight-bold" th:text="${auctionSortByTime} ? ${#lists.size(auctionSortByTime)} : 0"></span> bản ghi
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                </div>
+            </div>
+
+        </section>
+        <!-- schedule  -->
+        <!-- Grid pro  -->
+		<script>
+			document.addEventListener('DOMContentLoaded', (event) => {
+				pageMe({pagerSelector:'#ListAuction'});
+				const url = new URL(window.location);
+				function setPathVariable(name, value) {
+					url.searchParams.set(name, value);
+					window.history.pushState({}, '', url);
+	        	}
+				$('.sortByTime').on('click', function() {
+					setPathVariable('sortBy', 'ctime');
+				});
+				$('.sortByPrice').on('click', function() {
+					setPathVariable('sortBy', 'price');
+				});
+				
+				$('.grid-view').on('click', function() {
+					setPathVariable('style', 'grid');
+				});
+				$('.list-view').on('click', function() {
+					setPathVariable('style', 'list');
+				});
+			});
+		</script>
+    </div>
+</body>
+</html>

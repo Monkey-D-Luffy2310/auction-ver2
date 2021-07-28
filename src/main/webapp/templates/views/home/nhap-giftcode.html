@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Nạp tiền</title>
+</head>
+<body>
+    <div layout:fragment="content">
+	    <!-- Title Page -->
+        <section id="title">
+	        <div class="fw-box">
+	            <div class="container-fluid">
+	                <div class="title-page d-flex align-items-center bd-highlight pt-4 pb-2">
+	                    <h1 class="bd-highlight f-24">
+	                        Nạp tiền
+	                    </h1>
+	                    <div class="breadcrumb-box bd-highlight ml-auto">
+	                        <div class="d-inline-block">
+	                            <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-xl-flex">
+	                                <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+	                                    <li class="breadcrumb-item"><a href="/index">Trang chủ</a></li>
+	                                    <li class="breadcrumb-item"><a href="/tai-khoan">Tài chính</a></li>
+	                                    <li class="breadcrumb-item active" aria-current="page">Nạp tiền</li>
+	                                </ol>
+	                            </nav>
+	                        </div>
+	                        <div class="menu-account-drop d-inline-block d-xl-none mb-3">
+	                            <div class="btn-group dropdown">
+	                                <a href="#" class="dropdown-toggle font-weight-600" data-toggle="dropdown" data-flip="false" aria-haspopup="false" aria-expanded="false">
+	                                    <span class="text-secondary"></span><span th:text="${user.name}"></span>
+	                                </a>
+	                                <div class="dropdown-menu dropdown-menu-right border-0 shadow-sm rounded-0 p-0">
+	                                    <div class="card border-0 rounded-0 shadow-sm">
+	
+	                                        <div class="card-body p-3 rounded-0 border-0 f-13">
+	                                            <div class="card-text">
+	                                                <dl>
+	                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài khoản</dt>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/tai-khoan" class="text-dark">
+	                                                            <i class="las la-border-all mr-1"></i>
+	                                                            Bảng chính
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/ho-so-ca-nhan" class="text-dark">
+	                                                            <i class="las la-user-cog mr-1"></i>
+	                                                            Hồ sơ cá nhân
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dia-chi-van-chuyen" class="text-dark">
+	                                                            <i class="las la-directions mr-1"></i>
+	                                                            Địa chỉ nhận hàng
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/thay-doi-mat-khau" class="text-dark">
+	                                                            <i class="las la-lock mr-1"></i>
+	                                                            Thay đổi mật khẩu
+	                                                        </a>
+	                                                    </dd>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/chuong-trinh-affiliate" class="text-dark">
+                                                              <i class="las la-handshake"></i>
+                                                              Chương trình Affiliate
+                                                            </a>
+                                                          </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dang-nhap" class="text-dark">
+	                                                            <i class="las la-times-circle mr-1"></i>
+	                                                            Đăng xuất
+	                                                        </a>
+	                                                    </dd>
+	                                                </dl>
+	                                                <hr>
+	                                                <dl class="font-weight-500">
+	                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Đấu giá</dt>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dau-gia-yeu-thich" class="text-dark">
+	                                                            <i class="lar la-heart mr-1"></i>
+	                                                            Đấu giá yêu thích
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dau-gia-dang-tham-du" class="text-dark">
+	                                                            <i class="las la-gavel mr-1"></i>
+	                                                            Đấu giá đang tham dự
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dau-gia-da-dang-ky" class="text-dark">
+	                                                            <i class="las la-calendar-check mr-1"></i>
+	                                                            Đấu giá đã đăng ký
+	                                                        </a>
+	                                                    </dd>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/dau-gia-da-thang" class="text-dark">
+                                                                <i class="las la-trophy mr-1"></i>
+                                                                Đấu giá đã thắng
+                                                            </a>
+                                                        </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dau-gia-da-mua" class="text-dark">
+	                                                            <i class="las la-shopping-basket mr-1"></i>
+	                                                            Đấu giá đã mua
+	                                                        </a>
+	                                                    </dd>
+	                                                </dl>
+	                                                <hr>
+	                                                <dl class="font-weight-500">
+	                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài chính</dt>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/vi-va-so-du" class="text-dark">
+	                                                            <i class="las la-wallet mr-1"></i>
+	                                                            Ví và số dư
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/dat-coc-dau-gia" class="text-dark">
+	                                                            <i class="las la-comment-dollar mr-1"></i>
+	                                                            Đặt cọc đấu giá
+	                                                        </a>
+	                                                    </dd>
+														<dd class="ml-3 mb-1">
+															<a href="/nhap-giftcode" class="text-dark">
+																<i class="las la-gift mr-1"></i>
+																Nhập Giftcode
+															</a>
+														</dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/nap-tien" class="text-violet font-weight-bold">
+	                                                            <i class="las la-sign-in-alt mr-1"></i>
+	                                                            Nạp tiền
+	                                                        </a>
+	                                                    </dd>
+	                                                    <dd class="ml-3 mb-1">
+	                                                        <a href="/rut-tien" class="text-dark">
+	                                                            <i class="las la-sign-out-alt mr-1"></i>
+	                                                            Rút tiền
+	                                                        </a>
+	                                                    </dd>
+	                                                </dl>
+                                                    <dl class="font-weight-500" th:if="${user.group == 'Agency' || user.group == 'Admin'}">
+                                                        <hr />
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Đại lý</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                                <i class="las la-building mr-1"></i>
+                                                                Bảng chức năng đại lý
+                                                            </a>
+                                                        </dd>
+                                                    </dl>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <!-- Title Page -->
+        <div id="loading" style="display:none">
+            <div id="loading-center">
+                <div id="loading-center-absolute">
+                    <div class="object" id="object_one"></div>
+                    <div class="object" id="object_two"></div>
+                    <div class="object" id="object_three"></div>
+                    <div class="object" id="object_four"></div>
+    
+                </div>
+            </div>
+        </div>
+        <!-- Grid pro  -->
+        <!-- schedule  -->
+        <section id="liked" class="pb-4">
+
+            <div class="fw-box">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-12 col-xl-3 col-lg-4 d-none d-md-block">
+                            <!-- Menu Account -->
+                            <div class="side-right d-none d-xl-block">
+                                <div class="widget-right mg-b-20">
+                                    <div class="card border-0 rounded-0 shadow-sm">
+
+                                        <div class="card-body p-3 rounded-0 border-0">
+                                            <h3 class="card-title f-19 mb-3 font-weight-700 border-bottom pb-3">
+                                                Xin chào! <a href="ho-so-ca-nhan" class="font-weight-700" th:text="${user.name}"></a>
+                                            </h3>
+                                            <div class="card-text">
+                                                <dl>
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài khoản</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/tai-khoan" class="text-dark">
+                                                            <i class="las la-border-all mr-1"></i>
+                                                            Bảng chính
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/ho-so-ca-nhan" class="text-dark">
+                                                            <i class="las la-user-cog mr-1"></i>
+                                                            Hồ sơ cá nhân
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dia-chi-van-chuyen" class="text-dark">
+                                                            <i class="las la-directions mr-1"></i>
+                                                            Địa chỉ nhận hàng
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/thay-doi-mat-khau" class="text-dark">
+                                                            <i class="las la-lock mr-1"></i>
+                                                            Thay đổi mật khẩu
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/chuong-trinh-affiliate" class="text-dark">
+                                                          <i class="las la-handshake"></i>
+                                                          Chương trình Affiliate
+                                                        </a>
+                                                      </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dang-nhap" class="text-dark">
+                                                            <i class="las la-times-circle mr-1"></i>
+                                                            Đăng xuất
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                                <hr />
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Đấu giá</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dau-gia-yeu-thich" class="text-dark">
+                                                            <i class="lar la-heart mr-1"></i>
+                                                            Đấu giá yêu thích
+                                                        </a>
+                                                    </dd>
+                                                   <dd class="ml-3 mb-1">
+                                                        <a href="/dau-gia-dang-tham-du" class="text-dark">
+                                                            <i class="las la-gavel mr-1"></i>
+                                                            Đấu giá đang tham dự
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dau-gia-da-dang-ky" class="text-dark">
+                                                            <i class="las la-calendar-check mr-1"></i>
+                                                            Đấu giá đã đăng ký
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dau-gia-da-thang" class="text-dark">
+                                                            <i class="las la-trophy mr-1"></i>
+                                                            Đấu giá đã thắng
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dau-gia-da-mua" class="text-dark">
+                                                            <i class="las la-shopping-basket mr-1"></i>
+                                                            Đấu giá đã mua
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                                <hr />
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài chính</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/vi-va-so-du" class="text-dark">
+                                                            <i class="las la-wallet mr-1"></i>
+                                                            Ví và số dư
+                                                        </a>
+                                                    </dd>
+                                                   <dd class="ml-3 mb-1">
+                                                        <a href="/dat-coc-dau-gia" class="text-dark">
+                                                            <i class="las la-comment-dollar mr-1"></i>
+                                                            Đặt cọc đấu giá
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-1">
+                                                        <a href="/nhap-giftcode" class="text-dark">
+                                                            <i class="las la-gift mr-1"></i>
+                                                            Nhập Giftcode
+                                                        </a>
+                                                    </dd> -->
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/nap-tien" class="text-violet font-weight-bold">
+                                                            <i class="las la-sign-in-alt mr-1"></i>
+                                                            Nạp tiền
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/rut-tien" class="text-dark">
+                                                            <i class="las la-sign-out-alt mr-1"></i>
+                                                            Rút tiền
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                                <dl class="font-weight-500" th:if="${user.group == 'Agency' || user.group == 'Admin'}">
+                                                    <hr/>
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Đại lý</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                            <i class="las la-building mr-1"></i>
+                                                            Bảng chức năng đại lý
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Menu Account -->
+                            
+                        </div>
+                        <div class="col-12 col-xl-9 col-lg-12 mini-col pb-4">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-xl-7 col-lg-9 col-md-10">
+                                    <!-- <div class="kt-wizard-v3 mb-5">
+                                        <div class="kt-wizard-v3__nav">
+                                            <div class="kt-wizard-v3__nav-line"></div>
+                                            <div class="kt-wizard-v3__nav-items">
+                                                <div class="kt-wizard-v3__nav-item">
+                                                    <span>1</span>
+                                                    <i class="las la-check"></i>
+                                                </div>
+                                                <div class="kt-wizard-v3__nav-item">
+                                                    <span>2</span>
+                                                    <i class="las la-check"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="card border-0 rounded-0 shadow-sm">
+
+                                        <div class="card-body p-3 rounded-0 border-0">
+                                            <h3 class="card-title f-19 mb-3 font-weight-700 border-bottom pb-3">
+                                                Chọn phương thức nạp VNDT
+                                            </h3>
+                                            <div class="card-text">
+                                                <div class="row mb-3">
+                                                    <div class="col-12">
+                                                        <div class="border box-sel bg-light ">
+                                                            <div class="box-sel-title">
+                                                                <label class="kt-radio d-block mb-0">
+                                                                    <input class="check-bank" type="radio" name="reminder" value="true">
+                                                                    <strong class="font-weight-bold">Qua tài khoản ngân hàng</strong>
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="select-bank bg-white p-3 text-center " style="display:none;">
+                                                                <div class="bank-box p-3">
+
+                                                                    <!-- <div class="form-group mini-col">
+                                                                        <div class="row text-center">
+                                                                            <div class="col-12 mb-1 f-15 font-weight-bold ">
+                                                                                Số tiền được rút: <span class="cur-format" th:text="${user.getVNDTBalance()-user.getVNDTFreeze()}"></span> VNDT
+                                                                            </div>
+                                                                            <div class="col-12 f-11 text-secondary">
+                                                                                <span class="ml-1 mr-1">
+                                                                                    Tổng số tiền: <span class="font-weight-bold">249,384 VNDT</span>
+                                                                                </span>
+                                                                                <span class="ml-1 mr-1">
+                                                                                    Số tiền chờ xử lý: <span class="font-weight-bold text-warning">11,182 VNDT</span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+
+
+                                                                    <div class="form-group mini-col">
+                                                                        <label for="" class="font-weight-500 d-block text-left">
+                                                                            Tên ngân hàng
+                                                                        </label>
+                                                                        <div class="input-group mb-0">
+                                                                            <input type="text" class="form-control text-center" value="TECHCOMBANK" disabled>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group mini-col">
+                                                                        <label for="" class="font-weight-500 d-block text-left">
+                                                                            <span>Số tài khoản </span>
+                                                                            <span class="font-weight-400" style="opacity: 0.7;">(Ấn vào để sao chép)</span>
+                                                                        </label>
+                                                                        <div class="input-group mb-0" style="position: relative; cursor: pointer;">
+                                                                            <p type="text" class="form-control text-center over" readonly="" id="bankId" disabled onclick="copyToClipboard('#bankId')" >19036695858014</p>
+                                                                            <div class="tooltip2" style="position: absolute; right:1rem; top:-1rem;">
+                                                                                <span class="tooltiptext">Đã sao chép</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group mini-col">
+                                                                        <div class="form-group mini-col">
+                                                                            <label for="" class="font-weight-500 d-block text-left">
+                                                                                Tên tài khoản
+                                                                            </label>
+                                                                            <div class="input-group mb-0">
+                                                                                <input type="text" class="form-control text-center" value="VND-TGTT-CT TNHH MTV GIA HUNG PHAT" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group mini-col">
+                                                                        <div class="form-group mini-col">
+                                                                            <label for="" class="font-weight-500 d-block text-left text-danger">
+                                                                                Vui lòng viết chính xác nội dung chuyển khoản như sau
+                                                                                <span class="font-weight-400 text-dark" style="opacity: 0.7;">(Ấn vào để sao chép)</span>
+                                                                            </label>
+                                                                            <div class="input-group mb-0" style="position: relative; cursor: pointer;">
+                                                                                <p type="text" class="form-control text-center" readonly="" id="contentBank" onclick="copyToClipboard2('#contentBank')" disabled></p>
+                                                                                <div class="tooltip2" style="position: absolute; right:1rem; top:-1rem;">
+                                                                                    <span class="tooltiptext2">Đã sao chép</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- <div class="form-group mini-col">
+                                                                        <label for="" class="font-weight-500 d-block">
+                                                                            Memo
+                                                                        </label>
+                                                                        <input type="text" class="form-control" placeholder="XML Memo">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                                            <label class="custom-control-label f-13" for="customCheck">
+                                                                                Không sử dụng Memo
+                                                                            </label>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <!-- <div class="form-group mini-col">
+                                                                        <label for="" class="font-weight-500">Phí mạng lưới</label>
+                                                                        <div class="input-group mb-3">
+                                                                            <select class="form-control selectpickernone select-default" disabled="" tabindex="-98">
+                                                                                <option value="1">Thấp nhất</option>
+                                                                                <option selected="2" value="Techcombank">Trung bình</option>
+                                                                                <option value="3">Cao nhất</option>
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text font-weight-bold f-13 bg-light" id="basic-addon2">
+                                                                                    <span class="text-danger">11.129933 VNDT</span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <!-- <div class="form-group mini-col">
+                                                                        <div class="text-center f-15 font-weight-bold">
+                                                                            Số lượng bạn nhận: <span class="font-weight-bolder text-success">239,384 VNDT</span>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <hr>
+                                                                    <div class="alert alert-warning f-13 mb-0" role="alert">
+                                                                        <p class="mb-0">
+                                                                            <strong>Chú ý!</strong>
+                                                                            Vui lòng phân biệt chữ o (thấp) và số 0 (cao) khi điền nội dung chuyển tiền!
+                                                                        </p>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-12">
+                                                        <div class="border box-sel bg-light ">
+                                                            <div class="box-sel-title">
+                                                                <label class="kt-radio d-block mb-0">
+                                                                    <input class="check-giftcode" type="radio" name="reminder" value="true">
+                                                                    <strong class="font-weight-bold">Nạp bằng Giftcode</strong>
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="select-giftcode bg-white p-3 text-center " style="display:none;">
+                                                                <div class="form-group row">
+                                                                    <div class="col-12 col-md-4">
+                                                                        <label class="col-form-label font-weight-600">Nhập Giftcode vào đây:</label>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-8">
+                                                                        <input type="text" class="form-control form-control-user fs-090" maxlength="200" id="giftcode">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="AlertChange" style="min-height:20%;"></div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-form-label font-weight-600">Bạn chưa có Giftcode? Liên hệ trực tiếp với các <a href="https://ag.acwallet.net" target="_blank"><strong>đại lý</strong></a> sau để mua Giftcode</label>
+                                                                </div>
+                                                                <!-- <div>
+                                                                    <div class="text-violet contactClick" style="cursor:pointer">
+                                                                        Liên hệ
+                                                                        <i class="las la-angle-down contactClicked" style="display: none;"></i>
+                                                                        <i class="las la-angle-up unContactClicked" style="display: none;"></i>
+                                                                    </div>
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-12">
+                                                        <div class="border box-sel bg-light">
+                                                            <div class="box-sel-title">
+                                                                <label class="kt-radio d-block mb-0">
+                                                                    <input class="check-coin" type="radio" name="reminder" value="false">
+                                                                    <strong class="font-weight-bold">
+                                                                        Nạp bằng ví tiền điện tử
+                                                                    </strong>
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="select-coin  bg-white" style="display:none">
+                                                                <div class="bank-box p-3">
+
+                                                                    <div class="form-group mini-col">
+                                                                        <div class="form-group text-center">
+                                                                            <label class="col-form-label font-weight-800">Mã QR địa chỉ ví VNDT</label>
+                                                                        </div>
+                                                                        <div class="text-center">
+                                                                            <img width="200" id="qrcode">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group mini-col" >
+                                                                        <label for="" class="font-weight-500 d-block text-left">
+                                                                            <span>Địa chỉ ví điện tử VNDT</span>
+                                                                            <span class="font-weight-400" style="opacity: 0.7;">(Ấn vào để sao chép)</span>
+                                                                        </label>
+                                                                        <div class="input-group mb-3" style="position: relative;cursor: pointer;">
+                                                                            <p type="text" class="form-control text-center over" readonly="" id="walletAddress1" th:text="${user.walletAddress}" onclick="copyToClipboard('#walletAddress1')"></p>
+                                                                            <div class="tooltip2" style="position: absolute; right:1rem; top:-1rem;">
+                                                                                <span class="tooltiptext">Đã sao chép</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="alert alert-warning f-13 mb-0" role="alert">
+                                                                        <strong class="mb-2"><strong class="ng-binding">Chú ý!</strong></strong>
+                                                                        <span class="ng-binding">VNDT sẽ hiển thị trên Ví của bạn sau từ 5-10p kể từ khi chúng tôi nhận được khoản tiền gửi. Vui lòng kiên nhẫn và liên hệ với chúng tôi để được hỗ trợ.</span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top pt-3">
+                                                <!-- <a href="/nap-tien" class="btn btn-secondary">
+                                                    <i class="las la-arrow-left"></i>
+                                                    Quay lại
+                                                </a> -->
+                                                <button class="select-giftcode float-right btn btn-primary float-right" onclick="getGiftCode()" style="display: none;">
+                                                    Tiếp tục
+                                                    <i class="las la-arrow-right"></i>
+                                                </button>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- thông báo -->
+            <div class="modal fade pt-4" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Nạp bằng Giftcode</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h1 class="text-center">Thành công</h1>
+                      <h4 class="text-center">Số lượng: <span class="text-success">+<span class="text-success cur-format amount"></span> VNDT</span></h4>
+                      <div class="text-center">Quý khánh được cộng <span class="text-success">+<span class="text-success cur-format amount"></span> VNDT</span> vào tài khoản, giao dịch sẽ hoàn tất sau ít phút và tiền sẽ được chuyển vào tài khoản quý khách. Vui lòng kiểm tra <a href="/vi-va-so-du">Ví và số dư</a> sau 1 vài phút nữa.</div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Quay về</button>
+                      <a type="button" class="btn btn-primary" href="/vi-va-so-du">Ví và số dư</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+        <script th:inline="javascript">
+        /*[+
+        let walletaddress = [[${user.walletAddress}]];
+        let bonusaddress = [[${user.bonusAddress}]];
+        let id = [[${user.id}]];
+        +]*/
+        document.addEventListener('DOMContentLoaded', (event) => {   
+            $("#qrcode").attr("src", "https://chart.googleapis.com/chart?chs=360x360&cht=qr&chl=" + walletaddress + "&choe=UTF-8");
+            $("#buoc2").show();
+            $(".select-giftcode").show('fast');
+            $(".check-giftcode").click();
+            // $("#withdraw").click(function(){
+                
+            // })
+            $(".check-bank").change(function () {
+                if ($(".check-bank").prop("checked")) {
+                    $(".select-bank").show('fast');
+                    $(".select-coin").hide('fast');
+                    $(".select-giftcode").hide('fast');
+                    $(".btn-wit").show('fast');
+                    var hexString = (id+1000).toString(16);
+                    $("#contentBank").html('ACA'+hexString.toUpperCase());
+                }
+                // else {
+                //     $(".select-coin").show('fast');
+                //     $(".select-bank").hide('fast');
+                // }
+            });
+            $(".check-coin").change(function () {
+                if ($(".check-coin").prop("checked")) {
+                    $(".select-bank").hide('fast');
+                    $(".select-giftcode").hide('fast');
+                    $(".select-coin").show('fast');
+                    $(".btn-wit").show('fast');
+                }
+                // else {
+                //     $(".select-coin").hide('fast');
+                //     $(".select-bank").show('fast');
+                // }
+            });
+            $(".check-giftcode").change(function () {
+                if ($(".check-giftcode").prop("checked")) {
+                    $(".select-bank").hide('fast');
+                    $(".select-coin").hide('fast');
+                    $(".select-giftcode").show('fast');
+                    $(".btn-wit").show('fast');
+                }
+                // else {
+                //     $(".select-coin").hide('fast');
+                //     $(".select-bank").show('fast');
+                // }
+            });
+        });
+        function copyToClipboard2(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            $(".tooltiptext2").show();
+            setTimeout(() => $(".tooltiptext2").hide('slow'),1000);
+        }
+        function getGiftCode(){
+            if(giftcode.value == ""){
+                $(".AlertChange").addClass("alert alert-danger");
+                $(".AlertChange").html('Vui lòng nhập giftcode!!!');
+                $(".AlertChange").fadeIn('slow');
+                setTimeout(() => $(".AlertChange").fadeOut('slow'),5000);
+            }
+            else{
+                $("#loading").show()
+                    fetch('/giftcode/enter/'+giftcode.value, {
+                            method: 'GET'
+                    })
+                    .then(res =>{
+                        return res.text()
+                    }
+                    )   
+                    .then(results => {
+                        console.log(results);
+                        $("#loading").hide()
+                        // $("#amout").html(results);
+                        if(results == "Error"){
+                            $(".AlertChange").addClass("alert alert-danger");
+                            $(".AlertChange").html('Mã giftcode sai hoặc đã sử dụng!!!');
+                            $(".AlertChange").fadeIn('slow');
+                            setTimeout(() => $(".AlertChange").fadeOut('slow'),5000);
+                        }
+                        else{
+                            // $("#loading").hide()
+                            $(".amount").html(Number(results).toLocaleString('en'));
+                            $("#modalSuccess").modal();
+                        }       
+                    })
+                    .catch(error => {
+                        console.log("Error: " + error);
+                    }); 
+            }
+            }
+        </script>
+    </div>
+</body>
+</html>
+<style>
+    .hash-success{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap; 
+        text-overflow: ellipsis;
+    }
+    .over{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap; 
+        text-overflow: ellipsis;
+    }
+</style>

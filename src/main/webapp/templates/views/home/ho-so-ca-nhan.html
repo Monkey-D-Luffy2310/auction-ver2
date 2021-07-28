@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Hồ sơ cá nhân</title>
+    <style>
+        #UpdateHoSo {
+            position: relative;
+        }
+
+        #UpdateHoSo.spinning {
+            padding-right: 15px;
+        }
+
+        #UpdateHoSo.spinning:before {
+            content: "";
+            width: 0px;
+            height: 0px;
+            border-radius: 50%;
+            /* right: -10px; */
+            top: 50%;
+            border: 2px solid white;
+            border-right: 3px solid #FAB414;
+            position: absolute;
+            animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+        }
+
+        @keyframes rotate360 {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes exist {
+            100% {
+                width: 15px;
+                height: 15px;
+                margin: -8px 5px 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="dg-content">
+            <div class="dg-profile">
+                <div class="mt-80"></div>
+                <div class="container-fluid box-profile">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-1"></div>
+                        <div class="col-xl-8 col-lg-10 box-center-profile">
+                            <div class="row">
+                                <div class="col-xl-4">
+                                    <div class="profile-left">
+                                        <img class="avatar avatar-profile" th:src="${user.avatar}" alt=""
+                                            style="cursor:pointer" />
+                                        <div class="user-name" th:text="${user.name}"></div>
+                                        <div class="user-email" th:text="${user.email}"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="profile-right">
+                                        <div class="box-auto">
+                                            <div class="text-1">Thông tin cơ bản</div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control ip-email"
+                                                    th:value="${user?.email}" disabled />
+                                            </div>
+
+                                            <div class="dg-input-label-custom mt-24">
+                                                <label>Họ và tên *</label>
+                                                <input type="text" class="form-control" id="Fullname"
+                                                    th:value="${user?.fullname}" placeholder="" />
+                                            </div>
+
+                                            <div class="dg-input-label-custom mt-24">
+                                                <label>Địa chỉ *</label>
+                                                <input type="text" class="form-control" id="Province"
+                                                    th:value="${user?.province}" placeholder="" />
+                                            </div>
+
+                                            <div class="d-flex mt-24">
+                                                <div class="txt-1">Giới tính:</div>
+                                                <div class="dg-radio-custom mr-44">
+                                                    <label class="dg-radio">
+                                                        <input type="radio" name="radio" id="male"
+                                                            th:checked="${user.gender == 'Nam'}" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label for="male">Nam</label>
+                                                </div>
+                                                <div class="dg-radio-custom">
+                                                    <label class="dg-radio">
+                                                        <input type="radio" name="radio" id="female"
+                                                            th:checked="${user.gender == 'Nữ'}" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label for="female">Nữ</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex align-items-center justify-content-between mt-24">
+                                                <div class="txt-1">Ngày sinh:</div>
+
+                                                <div class="dg-select-custom dg-date ml-1">
+                                                    <select th:if="${user.dateofbirth != null}" id="dayOB"
+                                                        class="selectpicker" title="Ngày"
+                                                        th:title="${#strings.arraySplit(user.dateofbirth, '-')[2]}">
+                                                        <option>01</option>
+                                                        <option>02</option>
+                                                        <option>03</option>
+                                                        <option>04</option>
+                                                        <option>05</option>
+                                                        <option>06</option>
+                                                        <option>07</option>
+                                                        <option>08</option>
+                                                        <option>09</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                        <option>13</option>
+                                                        <option>14</option>
+                                                        <option>15</option>
+                                                        <option>16</option>
+                                                        <option>17</option>
+                                                        <option>18</option>
+                                                        <option>19</option>
+                                                        <option>20</option>
+                                                        <option>21</option>
+                                                        <option>22</option>
+                                                        <option>23</option>
+                                                        <option>24</option>
+                                                        <option>25</option>
+                                                        <option>26</option>
+                                                        <option>27</option>
+                                                        <option>28</option>
+                                                        <option>29</option>
+                                                        <option>30</option>
+                                                        <option>31</option>
+                                                    </select>
+                                                    <select th:if="${user.dateofbirth == null}" id="dayOB"
+                                                        class="selectpicker" title="Ngày">
+                                                        <option>01</option>
+                                                        <option>02</option>
+                                                        <option>03</option>
+                                                        <option>04</option>
+                                                        <option>05</option>
+                                                        <option>06</option>
+                                                        <option>07</option>
+                                                        <option>08</option>
+                                                        <option>09</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                        <option>13</option>
+                                                        <option>14</option>
+                                                        <option>15</option>
+                                                        <option>16</option>
+                                                        <option>17</option>
+                                                        <option>18</option>
+                                                        <option>19</option>
+                                                        <option>20</option>
+                                                        <option>21</option>
+                                                        <option>22</option>
+                                                        <option>23</option>
+                                                        <option>24</option>
+                                                        <option>25</option>
+                                                        <option>26</option>
+                                                        <option>27</option>
+                                                        <option>28</option>
+                                                        <option>29</option>
+                                                        <option>30</option>
+                                                        <option>31</option>
+                                                    </select>
+                                                    <div class=" icn-down"><img src="images/danh-sach/down.svg"
+                                                            alt="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="dg-select-custom dg-month ml-1">
+                                                    <select th:if="${user.dateofbirth != null}" id="monthOB"
+                                                        class="selectpicker" title="Tháng"
+                                                        th:title="${#strings.arraySplit(user.dateofbirth, '-')[1]}">
+                                                        <option>01</option>
+                                                        <option>02</option>
+                                                        <option>03</option>
+                                                        <option>04</option>
+                                                        <option>05</option>
+                                                        <option>06</option>
+                                                        <option>07</option>
+                                                        <option>08</option>
+                                                        <option>09</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                    <select th:if="${user.dateofbirth == null}" id="monthOB"
+                                                        class="selectpicker" title="Tháng">
+                                                        <option>01</option>
+                                                        <option>02</option>
+                                                        <option>03</option>
+                                                        <option>04</option>
+                                                        <option>05</option>
+                                                        <option>06</option>
+                                                        <option>07</option>
+                                                        <option>08</option>
+                                                        <option>09</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                    <div class="icn-down"><img src="images/danh-sach/down.svg" alt="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="dg-select-custom dg-year ml-1">
+                                                    <select th:if="${user.dateofbirth != null}" id="yearOB"
+                                                        class="selectpicker" title="Năm"
+                                                        th:title="${#strings.arraySplit(user.dateofbirth, '-')[0]}">
+                                                        <option>1950</option>
+                                                        <option>1951</option>
+                                                        <option>1952</option>
+                                                        <option>1953</option>
+                                                        <option>1954</option>
+                                                        <option>1955</option>
+                                                        <option>1956</option>
+                                                        <option>1957</option>
+                                                        <option>1958</option>
+                                                        <option>1959</option>
+                                                        <option>1960</option>
+                                                        <option>1961</option>
+                                                        <option>1962</option>
+                                                        <option>1963</option>
+                                                        <option>1964</option>
+                                                        <option>1965</option>
+                                                        <option>1966</option>
+                                                        <option>1967</option>
+                                                        <option>1968</option>
+                                                        <option>1969</option>
+                                                        <option>1970</option>
+                                                        <option>1971</option>
+                                                        <option>1972</option>
+                                                        <option>1973</option>
+                                                        <option>1974</option>
+                                                        <option>1975</option>
+                                                        <option>1976</option>
+                                                        <option>1977</option>
+                                                        <option>1978</option>
+                                                        <option>1979</option>
+                                                        <option>1980</option>
+                                                        <option>1981</option>
+                                                        <option>1982</option>
+                                                        <option>1983</option>
+                                                        <option>1984</option>
+                                                        <option>1985</option>
+                                                        <option>1986</option>
+                                                        <option>1987</option>
+                                                        <option>1988</option>
+                                                        <option>1989</option>
+                                                        <option>1990</option>
+                                                        <option>1991</option>
+                                                        <option>1992</option>
+                                                        <option>1993</option>
+                                                        <option>1994</option>
+                                                        <option>1995</option>
+                                                        <option>1996</option>
+                                                        <option>1997</option>
+                                                        <option>1998</option>
+                                                        <option>1999</option>
+                                                        <option>2000</option>
+                                                        <option>2001</option>
+                                                        <option>2002</option>
+                                                        <option>2003</option>
+                                                        <option>2004</option>
+                                                        <option>2005</option>
+                                                        <option>2006</option>
+                                                        <option>2007</option>
+                                                        <option>2008</option>
+                                                        <option>2009</option>
+                                                        <option>2010</option>
+                                                    </select>
+                                                    <select th:if="${user.dateofbirth == null}" id="yearOB"
+                                                        class="selectpicker" title="Năm">
+                                                        <option>1950</option>
+                                                        <option>1951</option>
+                                                        <option>1952</option>
+                                                        <option>1953</option>
+                                                        <option>1954</option>
+                                                        <option>1955</option>
+                                                        <option>1956</option>
+                                                        <option>1957</option>
+                                                        <option>1958</option>
+                                                        <option>1959</option>
+                                                        <option>1960</option>
+                                                        <option>1961</option>
+                                                        <option>1962</option>
+                                                        <option>1963</option>
+                                                        <option>1964</option>
+                                                        <option>1965</option>
+                                                        <option>1966</option>
+                                                        <option>1967</option>
+                                                        <option>1968</option>
+                                                        <option>1969</option>
+                                                        <option>1970</option>
+                                                        <option>1971</option>
+                                                        <option>1972</option>
+                                                        <option>1973</option>
+                                                        <option>1974</option>
+                                                        <option>1975</option>
+                                                        <option>1976</option>
+                                                        <option>1977</option>
+                                                        <option>1978</option>
+                                                        <option>1979</option>
+                                                        <option>1980</option>
+                                                        <option>1981</option>
+                                                        <option>1982</option>
+                                                        <option>1983</option>
+                                                        <option>1984</option>
+                                                        <option>1985</option>
+                                                        <option>1986</option>
+                                                        <option>1987</option>
+                                                        <option>1988</option>
+                                                        <option>1989</option>
+                                                        <option>1990</option>
+                                                        <option>1991</option>
+                                                        <option>1992</option>
+                                                        <option>1993</option>
+                                                        <option>1994</option>
+                                                        <option>1995</option>
+                                                        <option>1996</option>
+                                                        <option>1997</option>
+                                                        <option>1998</option>
+                                                        <option>1999</option>
+                                                        <option>2000</option>
+                                                        <option>2001</option>
+                                                        <option>2002</option>
+                                                        <option>2003</option>
+                                                        <option>2004</option>
+                                                        <option>2005</option>
+                                                        <option>2006</option>
+                                                        <option>2007</option>
+                                                        <option>2008</option>
+                                                        <option>2009</option>
+                                                        <option>2010</option>
+                                                    </select>
+                                                    <div class="icn-down"><img src="images/danh-sach/down.svg" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="dg-input-label-custom mt-24 mb-24">
+                                                <label>Số điện thoại *</label>
+                                                <input type="text" id="Mobile" class="form-control"
+                                                    th:value="${user?.mobile}" placeholder="" maxlength="13" />
+                                            </div>
+
+                                            <div class="AlertChange" style="position: absolute; margin: 10px;"></div>
+                                            <div class="line"></div>
+
+                                            <div class="d-flex justify-content-between">
+                                                <div class="txt-2 d-flex">
+                                                    Địa chỉ nhận hàng
+                                                    <div class="txt-3 d-flex align-items-center ml-12"
+                                                        th:if="${addressDefault != null}">
+                                                        <img src="images/thong-tin-ca-nhan/tick.svg" alt="" />
+                                                        Mặc định
+                                                    </div>
+                                                </div>
+                                                <div style="cursor: pointer;" class="change-address font-italic"
+                                                    onclick="$('#modalAddAddress').modal()" th:if="${addressDefault != null}">Thêm địa chỉ mặc định mới
+                                                </div>
+                                                <div style="cursor: pointer;" class="change-address font-italic"
+                                                    onclick="$('#modalAddAddress').modal()" th:if="${addressDefault == null}">Thêm
+                                                </div>
+                                            </div>
+
+                                            <div class="box-address" th:if="${addressDefault != null}">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="name" th:text="${addressDefault?.name}">
+                                                    </div>
+                                                    <div class="soc"></div>
+                                                    <div class="phone" th:text="${addressDefault?.mobile}">
+                                                    </div>
+                                                </div>
+                                                <div class="txt-address" th:text="${addressDefault?.address}"></div>
+                                            </div>
+
+                                            <div class="box-click-change-pass">
+                                                <a href="/thay-doi-mat-khau" class="change-password">Đổi mật khẩu</a>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-update" id="UpdateHoSo">Cập
+                                                nhật</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-xl-2 col-lg-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BEGIN: MODAL CHANGE AVATAR -->
+        <div class="modal fade" id="modalChangeAvatar" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="top:-20rem !important;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="md-header d-flex justify-content-between align-items-center">
+                            <div class="txt-1">Thay đổi ảnh đại diện</div>
+                            <a href="javascript:void(0)" data-dismiss="modal"><img
+                                    src="images/thong-tin-ca-nhan/close.svg" alt="" /></a>
+                        </div>
+
+                        <div class="dg-input-label-custom mt-24">
+                            <div class="form-control p-3" id="selected_filename">Chọn ảnh</div>
+                            <input type="file" id="fileinput" placeholder="" style="display:none;" />
+                        </div>
+                        <div class="box-btn mt-24">
+                            <button class="btn" style="height: 36px;
+                            display: flex;
+                            align-items: center;
+                            background: #FAB414;
+                            border-radius: 8px;
+                            color: white;
+                            width: 127px;
+                            justify-content: center;" onclick="uploadImage()" data-dismiss="modal" id="close">Tải
+                                lên</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: MODAL CHANGE AVATAR -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+        <script th:inline="javascript">
+            /*[+
+            let id = [[${user.id}]];
+            let urlImage = [[${user.avatar}]];
+            let dob1 = [[${user.dateofbirth}]];
+            let gender = [[${user.gender}]];
+            +]*/
+            document.addEventListener('DOMContentLoaded', (event) => {
+
+                $('#Mobile').keyup(function () {
+                    if (!isNumeric($('#Mobile').val())) {
+                        $(".AlertChange").removeClass("alert-success")
+                        $(".AlertChange").addClass("alert alert-danger");
+                        $(".AlertChange").html('Vui lòng điền đúng định dạng của số điện thoại!!!');
+                        $(".AlertChange").fadeIn('slow');
+                        setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+                    }
+                });
+
+                $('#selected_filename').click(function () {
+                    $("#fileinput").click();
+                });
+
+                $('#fileinput').change(function () {
+                    $('#selected_filename').text($('#fileinput')[0].files[0].name);
+                });
+
+                if (dob1 != null) {
+                    var dobSplit = dob1.split('-');
+                    var year = dobSplit[0];
+                    var month = dobSplit[1];
+                    var day = dobSplit[2];
+                }
+
+                $("#dayOB").change(function () {
+                    day = $("#dayOB").val();
+                })
+                $("#monthOB").change(function () {
+                    month = $("#monthOB").val();
+                })
+                $("#yearOB").change(function () {
+                    year = $("#yearOB").val();
+                })
+                //  changeAvatarBtn
+                $(".avatar-profile").click(function () {
+                    $("#modalChangeAvatar").modal();
+                });
+
+                $("#male").click(function (event) {
+                    gender = "Nam";
+                });
+                $("#female").click(function (event) {
+                    gender = "Nữ";
+                });
+                $("#UpdateHoSo").click(function (event) {
+                    // $("#UpdateHoSo").css("pointer-events", "none");
+                    let fullname = document.getElementById("Fullname");
+                    // let gender = document.getElementById("Gender");
+                    // let dob = document.getElementById("Dob");
+                    // console.log(dob.value);
+                    // console.log(urlImage)
+                    let mobile = document.getElementById("Mobile");
+                    let province = document.getElementById("Province");
+                    if (isNumeric($('#Mobile').val())) {
+                        $("#UpdateHoSo").addClass('spinning text-spinning');
+                        $("#UpdateHoSo").prop('disabled', true);
+                        fetch('/user/edit/' + id, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                'fullname': fullname.value,
+                                'gender': gender,
+                                'avatar': urlImage,
+                                'dateofbirth': year + '-' + month + '-' + day,
+                                'mobile': mobile.value,
+                                'province': province.value,
+                            })
+                        })
+                            .then(res => res.text())
+                            .then(results => {
+                                console.log(results)
+                                if (results === "OK") {
+                                    $("#UpdateHoSo").prop('disabled', false);
+                                    $("#UpdateHoSo").removeClass("spinning text-spinning");
+                                    // $("#UpdateHoSo").css("pointer-events", "visible");
+                                    $(".AlertChange").removeClass("alert-danger")
+                                    $(".AlertChange").addClass("alert alert-success");
+                                    $(".AlertChange").html('Cập nhật thông tin thành công');
+                                    $(".AlertChange").fadeIn('slow');
+                                    setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+                                    location.reload();
+                                    // $("#UpdateHoSo").css("pointer-events", "visible");
+                                }
+                                else {
+                                    $("#UpdateHoSo").prop('disabled', false);
+                                    $("#UpdateHoSo").removeClass("spinning text-spinning");
+                                    // $("#UpdateHoSo").css("pointer-events", "visible");
+                                    $(".AlertChange").removeClass("alert-success")
+                                    $(".AlertChange").addClass("alert alert-danger");
+                                    $(".AlertChange").html('Cập nhật thông tin không thành công</br>' + results);
+                                    $(".AlertChange").fadeIn('slow');
+                                    setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+                                    // $("#UpdateHoSo").css("pointer-events", "visible");
+                                }
+                            })
+                            .catch(error => {
+                                console.log("Error: " + error);
+                            });
+                    }
+                    else {
+                        $(".AlertChange").removeClass("alert-success")
+                        $(".AlertChange").addClass("alert alert-danger");
+                        $(".AlertChange").html('Vui lòng điền đúng định dạng của số điện thoại!!!');
+                        $(".AlertChange").fadeIn('slow');
+                        setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+                        // $("#UpdateHoSo").css("pointer-events", "visible");
+                    }
+                    // $("#UpdateHoSo").css("pointer-events", "visible");
+                });
+
+            });
+
+            var category;
+            var firebaseConfig = {
+                apiKey: "AIzaSyAgT9AnK8vAq4HuiB0Ch4pJS8RafVjvtic",
+                authDomain: "achauauction.firebaseapp.com",
+                projectId: "achauauction",
+                storageBucket: "achauauction.appspot.com",
+                messagingSenderId: "461753979976",
+                appId: "1:461753979976:web:7d25a36d53c495a527f47d",
+                measurementId: "G-GW36BEF4PQ"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            // Upload image
+            function uploadImage() {
+                const ref = firebase.storage().ref();
+                const file = document.querySelector("#fileinput").files[0];
+                if (file.size >= 1024 * 1024) {
+                    $(".AlertChange").addClass("alert alert-danger mt-12");
+                    $(".AlertChange").html('Vui lòng chọn ảnh có kích thước dưới 1MB');
+                    $(".AlertChange").fadeIn('slow');
+                    setTimeout(() => $(".AlertChange").fadeOut('slow'), 6000);
+                }
+                else {
+                    document.getElementById("selected_filename").innerHTML = file.name;
+                    const name = +new Date() + "-" + file.name;
+                    const metadata = {
+                        contentType: file.type
+                    };
+                    const task = ref.child(name).put(file, metadata);
+                    task
+                        .then(snapshot => snapshot.ref.getDownloadURL())
+                        .then(url => {
+                            urlImage = url,
+                                $(".avatar").attr("src", urlImage);
+                        })
+                        .catch(console.error);
+                }
+            }
+        </script>
+        <!-- <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                $("input[name='inputImage']").change(function () {
+                    const file = document.querySelector("#inputGroupFile02").files[0];
+                    document.getElementById("chooseImage").innerHTML = file.name;
+                })
+            })
+        </script> -->
+    </div>
+</body>
+
+
+</html>

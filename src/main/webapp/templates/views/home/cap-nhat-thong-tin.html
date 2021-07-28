@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Hồ sơ cá nhân</title>
+</head>
+<body>
+    <div layout:fragment="content">
+
+        <section id="liked" class="pb-4">
+
+            <div class="fw-box">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-4 col-xl-9 col-lg-12">
+                            <div class="edit-profile">
+                                <div class="card border-0 rounded-0 shadow-sm">
+
+                                    <div class="card-body p-3 rounded-0 border-0">
+
+                                        <div class="card-text pt-1">
+                                            <div class="row">
+                                                <div class="col-12 col-xl-3 col-lg-3 col-md-4">
+                                                    <div class="user-avatar mb-3 text-center">
+                                                        <img id="avatar" th:src="${user.avatar}" style="object-fit: cover;"  class="change-avatar rounded-circle edit-avatar" width="128" height="128" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click vào đây để thay avatar">
+                                                        <p class="pt-2 f-13 text-secondary">Nhấp chuột vào ảnh để thay đổi ảnh đại diện. Ảnh đại diện phải là: <span class="font-weight-bold">jpg, png, gif</span> dung lượng tối đa <span class="font-weight-bold">500Kb</span>. Kích thước tối đa <span class="font-weight-bold">300px</span></p>
+                                                    </div>
+                                                </div>
+                                                <form class="col-12 col-xl-9 col-lg-9 col-md-8">
+                                                    <div class="row">
+ <!--                                                   <div class="col-12 col-md-12">
+                                                            <div class="form-group" >
+                                                                <label class="col-form-label pb-1 pt-0 font-weight-600">Tên đăng nhập<span class="text-danger">*</span></label>
+                                                                <input id="Username" th:field="${user.name}" type="text" class="form-control form-control-user fs-090" readonly maxlength="20">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-12 col-md-12">
+                                                            <div class="form-group" >
+                                                                <label class=" col-form-label pb-1 pt-0 font-weight-600">Địa chỉ Email<span class="text-danger">*</span></label>
+                                                                <input id= "Email" th:field="${user.email}" type="text" class="form-control form-control-user fs-090" readonly maxlength="20">
+                                                            </div>
+                                                        </div>-->
+                                            
+
+                                                        <div class="col-12 col-md-7">
+                                                            <div class="form-group"  >
+                                                                <label class=" col-form-label pb-1 pt-0 font-weight-600">Tên<span class="text-danger">*</span></label>
+                                                                <input id="Lastname" th:field="${user.lastname}" type="text" class="form-control form-control-user fs-090" value="" maxlength="20"
+                                                                 oninvalid="validateName(this)" oninput="validateName(this)" required>
+                                                            </div>
+                                                        </div>
+														
+														<div class="col-12 col-md-5">
+                                                            <div class="form-group" >
+                                                                <label class="col-form-label pb-1 pt-0 font-weight-600">Họ và đệm<span class="text-danger">*</span></label>
+                                                                <input id= "Fullname" th:field="${user.fullname}" type="text" class="form-control form-control-user fs-090" value="" maxlength="20"
+                                                                oninvalid="validateName(this)" oninput="validateName(this)" required>
+                                                            </div>
+                                                        </div>
+                                           
+                                                        <div class="col-12 col-md-12">
+                                                            <div class="form-group mb-2">
+                                                                <label class="col-form-label pb-1 pt-0 font-weight-600">Giới tính<span class="text-danger">*</span></label>
+                                                                <select id="Gender" th:field="${user.gender}" class="form-control select-default selectpickernone"
+                                                                oninvalid="validateGender(this)" oninput="validateGender(this)" required>
+                                                                    <option value="">Chọn giới tính</option>
+                                                                    <option value="Nam">Nam</option>
+                                                                    <option value="Nữ">Nữ</option>
+                                                                    <option value="Khác">Khác</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <label class=" col-form-label pb-1 pt-0 font-weight-600">Ngày sinh<span class="text-danger">*</span></label>
+                                                                <div class="input-group dateranger-oneDob">
+                                                                    <input id= "Dob"  type="text" class="form-control form-control-sm date-useDob bg-white"
+                                                                     oninvalid="validateDob(this)" oninput="validateDob(this)" required>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text bg-white pl-2 pr-2">
+                                                                            <i class="las la-calendar"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                             
+                                                        <div class="col-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="col-form-label pb-1 pt-0 font-weight-600">Số điện thoại<span class="text-danger">*</span></label>
+                                                                <input id="Mobile" th:field="${user.mobile}" type="text" class="form-control form-control-user fs-090" value="" maxlength="20"
+                                                                 oninvalid="validateMobile(this)" oninput="validateMobile(this)" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <label class=" col-form-label pb-1 pt-0 font-weight-600">Tỉnh thành<span class="text-danger">*</span></label>
+                                                                <select id="Province" th:field="${user.province}" class="form-control select-default selectpickernone"
+                                                                oninvalid="validateProvince(this)" oninput="validateProvince(this)" required>
+                                                                    <option selected="selected" value="">Chọn tỉnh thành</option>
+                                                                    <option value="Hà Nội">Hà Nội</option>
+                                                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                                                    <option value="Hải Phòng">Hải Phòng</option>
+                                                                    <option value="Cần Thơ">Cần Thơ</option>
+                                                                    <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>
+                                                                    <option value="Quảng Ninh">Quảng Ninh</option>
+                                                                    <option value="An Giang">An Giang</option>
+                                                                    <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>
+                                                                    <option value="Bắc Giang">Bắc Giang</option>
+                                                                    <option value="Bắc Kạn">Bắc Kạn</option>
+                                                                    <option value="Bạc Liêu">Bạc Liêu</option>
+                                                                    <option value="Bắc Ninh">Bắc Ninh</option>
+                                                                    <option value="Bến Tre">Bến Tre</option>
+                                                                    <option value="Bình Dương">Bình Dương</option>
+                                                                    <option value="Bình Định">Bình Định</option>
+                                                                    <option value="Bình Phước">Bình Phước</option>
+                                                                    <option value="Bình Thuận">Bình Thuận</option>
+                                                                    <option value="Cà Mau">Cà Mau</option>
+                                                                    <option value="Cao Bằng">Cao Bằng</option>
+                                                                    <option value="Đắk Lắk">Đắk Lắk</option>
+                                                                    <option value="Đắk Nông">Đắk Nông</option>
+                                                                    <option value="Điện Biên">Điện Biên</option>
+                                                                    <option value="Đồng Nai">Đồng Nai</option>
+                                                                    <option value="Đồng Tháp">Đồng Tháp</option>
+                                                                    <option value="Gia Lai">Gia Lai</option>
+                                                                    <option value="Hà Giang">Hà Giang</option>
+                                                                    <option value="Hà Nam">Hà Nam</option>
+                                                                    <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                                                    <option value="Hải Dương">Hải Dương</option>
+                                                                    <option value="Hậu Giang">Hậu Giang</option>
+                                                                    <option value="Hòa Bình">Hòa Bình</option>
+                                                                    <option value="Hưng Yên">Hưng Yên</option>
+                                                                    <option value="Kiên Giang">Kiên Giang</option>
+                                                                    <option value="Kon Tum">Kon Tum</option>
+                                                                    <option value="Khánh Hòa">Khánh Hòa</option>
+                                                                    <option value="Lai Châu">Lai Châu</option>
+                                                                    <option value="Lạng Sơn">Lạng Sơn</option>
+                                                                    <option value="Lào Cai">Lào Cai</option>
+                                                                    <option value="Lâm Đồng">Lâm Đồng</option>
+                                                                    <option value="Long An">Long An</option>
+                                                                    <option value="Nam Định">Nam Định</option>
+                                                                    <option value="Ninh Bình">Ninh Bình</option>
+                                                                    <option value="Ninh Thuận">Ninh Thuận</option>
+                                                                    <option value="Nghệ An">Nghệ An</option>
+                                                                    <option value="Phú Thọ">Phú Thọ</option>
+                                                                    <option value="Phú Yên">Phú Yên</option>
+                                                                    <option value="Quảng Bình">Quảng Bình</option>
+                                                                    <option value="Quảng Nam">Quảng Nam</option>
+                                                                    <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                                    <option value="Quảng Trị">Quảng Trị</option>
+                                                                    <option value="Sóc Trăng">Sóc Trăng</option>
+                                                                    <option value="Sơn La">Sơn La</option>
+                                                                    <option value="Tây Ninh">Tây Ninh</option>
+                                                                    <option value="Tiền Giang">Tiền Giang</option>
+                                                                    <option value="Tuyên Quang">Tuyên Quang</option>
+                                                                    <option value="Thái Bình">Thái Bình</option>
+                                                                    <option value="Thái Nguyên">Thái Nguyên</option>
+                                                                    <option value="Thanh Hóa">Thanh Hóa</option>
+                                                                    <option value="Trà Vinh">Trà Vinh</option>
+                                                                    <option value="Vĩnh Long">Vĩnh Long</option>
+                                                                    <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                                    <option value="Yên Bái">Yên Bái</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            <button type="submit" class="btn btn-primary mb-2" id="UpdateHoSo">
+                                                                <i class="las la-check"></i>
+                                                                Cập nhật hồ sơ
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <div class="AlertChange"></div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- bảng đổi avatar -->
+            <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Thay đổi avatar</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group rounded-0">
+                                <div class="custom-file rounded-0">
+                                    <input type="file" class="custom-file-input rounded-0" id="inputGroupFile02" name="inputImage" >
+                                    <label class="custom-file-label rounded-0" for="" aria-describedby="inputGroupFileAddon02" id="chooseImage">Chọn ảnh</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-warning" onclick="uploadImage()" data-dismiss="modal" id="close">
+                                        <i class="las la-plus-circle"></i>
+                                        Chọn
+                                    </button>
+                                </div>
+                            </div>
+                            <small id="emailHelp" class="form-text text-muted">Chọn một ảnh để làm ảnh đại diện</small>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+        <!-- schedule  -->
+        <!-- Grid pro  -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+	
+	<script th:inline="javascript">
+	
+	function validateName(textbox) {
+		if (textbox.value === null || textbox.value === "") {
+			textbox.setCustomValidity("Vui lòng nhập tên");
+			return false;
+		}
+		else if (!isNaN(textbox.value)) {
+			textbox.setCustomValidity("Tên không thể là 1 số");
+			return false;
+		}
+	
+		else if (textbox.value.length < 2) {
+			textbox.setCustomValidity("Tên tài khoản phải chứa ít nhất 2 kí tự");
+			return false;
+		}
+		else textbox.setCustomValidity("");
+		return true;
+	}
+	function validateGender(textbox) {
+		if (textbox.value === null || textbox.value === "") {
+			textbox.setCustomValidity("Vui lòng chọn giới tính");
+			return false;
+		}
+		else textbox.setCustomValidity("");
+		return true;
+	}
+		function validateDob(textbox) {
+		if (textbox.value === null || textbox.value === "") {
+			textbox.setCustomValidity("Vui lòng chọn ngày sinh");
+			return false;
+		}
+		else textbox.setCustomValidity("");
+		return true;
+	}
+	function validateMobile(textbox) {
+		if (textbox.value === null || textbox.value === "") {
+			textbox.setCustomValidity("Vui lòng nhập số điện thoại");
+			return false;
+		}
+		else if(isNaN(textbox.value)){
+			textbox.setCustomValidity("Số điện thoại phải là 1 số");
+			return false;
+			}
+		else textbox.setCustomValidity("");
+		return true;
+	}
+		function validateProvince(textbox) {
+		if (textbox.value === null || textbox.value === "") {
+			textbox.setCustomValidity("Vui lòng chọn tỉnh thành");
+			return false;
+		}
+		else if(!isNaN(textbox.value)){
+			textbox.setCustomValidity("Tên tỉnh thành không thể là 1 số");
+			return false;
+			}
+		else textbox.setCustomValidity("");
+		return true;
+	}
+		 document.addEventListener('DOMContentLoaded', (event) => {
+             $("#Dob").val(dob1);
+            //  changeAvatarBtn
+            $(".change-avatar").click(function () {
+                $("#modalSuccess").modal();
+            });
+             //calendar dob
+            $('.dateranger-oneDob .date-useDob').prop('readonly', true);
+                $('.dateranger-oneDob').daterangepicker({
+                    // monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+                    // dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+                    opens: 'right',
+                    autoApply: true,
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'yyyy-mm-dd'
+                    },
+                    minYear: 1901,
+                    maxYear: 2010
+                }, function(start, end, label) {
+                    $('.dateranger-oneDob .date-useDob').val(start.format('YYYY-MM-DD'));
+                });
+   
+  
+				
+			 $("#UpdateHoSo").click(function(event){
+					let fullname  = document.getElementById("Fullname");
+					let lastname  = document.getElementById("Lastname");
+					let gender  = document.getElementById("Gender");
+					let dob  = document.getElementById("Dob");
+                    console.log(dob.value);
+                    console.log(urlImage)
+					let mobile  = document.getElementById("Mobile");
+					let province  = document.getElementById("Province");
+					if (validateName(fullname) && validateName(lastname) && validateGender(gender) && validateDob(dob) && validateMobile(mobile)&& validateProvince(province)) {
+						  event.preventDefault();
+						  fetch('/user/edit/' + id, {
+						   	  method: 'PUT',
+						   	  headers: {
+						   		 'Content-Type': 'application/json'
+						      },
+						   	  body: JSON.stringify({
+						   	  	 'fullname': fullname.value,
+						   	 	 'lastname': lastname.value,
+						   		 'gender': gender.value,
+                                 'avatar': urlImage,   
+						   		 'dateofbirth': dob.value,
+						   		 'mobile': mobile.value,   
+						   		 'province': province.value
+						   	  })
+					   	})
+					   	.then(res => res.text())
+					    .then(results => {
+					    	console.log(results)
+					        if (results === "OK") {
+                                $(".AlertChange").addClass("alert alert-success");
+                                $(".AlertChange").html('Cập nhật thông tin thành công');
+                                $(".AlertChange").fadeIn('slow');
+                                setTimeout(() => $(".AlertChange").fadeOut('slow'),4000);
+					   		}
+					   		else {
+                                $(".AlertChange").addClass("alert alert-danger");
+                                $(".AlertChange").html('Cập nhật thông tin không thành công</br>'+results);
+                                $(".AlertChange").fadeIn('slow');
+                                setTimeout(() => $(".AlertChange").fadeOut('slow'),4000);
+				   			}
+					    })
+					    .catch(error => {
+					    	console.log("Error: " + error);
+					    }); 
+					}
+			}); 
+		 });
+
+        var category;
+        var firebaseConfig = {
+        apiKey: "AIzaSyAgT9AnK8vAq4HuiB0Ch4pJS8RafVjvtic",
+        authDomain: "achauauction.firebaseapp.com",
+        projectId: "achauauction",
+        storageBucket: "achauauction.appspot.com",
+        messagingSenderId: "461753979976",
+        appId: "1:461753979976:web:7d25a36d53c495a527f47d",
+        measurementId: "G-GW36BEF4PQ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        // Upload image
+        function uploadImage() {
+          const ref = firebase.storage().ref();
+          const file = document.querySelector("#inputGroupFile02").files[0];
+          if(file.size >= 1024*1024){
+            $(".AlertChange").addClass("alert alert-danger");
+            $(".AlertChange").html('Vui lòng chọn ảnh có kích thước dưới 1MB');
+            $(".AlertChange").fadeIn('slow');
+            setTimeout(() => $(".AlertChange").fadeOut('slow'),4000);
+          }
+          else{
+              document.getElementById("chooseImage").innerHTML=file.name;
+              const name = +new Date() + "-" + file.name;
+              const metadata = {
+                  contentType: file.type
+                };
+                const task = ref.child(name).put(file, metadata);
+                task
+                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(url => {
+                    urlImage=url,
+                    $("#avatar").attr("src",urlImage);
+                })
+                .catch(console.error);
+            }
+        }
+		
+		
+		document.addEventListener('DOMContentLoaded', (event) => {
+            $("input[name='inputImage']").change(function(){
+            const file = document.querySelector("#inputGroupFile02").files[0];
+            document.getElementById("chooseImage").innerHTML=file.name;
+            })
+        })
+
+    </script>
+    </div>
+</body>
+</html>

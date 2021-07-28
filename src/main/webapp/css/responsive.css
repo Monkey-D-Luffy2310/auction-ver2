@@ -1,0 +1,498 @@
+@media (min-width: 1200px) {
+
+    /*frame*/
+    .container {
+        max-width: 1250px;
+    }
+}
+@media (max-width: 1366px) and (min-width: 1250px) and (max-height: 768px) {
+	#banner .carousel-item {
+        height: 75vh!important;
+    }
+}
+@media (min-width: 768px) {
+    /*.dropdown > div {
+        position: absolute;
+        clip: rect(0.5rem, 9999px, 9999px, -9999px);
+    }*/
+}
+
+@media (min-width: 540px) {
+    .col-sm-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+    .modal-dialog {
+	    margin: 15rem auto;
+	}
+}
+
+@media (min-width: 720px) {
+    .col-md-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+@media (min-width: 960px) {
+    .col-lg-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+@media (min-width: 1140px) {
+    .col-xl-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    #intro h2 {
+        font-size: 28px;
+    }
+}
+@media (max-width: 1366px) {
+
+    .fw-box {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #banner .carousel-item {
+        height: 55vh;
+    }
+}
+
+@media (max-width: 1250px) {
+
+    .fw-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .bidding-active {
+	    margin: 0 16px;
+	    padding: 30px 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .fw-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .nav-menu a {
+        padding: 15px 5px 15px 0;
+    }
+
+    #banner .carousel-item {
+        height: 32vh;
+    }
+    .start-pro-list .start-pro-item {
+        text-align: center;
+    }
+    .start-pro-list.cat-pro-list .start-pro-item {
+        text-align: left;
+    }
+    #signup-email .social-links.text-right {
+        text-align: left !important;
+    }
+    #header #logo img {
+        height: 40px;
+    }
+ 
+}
+@media (max-height: 768px) and (min-height: 737px) and (min-width: 1024px){
+	#banner .carousel-item {
+        height: 55vh!important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .detail-photo .photo-box .photo-thum {
+        display: none;
+    }
+
+    .detail-photo .photo-box .photo-slide {
+        padding-left: 0;
+    }
+}
+@media (max-width: 992px) {
+    .fw-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .detail-photo .photo-box .photo-thum {
+        display:none;
+    }
+
+    .detail-photo .photo-box .photo-slide {
+        padding-left: 0;
+    }
+    .nav-menu a {
+        padding: 15px 5px 15px 0;
+    }
+
+    #banner .carousel-item {
+        height: 45vh;
+    }
+    .bidding-active {
+	    margin: 0 150px;
+	    padding: 30px 50px;
+	}
+
+}
+
+@media (max-width: 768px) {
+
+
+    #nav-menu-container {
+        display: none;
+    }
+    .detail-photo .photo-box .photo-thum {
+        display: unset;
+        width:96px;
+    }
+
+    .detail-photo .photo-box .photo-slide {
+        padding-left: 1rem;
+    }
+    #mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #banner .carousel-item {
+        height: 30vh;
+    }
+
+    .fw-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /*Hotline*/
+    #header {
+        height: 130px;
+    }
+
+        #header .tp-header {
+            height: 80px;
+        }
+
+        #header .top-info {
+            padding-right: 55px;
+        }
+
+            #header .top-info .top-phone i {
+                font-size: 36px;
+            }
+
+            #header .top-info .top-phone {
+                font-size: 15px;
+            }
+
+                #header .top-info .top-phone .tit-phone {
+                    line-height: 1;
+                    font-size: 11px;
+                }
+
+            /*Like bid top*/
+            #header .top-info .top-like,
+            #header .top-info .top-bid {
+                margin-left: 20px;
+            }
+
+            #header .top-info .box-icon span {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+    #title {
+        margin-top: 130px;
+    }
+    .carousel-item .carousel-caption {
+    	display: none;
+    }
+    .time-container {
+    	display: none;
+    }
+    .at-time {
+        display: none;
+    }
+
+    .time-box.time-box-lg {
+        font-size: 15px;
+    }
+
+        .time-box.time-box-lg .time-info {
+            width: 40px;
+        }
+
+    .start-pro-list.cat-pro-list .start-pro-item .bid-pri-box.text-right {
+        text-align: left!important;
+    }
+
+    .sold-pro-list .sold-pro-item {
+        text-align: center;
+    }
+    #banner .carousel-item .carousel-caption h3.f-30 {
+        font-size: 20px !important;
+    }
+
+    #banner .carousel-item .carousel-caption h5.f-20 {
+        font-size: 15px !important;
+    }
+  
+}
+
+@media (max-width: 576px) {
+    #header.header-scrolled {
+        height: 110px;
+    }
+        #header.header-scrolled .tp-header {
+            height: 60px;
+        }
+    #banner .carousel-item {
+        height: 20vh;
+    }
+    .fw-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #header {
+        height: 110px;
+    }
+
+        #header #logo img {
+            height: 32px;
+        }
+
+        #header .tp-header {
+            height: 60px;
+        }
+
+    #mobile-nav-toggle {
+        margin: 15px 0 0 0;
+    }
+
+    #header .top-info .top-bid .dropdown-menu {
+        margin-top: 14px;
+    }
+
+    #header .top-info .top-bid .dropdown-menu {
+        width: calc(100vw - 30px);
+        margin-left: 10px;
+    }
+
+        #header .top-info .top-bid .dropdown-menu:before {
+            right: 4.15rem;
+        }
+
+        #header .top-info .top-bid .dropdown-menu::after {
+            right: 4.10rem;
+        }
+    #title {
+        margin-top: 110px;
+    }
+        #title .title-page h1 {
+            font-size: 19px!important;
+        }
+        #title .title-page h1.f-26 {
+            font-size:22px!important;
+        }
+        #title .title-page.pt-4 {
+            padding-top: 1rem !important;
+        }
+        #title .title-page.pb-2 {
+            padding-bottom: .25rem !important;
+        }
+    .title-panel.mg-b-20 {
+        margin-bottom: 15px !important;
+    }
+    .pro-filter.mg-b-20 {
+        margin-bottom: 15px !important;
+    }
+   
+    .start-pro-list.cat-pro-list .start-pro-item.mg-b-20 {
+        margin-bottom:15px!important;
+    }
+    .start-pro-list.cat-pro-list .start-pro-item .bid-pri-box.text-right {
+        text-align: center !important;
+    }
+       .start-pro-list .start-pro-item {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .start-pro-list .start-pro-item.mg-b-20 {
+        margin-bottom: 15px!important;
+    }
+    .start-pro-list.cat-pro-list .start-pro-item {
+        text-align: center;
+    }
+    .sold-pro-list .sold-pro-item {
+        margin-bottom: 15px;
+    }
+    .bid-pro-list.cat-pro-list .bid-pro-item {
+        margin-bottom: 15px!important;
+    }
+    .bid-cat-list .bid-cat-item .card-title.f-17{
+        font-size:15px!important;
+    }
+    .seller-list .seller-item {
+        text-align: center;
+       
+    }
+    .seller-list .seller-item.mg-b-20 {
+        margin-bottom:15px!important;
+    }
+    .detail-photo .photo-box .photo-thum {
+        display: none;
+    }
+
+    .detail-photo .photo-box .photo-slide {
+        padding-left: 0;
+    }
+    .add-list .add-info.d-flex {
+        display: block !important;
+    }
+    .add-list .add-status {
+        display: block !important;
+        padding-left: 2.35rem;
+        margin-top: 0.25rem;
+    }
+    .tab-account.nav {
+        display: block;
+        margin-bottom: 15px;
+        background: #f8f9fa;
+    }
+
+    .page-custom .num-paging {
+        display: none;
+    }
+    .page-custom .dot-paging {
+        display: none;
+    }
+    .footer_bottom {
+        text-align: center;
+    }
+        .footer_bottom span.float-right {
+            float:none!important;
+        }
+    .bidding-active {
+	    margin: 0;
+	    padding: 30px 20px;
+	}
+	
+	#MdlCongratulation .cg-body {
+		font-size: 13px!important;
+	}
+}
+
+/* reauction-page */
+@media (min-width: 992px) and (max-width: 1400px){
+    .ra-detail .package-box {
+        display: none!important;
+    }
+    .ra-detail .ra-bid-box {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+@media (max-width: 1366px) {
+    .ra-detail .ra-bid-history table {
+        font-size: 14px!important;
+    }
+    .item-box .bid-footer .nav-bid {
+	    padding: 10px 30px;
+	}
+	.ra-detail .ra-info table tr th {
+	    font-size: 18px;
+	}
+	.menu-left ul li a {
+	    font-size: 15px;
+	}
+}
+@media (max-width: 1250px) {
+    
+}
+@media (max-width: 1120px) {
+    .ra-bidding .bidding-box .bid-now {
+        padding: 17px 95px 16px;
+        border-radius: 33px;
+        margin-bottom: 10px;
+    }
+    .ra-bidding .bidding-box .bid-now {
+        padding: 15px 61px 12px;
+    }
+    .ra-bidding .bidding-box .bidding-append .bid-number {
+        padding: 10px 20px 9px;
+    }
+    .ra-bidding .bidding-box .bidding-append .bid-auto { 
+        padding: 10px 20px 9px;
+    }
+}
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 992) {
+    
+}
+@media (max-width: 768px) {
+    .ra-detail .ra-info table {
+        font-size: 15px!important;
+    }
+    .ra-detail .ra-info table tr th {
+        font-size: 20px;
+    }
+    .title-page .page-box li {
+        font-size: 18px;
+    }
+    .title-page .page-box .separator {
+        margin: 0 10px;
+      }
+    .title-page .user-bid-box img{
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+    }
+    .title-page .user-bid-box .user-bid-num {
+        font-size: 14px!important;
+    }
+    .title-page .user-bid-box .ra-buy-bid {
+        padding: 3px 10px;
+        border-radius: 17px;
+        font-size: 18px;
+        height: 30px;
+        margin-left: 10px;
+    }
+}
+@media (max-width: 576px) {
+    .ra-detail .ra-bid-history table {
+        font-size: 10px!important;
+    }
+    .title-page .page-box li {
+        font-size: 15px;
+    } 
+}
+
+

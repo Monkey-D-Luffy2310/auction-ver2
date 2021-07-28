@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Thay đổi mật khẩu</title>
+	<style>
+		#changePassword {
+			position: relative;
+		}
+
+		#changePassword.spinning {
+			padding-right: 15px;
+		}
+
+		#changePassword.spinning:before {
+			content: "";
+			width: 0px;
+			height: 0px;
+			border-radius: 50%;
+			/* right: -10px; */
+			top: 50%;
+			border: 2px solid white;
+			border-right: 3px solid #FAB414;
+			position: absolute;
+			animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+		}
+
+		@keyframes rotate360 {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes exist {
+			100% {
+				width: 15px;
+				height: 15px;
+				margin: -8px 5px 0 0;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="dg-content">
+			<div class="dg-change-password">
+				<div class="box-change-password ">
+					<div class="txt-1">Đổi mật khẩu</div>
+
+					<div class="form-group">
+						<input type="text" value="" class="form-control" placeholder="Mật khẩu cũ" id="oldPassword">
+					</div>
+
+					<div class="form-group">
+						<input type="text" value="" class="form-control" placeholder="Mật khẩu mới" id="newPassword">
+					</div>
+
+					<div class="form-group">
+						<input type="text" value="" class="form-control" placeholder="Xác nhận mật khẩu mới"
+							id="checkNewPassword">
+					</div>
+					<div class="AlertChange"></div>
+					<div class="box-btn">
+						<button class="btn btn-add" id="changePassword">Thay đổi</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script th:inline="javascript">
+	/*[+
+		let userEmail = [[${user.email}]];
+	+]*/
+	function checkLength() {
+		
+		var length = newPassword.value.length;
+		if (length < 6) {
+			$(".AlertChange").removeClass("alert-success")
+			$(".AlertChange").addClass("alert alert-danger");
+			$(".AlertChange").html('Mật khẩu phải có ít nhất 6 ký tự.');
+			$(".AlertChange").fadeIn('slow');
+			setTimeout(() => $(".AlertChange").fadeOut('slow'), 4000);
+			return false;
+		}
+		else return true;
+	}
+	function checkSame() {
+		if (newPassword.value != checkNewPassword.value) {
+			$(".AlertChange").removeClass("alert-success")
+			$(".AlertChange").addClass("alert alert-danger");
+			$(".AlertChange").html('Nhập lại mật khẩu không trùng khớp.');
+			$(".AlertChange").fadeIn('slow');
+			setTimeout(() => $(".AlertChange").fadeOut('slow'), 4000);
+			return false;
+		}
+		else return true;
+	}
+	function checkSameOldNew() {
+		if (newPassword.value == oldPassword.value) {
+			$(".AlertChange").removeClass("alert-success")
+			$(".AlertChange").addClass("alert alert-danger");
+			$(".AlertChange").html('Mật khẩu mới trùng khớp với mật khẩu cũ.');
+			$(".AlertChange").fadeIn('slow');
+			setTimeout(() => $(".AlertChange").fadeOut('slow'), 4000);
+			return false;
+		}
+		else return true;
+	}
+	document.addEventListener('DOMContentLoaded', (event) => {
+		$('#changePassword').click(function () {
+			if (checkLength() && checkSame() && checkSameOldNew()) {
+				$("#changePassword").prop('disabled', true);
+				$("#changePassword").addClass('spinning text-spinning');
+				fetch('/auth/changepass', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						"email": userEmail,
+						"newPassword": newPassword.value,
+						"oldPassword": oldPassword.value
+					})
+				}).then(res => res.text())
+					.then(result => {
+						console.log(result);
+						if (result == 'Wrong password') {
+							$("#changePassword").removeClass("spinning text-spinning");
+							$("#changePassword").prop('disabled', false);
+							$(".AlertChange").removeClass("alert-success")
+							$(".AlertChange").addClass("alert alert-danger");
+							$(".AlertChange").html('Sai mật khẩu, vui lòng nhập đúng mật khẩu.');
+							$(".AlertChange").fadeIn('slow');
+							setTimeout(() => $(".AlertChange").fadeOut('slow'), 4000);
+						}
+						else if (result == 'OK') {
+							$("#oldPassword").val('');
+							$("#newPassword").val('');
+							$("#checkNewPassword").val('');
+							$("#changePassword").removeClass("spinning text-spinning");
+							$("#changePassword").prop('disabled', false);
+							$(".AlertChange").removeClass("alert-danger")
+							$(".AlertChange").addClass("alert alert-success");
+							$(".AlertChange").html('Đổi mật khẩu thành công.');
+							$(".AlertChange").fadeIn('slow');
+							setTimeout(() => $(".AlertChange").fadeOut('slow'), 4000);
+						}
+						else {
+							$("#changePassword").removeClass("spinning text-spinning");
+							$("#changePassword").prop('disabled', false);
+							console.log(results);
+							$(".AlertChange").removeClass("alert-success")
+							$(".AlertChange").addClass("alert alert-danger");
+							$(".AlertChange").html(results);
+							$(".AlertChange").fadeIn('slow');
+							setTimeout(() => $(".AlertChange").fadeOut('slow'), 6000);
+						}
+					})
+			}
+		});
+	});
+</script>

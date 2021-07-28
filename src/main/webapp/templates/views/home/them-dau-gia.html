@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Thêm đấu giá</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <!-- Title Page -->
+        <section id="title">
+            <div class="fw-box">
+                <div class="container-fluid">
+                    <div class="title-page d-flex align-items-center bd-highlight pt-4 pb-2">
+                        <h1 class="bd-highlight f-24">
+                            Thêm đấu giá
+                        </h1>
+                        <div class="breadcrumb-box bd-highlight ml-auto">
+                            <div class="d-inline-block">
+                                <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-xl-flex">
+                                    <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+                                        <li class="breadcrumb-item"><a href="/index">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="/bang-chinh-dai-ly">Đại lý</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thêm đấu giá</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="menu-account-drop d-inline-block d-xl-none mb-3">
+                                <div class="btn-group dropdown">
+                                    <a href="#" class="dropdown-toggle font-weight-600" data-toggle="dropdown"
+                                        data-flip="false" aria-haspopup="false" aria-expanded="false">
+                                        <span class="text-secondary"></span><span th:text="${user.name}"></span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right border-0 shadow-sm rounded-0 p-0">
+                                        <div class="card border-0 rounded-0 shadow-sm">
+
+                                            <div class="card-body p-3 rounded-0 border-0 f-13">
+                                                <div class="card-text">
+                                                    <dl>
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                                                            Tài khoản</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                                <i class="las la-border-all mr-1"></i>
+                                                                Bảng chính
+                                                            </a>
+                                                        </dd>
+                                                        <!-- <dd class="ml-3 mb-1">
+                                                            <a href="/ho-so-dai-ly" class="text-dark">
+                                                                <i class="las la-user-cog mr-1"></i>
+                                                                Hồ sơ đại lý
+                                                            </a>
+                                                        </dd> -->
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/dang-nhap" class="text-dark">
+                                                                <i class="las la-times-circle mr-1"></i>
+                                                                Đăng xuất
+                                                            </a>
+                                                        </dd>
+                                                    </dl>
+                                                    <hr>
+                                                    <dl class="font-weight-500">
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                                                            Quản lý</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/danh-sach-dau-gia" class="text-dark">
+                                                                <i class="las la-gavel mr-1"></i>
+                                                                Danh sách đấu giá
+                                                            </a>
+                                                        </dd>
+                                                        <!-- <dd class="ml-3 mb-2">
+                                                            <a href="/them-dau-gia"
+                                                                class="text-violet font-weight-bold">
+                                                                <i class="las la-plus-circle mr-1"></i>
+                                                                Thêm đấu giá
+                                                            </a>
+                                                        </dd> -->
+                                                        <dd class="ml-3 mb-1 pt-1">
+                                                            <a href="/danh-sach-tai-san" class="text-dark">
+                                                                <i class="las la-city mr-1"></i>
+                                                                Danh sách tài sản
+                                                            </a>
+                                                        </dd>
+                                                        <!-- <dd class="ml-3 mb-2">
+                                                            <a href="/them-tai-san" class="text-dark">
+                                                                <i class="las la-plus-circle mr-1"></i>
+                                                                Thêm tài sản
+                                                            </a>
+                                                        </dd> -->
+                                                        <!--   -->
+                                                    </dl>
+                                                    <hr>
+                                                    <dl class="font-weight-500">
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                                                            Cá nhân</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/tai-khoan" class="text-dark">
+                                                                <i class="las la-user mr-1"></i>
+                                                                Bảng chức năng cá nhân
+                                                            </a>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Title Page -->
+
+        <!-- Grid pro  -->
+        <!-- schedule  -->
+        <section id="liked" class="pb-4">
+
+            <div class="fw-box">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-12 col-xl-3 col-lg-4 d-none d-md-block">
+                            <!-- Menu Account -->
+                            <div class="side-right d-none d-xl-block">
+                                <div class="widget-right mg-b-20">
+                                    <div class="card border-0 rounded-0 shadow-sm">
+
+                                        <div class="card-body p-3 rounded-0 border-0">
+                                            <h3 class="card-title f-19 mb-3 font-weight-700 border-bottom pb-3">
+                                                Xin chào! <a href="ho-so-ca-nhan" class="font-weight-700"
+                                                    th:text="${user.name}"></a>
+                                            </h3>
+                                            <div class="card-text">
+                                                <dl>
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài
+                                                        khoản</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                            <i class="las la-border-all mr-1"></i>
+                                                            Bảng chính
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-1">
+                                                        <a href="/ho-so-dai-ly" class="text-dark">
+                                                            <i class="las la-user-cog mr-1"></i>
+                                                            Hồ sơ đại lý
+                                                        </a>
+                                                    </dd> -->
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dang-nhap" class="text-dark">
+                                                            <i class="las la-times-circle mr-1"></i>
+                                                            Đăng xuất
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                                <hr>
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Quản
+                                                        lý</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/danh-sach-dau-gia" class="text-dark">
+                                                            <i class="las la-gavel mr-1"></i>
+                                                            Danh sách đấu giá
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-2">
+                                                        <a href="/them-dau-gia" class="text-violet font-weight-bold">
+                                                            <i class="las la-plus-circle mr-1"></i>
+                                                            Thêm đấu giá
+                                                        </a>
+                                                    </dd> -->
+                                                    <dd class="ml-3 mb-1 pt-1">
+                                                        <a href="/danh-sach-tai-san" class="text-dark">
+                                                            <i class="las la-city mr-1"></i>
+                                                            Danh sách tài sản
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-2">
+                                                        <a href="/them-tai-san" class="text-dark">
+                                                            <i class="las la-plus-circle mr-1"></i>
+                                                            Thêm tài sản
+                                                        </a>
+                                                    </dd> -->
+                                                </dl>
+                                                <hr>
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Cá
+                                                        nhân</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/tai-khoan" class="text-dark">
+                                                            <i class="las la-user mr-1"></i>
+                                                            Bảng chức năng cá nhân
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Menu Account -->
+                        </div>
+                        <div class="col-12 col-xl-9 col-lg-12">
+                            <div class="edit-profile">
+                                <div class="card border-0 rounded-0 shadow-sm">
+
+                                    <div class="card-body p-3 rounded-0 border-0">
+
+                                        <div class="card-text pt-1">
+                                            <div class="row justify-content-center">
+
+                                                <div class="col-12 col-xl-9 col-lg-10 col-md-12">
+
+                                                    <h3 class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3">
+                                                        Thông tin chung
+                                                    </h3>
+
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Mã đấu giá<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-4">
+                                                                <input type="text" class="form-control form-control-user fs-090" maxlength="20">
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Tài sản
+                                                                    đấu giá<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-user fs-090 "
+                                                                        th:value="${assets.name}" maxlength="200"
+                                                                        id="selectAssets" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label
+                                                                    class=" col-form-label pb-1 pt-0 font-weight-600">Tỉnh
+                                                                    thành<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-4">
+                                                                <select id="area"
+                                                                    class="form-control select-default selectpickernone">
+                                                                    <option selected="selected" value="">Chọn tỉnh thành
+                                                                    </option>
+                                                                    <option value="Hà Nội">Hà Nội</option>
+                                                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                                                    <option value="Hải Phòng">Hải Phòng</option>
+                                                                    <option value="Cần Thơ">Cần Thơ</option>
+                                                                    <option value="Thừa Thiên - Huế">Thừa Thiên - Huế
+                                                                    </option>
+                                                                    <option value="Quảng Ninh">Quảng Ninh</option>
+                                                                    <option value="An Giang">An Giang</option>
+                                                                    <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu
+                                                                    </option>
+                                                                    <option value="Bắc Giang">Bắc Giang</option>
+                                                                    <option value="Bắc Kạn">Bắc Kạn</option>
+                                                                    <option value="Bạc Liêu">Bạc Liêu</option>
+                                                                    <option value="Bắc Ninh">Bắc Ninh</option>
+                                                                    <option value="Bến Tre">Bến Tre</option>
+                                                                    <option value="Bình Dương">Bình Dương</option>
+                                                                    <option value="Bình Định">Bình Định</option>
+                                                                    <option value="Bình Phước">Bình Phước</option>
+                                                                    <option value="Bình Thuận">Bình Thuận</option>
+                                                                    <option value="Cà Mau">Cà Mau</option>
+                                                                    <option value="Cao Bằng">Cao Bằng</option>
+                                                                    <option value="Đắk Lắk">Đắk Lắk</option>
+                                                                    <option value="Đắk Nông">Đắk Nông</option>
+                                                                    <option value="Điện Biên">Điện Biên</option>
+                                                                    <option value="Đồng Nai">Đồng Nai</option>
+                                                                    <option value="Đồng Tháp">Đồng Tháp</option>
+                                                                    <option value="Gia Lai">Gia Lai</option>
+                                                                    <option value="Hà Giang">Hà Giang</option>
+                                                                    <option value="Hà Nam">Hà Nam</option>
+                                                                    <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                                                    <option value="Hải Dương">Hải Dương</option>
+                                                                    <option value="Hậu Giang">Hậu Giang</option>
+                                                                    <option value="Hòa Bình">Hòa Bình</option>
+                                                                    <option value="Hưng Yên">Hưng Yên</option>
+                                                                    <option value="Kiên Giang">Kiên Giang</option>
+                                                                    <option value="Kon Tum">Kon Tum</option>
+                                                                    <option value="Khánh Hòa">Khánh Hòa</option>
+                                                                    <option value="Lai Châu">Lai Châu</option>
+                                                                    <option value="Lạng Sơn">Lạng Sơn</option>
+                                                                    <option value="Lào Cai">Lào Cai</option>
+                                                                    <option value="Lâm Đồng">Lâm Đồng</option>
+                                                                    <option value="Long An">Long An</option>
+                                                                    <option value="Nam Định">Nam Định</option>
+                                                                    <option value="Ninh Bình">Ninh Bình</option>
+                                                                    <option value="Ninh Thuận">Ninh Thuận</option>
+                                                                    <option value="Nghệ An">Nghệ An</option>
+                                                                    <option value="Phú Thọ">Phú Thọ</option>
+                                                                    <option value="Phú Yên">Phú Yên</option>
+                                                                    <option value="Quảng Bình">Quảng Bình</option>
+                                                                    <option value="Quảng Nam">Quảng Nam</option>
+                                                                    <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                                    <option value="Quảng Trị">Quảng Trị</option>
+                                                                    <option value="Sóc Trăng">Sóc Trăng</option>
+                                                                    <option value="Sơn La">Sơn La</option>
+                                                                    <option value="Tây Ninh">Tây Ninh</option>
+                                                                    <option value="Tiền Giang">Tiền Giang</option>
+                                                                    <option value="Tuyên Quang">Tuyên Quang</option>
+                                                                    <option value="Thái Bình">Thái Bình</option>
+                                                                    <option value="Thái Nguyên">Thái Nguyên</option>
+                                                                    <option value="Thanh Hóa">Thanh Hóa</option>
+                                                                    <option value="Trà Vinh">Trà Vinh</option>
+                                                                    <option value="Vĩnh Long">Vĩnh Long</option>
+                                                                    <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                                    <option value="Yên Bái">Yên Bái</option>
+                                                                </select>
+                                                            </div>
+                                                            <!-- <div class="col-12 col-md-3 text-left">
+                                                                <label class=" col-form-label pb-1 pt-0 font-weight-600">Hình thức đấu<span class="text-danger">*</span></label>
+                                                            </div> -->
+                                                            <div class="col-12 col-md-5">
+                                                                <select id="type"
+                                                                    class="form-control select-default selectpickernone">
+                                                                    <option selected="selected" value="">Chọn hình thức
+                                                                        đấu giá</option>
+                                                                    <option value="Normal">Đấu giá truyền thống</option>
+                                                                    <option value="Reverse">Đấu giá ngược</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Hình thức đấu giá<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <select class="form-control select-default selectpickernone">
+                                                                    <option value="0">Chọn hình thức</option>
+                                                                    <option value="1">Đấu giá trực tuyến</option>
+                                                                    <option value="2">Đấu giá trực tuyến và truyền thống</option>
+                                                                    <option value="4">Đấu giá Livestream</option>
+                                                                    <option value="5">Đấu giá Livestream và truyền thống</option>
+                                                                    <option value="5">Đấu giá truyền thống</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Địa điểm đấu giá:</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <select class="form-control select-default selectpickernone">
+                                                                    <option selected="selected" value="0">Chọn tỉnh thành</option>
+                                                                    <option value="24">Hà Nội</option>
+                                                                    <option value="30">Hồ Chí Minh</option>
+                                                                    <option value="15">Đà Nẵng</option>
+                                                                    <option value="28">Hải Phòng</option>
+                                                                    <option value="14">Cần Thơ</option>
+                                                                    <option value="58">Thừa Thiên - Huế</option>
+                                                                    <option value="50">Quảng Ninh</option>
+                                                                    <option value="1">An Giang</option>
+                                                                    <option value="2">Bà Rịa-Vũng Tàu</option>
+                                                                    <option value="5">Bắc Giang</option>
+                                                                    <option value="4">Bắc Kạn</option>
+                                                                    <option value="3">Bạc Liêu</option>
+                                                                    <option value="6">Bắc Ninh</option>
+                                                                    <option value="7">Bến Tre</option>
+                                                                    <option value="8">Bình Dương</option>
+                                                                    <option value="9">Bình Định</option>
+                                                                    <option value="10">Bình Phước</option>
+                                                                    <option value="11">Bình Thuận</option>
+                                                                    <option value="12">Cà Mau</option>
+                                                                    <option value="13">Cao Bằng</option>
+                                                                    <option value="16">Đắk Lắk</option>
+                                                                    <option value="17">Đắk Nông</option>
+                                                                    <option value="18">Điện Biên</option>
+                                                                    <option value="19">Đồng Nai</option>
+                                                                    <option value="20">Đồng Tháp</option>
+                                                                    <option value="21">Gia Lai</option>
+                                                                    <option value="22">Hà Giang</option>
+                                                                    <option value="23">Hà Nam</option>
+                                                                    <option value="26">Hà Tĩnh</option>
+                                                                    <option value="27">Hải Dương</option>
+                                                                    <option value="31">Hậu Giang</option>
+                                                                    <option value="29">Hòa Bình</option>
+                                                                    <option value="32">Hưng Yên</option>
+                                                                    <option value="34">Kiên Giang</option>
+                                                                    <option value="35">Kon Tum</option>
+                                                                    <option value="33">Khánh Hòa</option>
+                                                                    <option value="36">Lai Châu</option>
+                                                                    <option value="38">Lạng Sơn</option>
+                                                                    <option value="37">Lào Cai</option>
+                                                                    <option value="39">Lâm Đồng</option>
+                                                                    <option value="40">Long An</option>
+                                                                    <option value="41">Nam Định</option>
+                                                                    <option value="43">Ninh Bình</option>
+                                                                    <option value="44">Ninh Thuận</option>
+                                                                    <option value="42">Nghệ An</option>
+                                                                    <option value="45">Phú Thọ</option>
+                                                                    <option value="46">Phú Yên</option>
+                                                                    <option value="47">Quảng Bình</option>
+                                                                    <option value="48">Quảng Nam</option>
+                                                                    <option value="49">Quảng Ngãi</option>
+                                                                    <option value="51">Quảng Trị</option>
+                                                                    <option value="52">Sóc Trăng</option>
+                                                                    <option value="53">Sơn La</option>
+                                                                    <option value="54">Tây Ninh</option>
+                                                                    <option value="59">Tiền Giang</option>
+                                                                    <option value="61">Tuyên Quang</option>
+                                                                    <option value="55">Thái Bình</option>
+                                                                    <option value="56">Thái Nguyên</option>
+                                                                    <option value="57">Thanh Hóa</option>
+                                                                    <option value="60">Trà Vinh</option>
+                                                                    <option value="62">Vĩnh Long</option>
+                                                                    <option value="63">Vĩnh Phúc</option>
+                                                                    <option value="64">Yên Bái</option>
+                                                                </select>
+                                                                <small class="form-text text-muted">Chọn nếu kết hợp với đấu gia truyền thống.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <h3
+                                                        class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5">
+                                                        Giá và bước giá
+                                                    </h3>
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Giá ước tính<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13 bg-white border-right-0" id="basic-addon2">Từ</span>
+                                                                    </div>
+                                                                    <input type="text" class="form-control form-control-user fs-090" maxlength="200">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13" id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13 bg-white border-right-0" id="basic-addon2">Đến</span>
+                                                                    </div>
+                                                                    <input type="text" class="form-control form-control-user fs-090" maxlength="200">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13" id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                                <small class="form-text text-muted">Giá ước tính được đính giá bởi các chuyên gia.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Giá bán
+                                                                    ngay</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-user fs-090 "
+                                                                        maxlength="200" id="buyPrice">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Giá đấu
+                                                                    khởi điểm<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-user fs-090"
+                                                                        maxlength="200" id="bidPrice">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Bước
+                                                                    giá</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-user fs-090"
+                                                                        maxlength="200" id="stepPrice">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Phí đăng
+                                                                    ký</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-user fs-090"
+                                                                        maxlength="200" id="registrationFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-9">
+                                                                <label class="col-form-label font-weight-600">Số người
+                                                                    tham gia tối thiểu</br><span class="f-12"
+                                                                        style="opacity:0.7">( lưu số người tham dự đấu
+                                                                        giá. nếu số người tham dự ít hơn thì đấu giá tự
+                                                                        huỷ )</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-3">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-user fs-090"
+                                                                        maxlength="200" id="attendingUser">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">Người</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Bước giá<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-4">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control form-control-user fs-090" maxlength="200">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13" id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số phần
+                                                                    trăm đặt cọc<span
+                                                                        class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-2">
+                                                                <div class="input-group">
+                                                                    <select id="warrantyPercent"
+                                                                        class="form-control select-default selectpickernone">
+                                                                        <option value="0">0</option>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                        <option value="6">6</option>
+                                                                        <option value="7">7</option>
+                                                                        <option value="8">8</option>
+                                                                        <option value="9">9</option>
+                                                                        <option value="10">10</option>
+                                                                        <option value="11">11</option>
+                                                                        <option value="12">12</option>
+                                                                        <option value="13">13</option>
+                                                                        <option value="14">14</option>
+                                                                        <option value="15">15</option>
+                                                                        <option value="16">16</option>
+                                                                        <option value="17">17</option>
+                                                                        <option value="18">18</option>
+                                                                        <option value="19">19</option>
+                                                                        <option value="20">20</option>
+                                                                        <option value="21">21</option>
+                                                                        <option value="22">22</option>
+                                                                        <option value="23">23</option>
+                                                                        <option value="24">24</option>
+                                                                        <option value="25">25</option>
+                                                                        <option value="26">26</option>
+                                                                        <option value="27">27</option>
+                                                                        <option value="28">28</option>
+                                                                        <option value="29">29</option>
+                                                                        <option value="30">30</option>
+                                                                    </select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">%</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-7">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                        class="form-control text-center form-control-user fs-090"
+                                                                        maxlength="200" id="warranty" disabled>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13"
+                                                                            id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3
+                                                        class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5">
+                                                        Thời gian đấu giá
+                                                    </h3>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Bắt đầu
+                                                                    đấu giá</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-7">
+                                                                        <div class="input-group  mb-2 mb-sm-0">
+                                                                            <select
+                                                                                class="form-control select-default selectpickernone"
+                                                                                id="hourStart">
+                                                                                <!-- <option value="0">Giờ</option> -->
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text f-13 border-right-0">Giờ</span>
+                                                                            </div>
+                                                                            <select
+                                                                                class="form-control select-default selectpickernone"
+                                                                                id="minuteStart">
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+                                                                                <option>24</option>
+                                                                                <option>25</option>
+                                                                                <option>26</option>
+                                                                                <option>27</option>
+                                                                                <option>28</option>
+                                                                                <option>29</option>
+                                                                                <option>30</option>
+                                                                                <option>31</option>
+                                                                                <option>32</option>
+                                                                                <option>33</option>
+                                                                                <option>34</option>
+                                                                                <option>35</option>
+                                                                                <option>36</option>
+                                                                                <option>37</option>
+                                                                                <option>38</option>
+                                                                                <option>39</option>
+                                                                                <option>40</option>
+                                                                                <option>41</option>
+                                                                                <option>42</option>
+                                                                                <option>43</option>
+                                                                                <option>44</option>
+                                                                                <option>45</option>
+                                                                                <option>46</option>
+                                                                                <option>47</option>
+                                                                                <option>48</option>
+                                                                                <option>49</option>
+                                                                                <option>50</option>
+                                                                                <option>51</option>
+                                                                                <option>52</option>
+                                                                                <option>53</option>
+                                                                                <option>54</option>
+                                                                                <option>55</option>
+                                                                                <option>56</option>
+                                                                                <option>57</option>
+                                                                                <option>58</option>
+                                                                                <option>59</option>
+
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text f-13 ">Phút</span>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-5">
+                                                                        <div
+                                                                            class="input-group dateranger-one3 mb-3 mb-sm-0">
+                                                                            <input type="text"
+                                                                                class="form-control date-use3 bg-white"
+                                                                                readonly="" id="dayStart">
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text bg-white pl-2 pr-2">
+                                                                                    <i class="las la-calendar"></i>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <small class="form-text text-muted">Thời gian bắt đầu
+                                                                    phiên đấu giá.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Kết thúc
+                                                                    đấu giá</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-7">
+                                                                        <div class="input-group  mb-2 mb-sm-0">
+                                                                            <select
+                                                                                class="form-control select-default selectpickernone"
+                                                                                id="hourEnd">
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text f-13 border-right-0">Giờ</span>
+                                                                            </div>
+                                                                            <select
+                                                                                class="form-control select-default selectpickernone"
+                                                                                id="minuteEnd">
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+                                                                                <option>24</option>
+                                                                                <option>25</option>
+                                                                                <option>26</option>
+                                                                                <option>27</option>
+                                                                                <option>28</option>
+                                                                                <option>29</option>
+                                                                                <option>30</option>
+                                                                                <option>31</option>
+                                                                                <option>32</option>
+                                                                                <option>33</option>
+                                                                                <option>34</option>
+                                                                                <option>35</option>
+                                                                                <option>36</option>
+                                                                                <option>37</option>
+                                                                                <option>38</option>
+                                                                                <option>39</option>
+                                                                                <option>40</option>
+                                                                                <option>41</option>
+                                                                                <option>42</option>
+                                                                                <option>43</option>
+                                                                                <option>44</option>
+                                                                                <option>45</option>
+                                                                                <option>46</option>
+                                                                                <option>47</option>
+                                                                                <option>48</option>
+                                                                                <option>49</option>
+                                                                                <option>50</option>
+                                                                                <option>51</option>
+                                                                                <option>52</option>
+                                                                                <option>53</option>
+                                                                                <option>54</option>
+                                                                                <option>55</option>
+                                                                                <option>56</option>
+                                                                                <option>57</option>
+                                                                                <option>58</option>
+                                                                                <option>59</option>
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text f-13">Phút</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-5">
+                                                                        <div
+                                                                            class="input-group dateranger-one4 mb-3 mb-sm-0">
+                                                                            <input type="text"
+                                                                                class="form-control date-use4 bg-white"
+                                                                                readonly="" id="dayEnd">
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text bg-white pl-2 pr-2">
+                                                                                    <i class="las la-calendar"></i>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <small class="form-text text-muted">Thời gian kết thúc
+                                                                    phiên đấu giá.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- thời gian đấu giá dự kiến -->
+
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Thời gian diễn ra đấu giá dự kiến</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-7">
+                                                                        <div class="input-group  mb-2 mb-sm-0">
+                                                                            <input class="form-control" id="date-du-kien" disabled>
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text f-13">Ngày</span>
+                                                                            </div>
+                                                                            <input class="form-control" id="hour-du-kien" disabled>
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text f-13 border-right-0">Giờ</span>
+                                                                            </div>
+                                                                            <input class="form-control" id="minute-du-kien" disabled>
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text f-13">Phút</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <small class="form-text text-muted">Thời gian kết thúc phiên đấu giá.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    
+                                                    <hr class="pt-3 mb-1" />
+                                                    <h3 class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5 traditionalTrue"
+                                                        style="display: none;">
+                                                        Hạn tham dự đấu giá
+                                                    </h3>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Thời hạn
+                                                                    tham gia đấu giá</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-7">
+                                                                        <div class="input-group  mb-2 mb-sm-0">
+                                                                            <select
+                                                                                class="form-control select-default selectpickernone"
+                                                                                id="hourAttendanceDeadline">
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+                                                                                <option>24</option>
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text f-13 border-right-0">Giờ</span>
+                                                                            </div>
+                                                                            <select
+                                                                                class="form-control select-default selectpickernone"
+                                                                                id="minuteAttendanceDeadline">
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+                                                                                <option>24</option>
+                                                                                <option>25</option>
+                                                                                <option>26</option>
+                                                                                <option>27</option>
+                                                                                <option>28</option>
+                                                                                <option>29</option>
+                                                                                <option>30</option>
+                                                                                <option>31</option>
+                                                                                <option>32</option>
+                                                                                <option>33</option>
+                                                                                <option>34</option>
+                                                                                <option>35</option>
+                                                                                <option>36</option>
+                                                                                <option>37</option>
+                                                                                <option>38</option>
+                                                                                <option>39</option>
+                                                                                <option>40</option>
+                                                                                <option>41</option>
+                                                                                <option>42</option>
+                                                                                <option>43</option>
+                                                                                <option>44</option>
+                                                                                <option>45</option>
+                                                                                <option>46</option>
+                                                                                <option>47</option>
+                                                                                <option>48</option>
+                                                                                <option>49</option>
+                                                                                <option>50</option>
+                                                                                <option>51</option>
+                                                                                <option>52</option>
+                                                                                <option>53</option>
+                                                                                <option>54</option>
+                                                                                <option>55</option>
+                                                                                <option>56</option>
+                                                                                <option>57</option>
+                                                                                <option>58</option>
+                                                                                <option>59</option>
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text f-13">Phút</span>
+                                                                            </div>
+                                                                            <!-- <select class="form-control select-default selectpickernone" id="secondsAttendanceDeadline">
+                                                                                <option>00</option>
+                                                                                <option>01</option>
+                                                                                <option>02</option>
+                                                                                <option>03</option>
+                                                                                <option>04</option>
+                                                                                <option>05</option>
+                                                                                <option>06</option>
+                                                                                <option>07</option>
+                                                                                <option>08</option>
+                                                                                <option>09</option>
+                                                                                <option>10</option>
+                                                                                <option>11</option>
+                                                                                <option>12</option>
+                                                                                <option>13</option>
+                                                                                <option>14</option>
+                                                                                <option>15</option>
+                                                                                <option>16</option>
+                                                                                <option>17</option>
+                                                                                <option>18</option>
+                                                                                <option>19</option>
+                                                                                <option>20</option>
+                                                                                <option>21</option>
+                                                                                <option>22</option>
+                                                                                <option>23</option>
+                                                                                <option>24</option>
+                                                                                <option>25</option>
+                                                                                <option>26</option>
+                                                                                <option>27</option>
+                                                                                <option>28</option>
+                                                                                <option>29</option>
+                                                                                <option>30</option>
+                                                                                <option>31</option>
+                                                                                <option>32</option>
+                                                                                <option>33</option>
+                                                                                <option>34</option>
+                                                                                <option>35</option>
+                                                                                <option>36</option>
+                                                                                <option>37</option>
+                                                                                <option>38</option>
+                                                                                <option>39</option>
+                                                                                <option>40</option>
+                                                                                <option>41</option>
+                                                                                <option>42</option>
+                                                                                <option>43</option>
+                                                                                <option>44</option>
+                                                                                <option>45</option>
+                                                                                <option>46</option>
+                                                                                <option>47</option>
+                                                                                <option>48</option>
+                                                                                <option>49</option>
+                                                                                <option>50</option>
+                                                                                <option>51</option>
+                                                                                <option>52</option>
+                                                                                <option>53</option>
+                                                                                <option>54</option>
+                                                                                <option>55</option>
+                                                                                <option>56</option>
+                                                                                <option>57</option>
+                                                                                <option>58</option>
+                                                                                <option>59</option>
+                                                                            </select> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-5">
+                                                                        <div
+                                                                            class="input-group dateranger-one5 mb-3 mb-sm-0">
+                                                                            <input type="text"
+                                                                                class="form-control date-use5 bg-white"
+                                                                                readonly="" id="dayAttendanceDeadline">
+                                                                            <div class="input-group-append">
+                                                                                <span
+                                                                                    class="input-group-text bg-white pl-2 pr-2">
+                                                                                    <i class="las la-calendar"></i>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <small class="form-text text-muted">Thời hạn tham dự
+                                                                    phiên đấu giá.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <h3
+                                                        class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5">
+                                                        Chi tiết quy định
+                                                    </h3>
+                                                    <div class="form-group">
+                                                        <div class="input-group rounded-0">
+                                                            <div class="custom-file rounded-0">
+                                                                <input type="file" class="custom-file-input rounded-0"
+                                                                    id="inputGroupFile02" multiple="multiple"
+                                                                    name="inputImage" style="overflow: hidden;">
+                                                                <label class="custom-file-label rounded-0" for=""
+                                                                    aria-describedby="inputGroupFileAddon02"
+                                                                    id="chooseImage" style="overflow: hidden;">Chọn tệp
+                                                                    tải lên</label>
+                                                            </div>
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary" onclick="uploadImage()">
+                                                                    <i class="las la-plus-circle"></i>
+                                                                    Tải tệp lên
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <hr class="pt-3 mb-1" />
+                                                    <div class="clearfix">
+                                                        <button class="btn btn-primary mb-2" onclick="addAssets()">
+                                                            <i class="las la-save"></i>
+                                                            Thêm đấu giá
+                                                        </button>
+                                                        <em
+                                                            class="text-danger f-13 d-block d-sm-inline float-left float-sm-right">*
+                                                            là trường bắt buộc nhập dữ liệu</em>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- thông báo -->
+            <div class="modal fade pt-4" id="modalSuccess" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm đấu giá</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h1 class="text-center">Thành công</h1>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                            <a type="button" class="btn btn-primary" href="/danh-sach-dau-gia">Danh sách đấu giá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade pt-4" id="modalFail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm đấu giá</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h1 class="text-center">Thất bại</h1>
+                            <div class="AlertChange"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="Close">Close</button>
+                            <a type="button" class="btn btn-primary" href="/danh-sach-dau-gia">Danh sách đấu giá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+        <script th:inline="javascript">
+            /*[+
+            var assets = [[${assets}]];
+            var id = [[${user.id}]] 
+            +]*/
+            console.log(assets);
+            var firebaseConfig = {
+                apiKey: "AIzaSyAgT9AnK8vAq4HuiB0Ch4pJS8RafVjvtic",
+                authDomain: "achauauction.firebaseapp.com",
+                projectId: "achauauction",
+                storageBucket: "achauauction.appspot.com",
+                messagingSenderId: "461753979976",
+                appId: "1:461753979976:web:7d25a36d53c495a527f47d",
+                measurementId: "G-GW36BEF4PQ"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            // Upload image
+            var urlFile;
+            function uploadImage() {
+                const ref = firebase.storage().ref();
+                const file = new Array();
+                let n = document.querySelector("#inputGroupFile02").files.length;
+                file.push(document.querySelector("#inputGroupFile02").files[0])
+                const metadata = {
+                    contentType: file.type
+                };
+                var name = +new Date() + "-" + file[0].name;
+                var task = ref.child(name).put(file[0], metadata);
+                task
+                    .then(snapshot => snapshot.ref.getDownloadURL())
+                    .then(url => {
+                        urlFile = url;
+                        console.log(urlFile)
+                    })
+                    .catch(console.error);
+            }
+            document.addEventListener('DOMContentLoaded', (event) => {
+                // var traditionalCheck = true;
+                // $("#flexCheckDefault").click(function(){
+                //     if($("#flexCheckDefault").prop("checked")){
+                //         $(".traditionalTrue").show('slow');
+                //         traditionalCheck = true;
+                //     }
+                //     else{
+                //         $(".traditionalTrue").hide('slow');
+                //         traditionalCheck = false;
+                //     }
+                // })
+                //get warranty
+                $("#warranty").val(parseInt($("#warrantyPercent").val() * assets.initPrice / 100).toLocaleString('en'))
+                $("#warrantyPercent").change(function () {
+                    $("#warranty").val(parseInt($("#warrantyPercent").val() * assets.initPrice / 100).toLocaleString('en'))
+                })
+                //get time
+                var today = new Date();
+                if (today.getDate() < 9 && today.getDate() > 1) {
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + today.getDate();
+                }
+                if (today.getMonth() + 1 < 9 && today.getMonth() + 1 > 1) {
+                    var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
+                }
+                if (today.getDate() < 9 && today.getDate() > 1 && today.getMonth() + 1 < 9 && today.getMonth() + 1 > 1) {
+                    var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + today.getDate();
+                }
+                $('#dayStart').val(date);
+                $('#dayEnd').val(date);
+                $('#dayAttendanceDeadline').val(date);
+                //calendar1
+                $('.dateranger-one1 .date-use1').prop('readonly', true);
+                $('.dateranger-one1').daterangepicker({
+                    opens: 'right',
+                    autoApply: true,
+                    singleDatePicker: true
+                }, function (start, end, label) {
+                    $('.dateranger-one1 .date-use1').val(start.format('YYYY-MM-DD'));
+                });
+                //calendar2
+                $('.dateranger-one2 .date-use2').prop('readonly', true);
+                $('.dateranger-one2').daterangepicker({
+                    opens: 'right',
+                    autoApply: true,
+                    singleDatePicker: true
+                }, function (start, end, label) {
+                    $('.dateranger-one2 .date-use2').val(start.format('YYYY-MM-DD'));
+                });
+                //calendar3
+                $('.dateranger-one3 .date-use3').prop('readonly', true);
+                $('.dateranger-one3').daterangepicker({
+                    opens: 'right',
+                    autoApply: true,
+                    singleDatePicker: true
+                }, function (start, end, label) {
+                    $('.dateranger-one3 .date-use3').val(start.format('YYYY-MM-DD'));
+                });
+                //calendar4
+                $('.dateranger-one4 .date-use4').prop('readonly', true);
+                $('.dateranger-one4').daterangepicker({
+                    opens: 'right',
+                    autoApply: true,
+                    singleDatePicker: true
+                }, function (start, end, label) {
+                    $('.dateranger-one4 .date-use4').val(start.format('YYYY-MM-DD'));
+                });
+                //calendar5
+                $('.dateranger-one5 .date-use5').prop('readonly', true);
+                $('.dateranger-one5').daterangepicker({
+                    opens: 'right',
+                    autoApply: true,
+                    singleDatePicker: true
+                }, function (start, end, label) {
+                    $('.dateranger-one5 .date-use5').val(start.format('YYYY-MM-DD'));
+                });
+
+                $("#close").click(function () {
+                    window.location.assign("/them-dau-gia");
+                });
+            });
+            function addAssets() {
+                $('#loading').show();
+                console.log(warrantyPercent.value)
+                //time start
+                let hourStart = document.getElementById("hourStart").value;
+                let minuteStart = document.getElementById("minuteStart").value;
+                let dayStart = document.getElementById("dayStart").value;
+                // time end
+                let hourEnd = document.getElementById("hourEnd").value;
+                let minuteEnd = document.getElementById("minuteEnd").value;
+                let dayEnd = document.getElementById("dayEnd").value;
+
+                let bidPrice = parseInt($('#bidPrice').val().replace(/,/g, ''));
+                let warranty = parseInt($('#warranty').val().replace(/,/g, ''));
+                let buyPrice = parseInt($('#buyPrice').val().replace(/,/g, ''));
+                let stepPrice = parseInt($('#stepPrice').val().replace(/,/g, ''));
+                fetch('/auction/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "assest": assets.id,
+                        "bidPrice": bidPrice,
+                        "buyPrice": buyPrice,
+                        "endAt": dayEnd + "T" + hourEnd + ":" + minuteEnd + ":00Z",
+                        "startAt": dayStart + "T" + hourStart + ":" + minuteStart + ":00Z",
+                        "warranty": warranty,
+                        "percent": warrantyPercent.value,
+                        "stepPrice": stepPrice,
+                        "area": area.value,
+                        "attendanceDeadline": dayAttendanceDeadline.value + "T" + hourAttendanceDeadline.value + ":" + minuteAttendanceDeadline.value + ":00Z",
+                        "seller": id,
+                        "regulation": urlFile,
+                        "type": type.value,
+                        "registrationFee": registrationFee.value,
+                        "attendingUser": attendingUser.value
+                    })
+                }).then(res => res.text())
+                    .then(results => {
+                        console.log(results);
+                        if (results === "OK") {
+                            $('#loading').hide();
+                            $("#modalSuccess").modal();
+                        }
+                        else {
+                            $('#loading').hide();
+                            $(".AlertChange").addClass("alert alert-danger");
+                            $(".AlertChange").html('Thêm đấu giá không thành công</br>' + results);
+                            $(".AlertChange").fadeIn('slow');
+                            setTimeout(() => $(".AlertChange").fadeOut('slow'), 20000);
+                            $("#modalFail").modal();
+                        }
+                    }).catch(error => {
+                        console.log("Error: " + error);
+                    });
+            }
+        </script>
+    </div>
+</body>
+
+</html>

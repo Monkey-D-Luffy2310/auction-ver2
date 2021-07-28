@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div layout:fragment="content">
+        <div class="dg-content">
+			<div class="dg-home">
+				<div class="slider">
+					<div id="auction-slider" class="owl-carousel owl-theme">
+						<div class="carousel-item" th:each="auc : ${auctionActiveTop3}" th:attr="data-auction-id = ${auc.id}">
+							<div class="left">
+								<div class="image-content">
+									<img th:src="${auc.getAssest().images}" alt="" class="product-image" data-slide="1">
+									<div class="top">
+										<div class="status d-flex justify-content-center align-items-center">
+											Đang đấu giá
+										</div>
+										<div class="favorite d-flex justify-content-center align-items-center" th:attr="data-id=${auc.id}">
+											<img src="images/ac-img/like.svg" alt="">
+										</div>
+									</div>
+									<div class="preview-image owl-carousel owl-theme" data-slide="1">
+										<div class="item custom-active" th:classappend="${state.index} == 0 ? '' : ''" th:each="img, state : ${#strings.arraySplit(auc.getAssest().images, ',')}">
+											<img th:src="${img}" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="info">
+									<div class="top">
+										<div class="title" th:text="${auc.getAssest().name}"></div>
+										<div class="time-remaining d-flex align-items-center justify-content-center">
+											<div class="count-down d-flex">
+												<img src="images/ac-img/eva_clock-outline.svg" alt="">
+												<span class="box-date" th:attr="data-action-time=${auc.endAt}">
+													<span class="time-num"></span> <span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+												</span>
+											</div>
+											<div class="person-join d-flex">
+												<img src="images/ac-img/akar-icons_person.svg" alt="">
+												<span class="numRegister" th:attr="data-register-auction-id=${auc.id}"></span>
+											</div>
+										</div>
+									</div>
+									<div class="bot d-flex">
+										<div class="category" th:text="${auc.category}"></div>
+										<div class="start-price d-flex justify-content-center align-items-center">
+											Khởi điểm: <span class="cur-format" th:text="${auc.bidPrice}"></span> &nbsp;VNDT
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="right">
+								<div class="top">
+									<div class="header">
+										<div>GIÁ CAO NHẤT HIỆN TẠI (VNDT)</div>
+										<img src="images/ac-img/more.svg" alt="" class="box-exit-btn">
+										<div class="box-exit">
+											<a href="default.htm"
+												class="d-flex justify-content-center align-items-center">
+												<div><img src="images/ac-img/box-exit.svg" alt=""></div>
+												<div>Thoát đấu giá</div>
+											</a>
+										</div>
+									</div>
+									<div class="auction-highest-price cur-format font-weight-bold currentPrice" th:text="${auc.currentPrice == 0 ? auc.bidPrice : auc.currentPrice}">
+										<div></div>
+										<div>5</div>
+										<div>3,</div>
+										<div>2</div>
+										<div>7</div>
+										<div>5,</div>
+										<div>3</div>
+										<div>0</div>
+										<div>0,</div>
+										<div>0</div>
+										<div>0</div>
+										<div>0</div>
+									</div>
+								</div>
+								<div class="body">
+                                <div class="content">
+                                    <div class="dg-detail-auction-content">
+                                        <div class="dg-detail-auction-content-payment">
+                                            <div class="dg-detail-auction-other-payment">
+                                                <div class="dg-detail-person-avatar">
+                                                    <img src="/images/ac-img/avatar.svg" alt="">
+                                                </div>
+                                                <div class="dg-detail-auction-other-payment-price">
+                                                    53,265,000,000 VNDT
+                                                </div>
+                                            </div>
+                                            <div class="dg-detail-auction-other-payment">
+                                                <div class="dg-detail-person-avatar">
+                                                    <img src="/images/ac-img/avatar.svg" alt="">
+                                                </div>
+                                                <div class="dg-detail-auction-other-payment-price">
+                                                    53,265,000,000 VNDT
+                                                </div>
+                                            </div>
+                                            <div class="dg-detail-auction-other-payment">
+                                                <div class="dg-detail-person-avatar">
+                                                    <img src="/images/ac-img/avatar.svg" alt="">
+                                                </div>
+                                                <div class="dg-detail-auction-other-payment-price">
+                                                    53,265,000,000 VNDT
+                                                </div>
+                                            </div>
+                                            <div class="dg-detail-auction-other-payment">
+                                                <div class="dg-detail-person-avatar">
+                                                    <img src="/images/ac-img/avatar.svg" alt="">
+                                                </div>
+                                                <div class="dg-detail-auction-other-payment-price">
+                                                    53,265,000,000 VNDT
+                                                </div>
+                                            </div>
+                                            <div class="dg-detail-auction-me-payment">
+                                                <div class="dg-detail-auction-me-payment-price">
+                                                    53,265,000,000 VNDT
+                                                </div>
+                                                <div class="dg-detail-person-avatar">
+                                                    <img src="/images/ac-img/avatar.svg" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="active-time">
+                                            Nếu không có ai đặt giá thêm, phiên đấu giá sẽ kết thúc trong <span>01:30:02</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dg-detail-auction-footer">
+                                    <div class="dg-detail-auction-footer-wrapper-header">
+                                        <div class="dg-detail-quantity">
+                                            <div class="dg-detail-quantity-sub">
+                                                -
+                                            </div>
+                                            <div class="dg-detail-quantity-content">
+                                                1
+                                            </div>
+                                            <div class="dg-detail-quantity-add">
+                                                +
+                                            </div>
+                                        </div>
+                                        <div class="dg-detail-payment-now">
+                                            ĐẶT 53,275,300,000 VNDT
+                                        </div>
+                                    </div>
+                                    <div class="dg-detail-auction-footer-wrapper-footer">
+                                        <div class="dg-detail-price-step">
+                                            Bước giá: <span>10,000</span> VNDT
+                                        </div>
+                                        <div class="dg-detail-deposit">
+                                            Đặt cọc (10%): <span>10,000,000</span> VNDT
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body-blur">
+                                    <div class="content">
+                                    	<a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+	                                        <button class="btn join-auction d-flex justify-content-center align-items-center">
+	                                            <img src="images/ac-img/auction.svg" alt="">
+	                                            <div>THAM GIA ĐẤU GIÁ</div>
+	                                        </button>
+	                                    </a>
+                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+	                                        <button class="btn buy-now d-flex justify-content-center align-items-center">
+	                                            <img src="images/ac-img/cart-white.svg" alt="">
+	                                            <div>MUA NGAY</div>
+	                                        </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+							</div>
+						</div>
+						<div class="carousel-item" th:if="${#lists.size(auctionActiveTop3) == 0}">
+							<img src="images/banner-daugia-50k.png">
+						</div>
+						<div class="carousel-item" th:if="${#lists.size(auctionActiveTop3) == 0}">
+							<img src="images/banner 2-01.jpg">
+						</div>
+						<div class="carousel-item" th:if="${#lists.size(auctionActiveTop3) == 0}">
+							<img src="images/banner 2-02.jpg">
+						</div>
+					</div>
+				</div>
+				<div class="auction-highlight">
+					<div class="d-flex align-items-center">
+						<div class="title">Đang đấu giá</div>
+						<div class="load-more">
+							<a href="/danh-sach-phien-dau-gia" class="d-flex justify-content-center align-items-center">
+								Xem tất cả
+								<div class="load-more-icon">
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="auction-highlight-content row">
+						<div class="item col-xl-2 col-md-4 col-sm-6 col-9" th:each="auc : ${auctionActiveTop6}" th:attr="data-auction-id = ${auc.id}">
+							<div class="top">
+								<a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+									<div class="blur-img"></div>
+									<div class="top-wrapper d-flex align-items-center">
+										<div class="timing" th:attr="data-action-time=${auc.endAt}">
+	                                        <span class="time-num"></span> <span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+										</div>
+										<a href="javascript:void(0)" class="favorite d-flex justify-content-center align-items-center" th:attr="data-id=${auc.id}">
+											<img src="images/ac-img/like.svg" alt="">
+										</a>
+									</div>
+									<div class="image">
+										<img th:src="${auc.getAssest().images}" alt="">
+									</div>
+								</a>
+							</div>
+							<div class="info">
+								<a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+									<div class="title" th:text="${auc.getAssest().name}"></div>
+									<div class="bottom">
+										<div class="price"><span class="cur-format currentPrice" th:text="${auc.currentPrice == 0 ? auc.bidPrice : auc.currentPrice}"></span> VNDT</div>
+										<div class="number-join d-flex justify-content-center align-items-center">
+											<img src="images/ac-img/akar-icons_person.svg" alt="" width="14"
+												height="14">
+											<span class="numRegister" th:attr="data-register-auction-id=${auc.id}"></span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="auction-coming">
+					<div class="d-flex align-items-center">
+						<div class="title">Sắp đấu giá</div>
+						<div class="load-more">
+							<a href="/danh-sach-phien-dau-gia" class="d-flex justify-content-center align-items-center">
+								Xem tất cả
+								<div class="load-more-icon">
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="auction-coming-content row">
+						<div class="item col-xl-2 col-md-4 col-sm-6 col-9" th:each="auc : ${auctionTop6Upcoming}" th:attr="data-auction-id = ${auc.id}">
+							<div class="top">
+								<a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+								<div class="blur-img"></div>
+								<div class="top-wrapper d-flex align-items-center">
+									<div class="timing" th:attr="data-action-time=${auc.endAt}">
+										<span class="time-num"></span> <span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+									</div>
+									<a href="javascript:void(0)" class="favorite" th:attr="data-id=${auc.id}">
+										<img src="images/ac-img/like.svg" alt="">
+									</a>
+								</div>
+									<div class="image">
+										<img th:src="${auc.getAssest().images}" alt="">
+									</div>
+								</a>
+							</div>
+							<div class="info">
+								<a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+									<div class="title" th:text="${auc.getAssest().name}"></div>
+									<div class="bottom">
+										<div class="price"><span class="cur-format" th:text="${auc.bidPrice}"></span> VNDT</div>
+										<div class="number-join d-flex justify-content-center align-items-center">
+											<img src="images/ac-img/akar-icons_person.svg" alt="" width="14"
+												height="14">
+											<span class="numRegister" th:attr="data-register-auction-id=${auc.id}"></span>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="news">
+					<div class="">
+						<div class="d-flex align-items-center">
+							<div class="title">Tin tức</div>
+							<div class="load-more">
+								<a href="/tin-tuc" class="d-flex justify-content-center align-items-center">
+									Xem tất cả
+									<div class="load-more-icon">
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="news-content row">
+							<a th:each="newAuction : ${newTop6}" th:href="@{/AC-Auction/chi-tiet-tin-tuc/{alias}(alias = ${newAuction.alias})}" class="item col-xl-2 col-md-4 col-sm-6 col-8">
+								<div class="image">
+									<div class="blur-img"></div>
+									<img th:src="${newAuction.image}" alt="">
+								</div>
+								<div class="info">
+									<div class="title" th:text="${newAuction.tittle}"></div>
+									<div class="summary" th:text="${newAuction.summary}"></div>
+									<div class="created-at time-format" th:text="${newAuction.created}"></div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			document.addEventListener('DOMContentLoaded', (event) => {
+				if (!checkUserLoggedIn()) {
+					$('#modalLogin').modal('show');
+					$('.dg-login').show();
+					$('.dg-user-info').hide();
+				}
+				else {
+					$('.dg-login').hide();
+					$('.dg-user-info').show();
+				}
+			});
+		</script>
+	</div>
+</body>
+</html>

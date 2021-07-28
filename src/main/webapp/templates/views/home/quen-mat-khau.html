@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta charset="UTF-8">
+    <title>Quên mật khẩu</title>
+</head>
+
+<body>
+
+    <!-- Main -->
+    <div layout:fragment="content">
+    	<!-- Title Page -->
+	    <section id="title">
+	        <div class="fw-box">
+	            <div class="container-fluid">
+	                <div class="title-page d-sm-flex align-items-center bd-highlight pt-4 pb-2">
+	                    <h1 class="bd-highlight f-26">Quên mật khẩu</h1>
+	                    <div class="breadcrumb-box bd-highlight  ml-auto">
+	                        <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-lg-flex ">
+	                            <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+	                                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+	                                <li class="breadcrumb-item"><a href="/tai-khoan">Tài khoản</a></li>
+	                                <li class="breadcrumb-item active" aria-current="page">Quên mật khẩu</li>
+	                            </ol>
+	                        </nav>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <!-- Title Page -->
+
+        <!-- Grid pro  -->
+        <!-- schedule  -->
+        <section id="signup" class="mb-5">
+
+            <div class="fw-box">
+                <div class="container">
+
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-xl-4 col-lg-5 col-md-7">
+                            <div class="card o-hidden border-0 shadow-sm">
+                                <div class="card-body p-0">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="p-3 p-md-4">
+                                                <form class="user mini-col">
+                                                    <div class="d-flex bd-highlight">
+                                                        <h1 class="font-weight-600 f-19 bd-highlight mb-1">Đổi mật khẩu</h1>
+                                                        <div class="bd-highlight ml-auto f-13">
+                                                            <a class="fs-090" href="/dang-nhap">Đã nhớ mật khẩu?</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="pb-2" />
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label pb-1 pt-0">Địa chỉ Email<span class="text-danger">*</span></label>
+                                                        <input id="Email" type="email" class="form-control form-control-user fs-090" maxlength="40"
+                                                        	oninvalid="validateEmail(this)" oninput="validateEmail(this)" required>
+                                                    </div>
+													<div class="errorEmail col-12" style="color: red;"></div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group f-13">
+                                                                <span><strong>Chú ý!</strong> Mật khẩu mới sẽ được gửi đến Email, vui lòng kiểm tra hòm thư (cả hòm thư rác).</span>
+                                                            </div>
+                                                            <button id="SendEmail" class="btn btn-primary btn-user d-block fs-100 font-weight-500" style="margin: auto;">
+                                                                <i class="las la-envelope"></i>
+                                                                Gửi mail tạo mật khẩu mới
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <!-- schedule  -->
+        <!-- Grid pro  -->
+        <style>
+			#SendEmail {
+				position: relative;
+			}
+			#SendEmail.spinning {
+			    padding-right: 30px;
+			}
+			#SendEmail.spinning:after {
+			    content: '';
+			    position: absolute;
+			    right: 6px;
+			    top: 50%;
+			    width: 0;
+			    height: 0;
+			    position: absolute;
+			    border-radius: 50%;
+			    animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+			}
+			
+			#SendEmail.spinning:before {
+			    content: "";
+			    width: 0px;
+			    height: 0px;
+			    border-radius: 50%;
+			    right: 5px;
+			    top: 50%;
+			    border: 2px solid white;
+		    	border-right: 3px solid #45a3d085;
+			    position: absolute;
+			    animation: rotate360 .5s infinite linear, exist .1s forwards ease ;
+			}
+		
+			@keyframes rotate360 { 
+			    100% {
+			        transform: rotate(360deg);
+			    }
+			}
+			@keyframes exist { 
+			    100% {
+			        width: 15px;
+			        height: 15px;
+			        margin: -8px 5px 0 0;
+			    }
+			}
+		</style>
+		<script type="text/javascript">
+			function validateEmail(textbox) {
+				if (textbox.value === null || textbox.value === "") {
+					textbox.setCustomValidity("Vui lòng nhập Email");
+					return false;
+				}
+				else if (textbox.validity.typeMismatch) {
+					textbox.setCustomValidity("Vui lòng nhập đúng định dạng");
+					return false;
+				}
+				else textbox.setCustomValidity("");
+				return true;
+			}
+			document.addEventListener('DOMContentLoaded', (event) => {
+				toggle = true;
+				let ForgotPasswrod = function(e) {
+					let email = $("#Email").get(0);
+					if (toggle) {
+						toggle = false;
+						$('.errorEmail').html('');
+						if (validateEmail(email)) {
+						    e.preventDefault();
+							$("#SendEmail").addClass('spinning');
+							fetch('/auth/forgot_password/' + email.value)
+						   	    .then(res => res.text())
+						        .then(results => {
+						    	    if (results === "OK") {
+						    		  $("#SendEmail").removeClass('spinning');
+						    		  toggle = true;
+						   		    }
+						    	    else {
+						    	      $('.errorEmail').html('Email không tồn tại');
+						    		  $("#SendEmail").removeClass('spinning');
+						    		  toggle = true;
+						    	    }
+						        })
+						        .catch(error => {
+						    	  console.log("Error: " + error);
+						        }); 
+						}
+						else {
+							toggle = true;
+						}
+					}
+					else {
+						e.preventDefault();
+					}
+				}
+				$("#SendEmail").click(e => ForgotPasswrod(e));
+				$('form').keydown(function(event) {
+					if(event.keyCode === 13){
+						ForgotPasswrod(event);
+					}
+				}) 
+			});
+		</script>
+    </div>
+    <!-- Main -->
+
+</body>
+</html>

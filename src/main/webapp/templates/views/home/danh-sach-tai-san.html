@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Danh sách tài sản</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <!-- Title Page -->
+        <section id="title">
+            <div class="fw-box">
+                <div class="container-fluid">
+                    <div class="title-page d-flex align-items-center bd-highlight pt-4 pb-2">
+                        <h1 class="bd-highlight f-24">
+                            Danh sách tài sản
+                        </h1>
+                        <div class="breadcrumb-box bd-highlight ml-auto">
+                            <div class="d-inline-block">
+                                <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-xl-flex">
+                                    <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+                                        <li class="breadcrumb-item"><a href="/index">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="/bang-chinh-dai-ly">Đại lý</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Danh sách tài sản</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="menu-account-drop d-inline-block d-xl-none mb-3">
+                                <div class="btn-group dropdown">
+                                    <a href="#" class="dropdown-toggle font-weight-600" data-toggle="dropdown"
+                                        data-flip="false" aria-haspopup="false" aria-expanded="false">
+                                        <span class="text-secondary"></span><span th:text="${user.name}"></span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right border-0 shadow-sm rounded-0 p-0">
+                                        <div class="card border-0 rounded-0 shadow-sm">
+
+                                            <div class="card-body p-3 rounded-0 border-0 f-13">
+                                                <div class="card-text">
+                                                    <dl>
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                                                            Tài khoản</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                                <i class="las la-border-all mr-1"></i>
+                                                                Bảng chính
+                                                            </a>
+                                                        </dd>
+                                                        <!-- <dd class="ml-3 mb-1">
+                                                            <a href="/ho-so-dai-ly" class="text-dark">
+                                                                <i class="las la-user-cog mr-1"></i>
+                                                                Hồ sơ đại lý
+                                                            </a>
+                                                        </dd> -->
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/dang-nhap" class="text-dark">
+                                                                <i class="las la-times-circle mr-1"></i>
+                                                                Đăng xuất
+                                                            </a>
+                                                        </dd>
+                                                    </dl>
+                                                    <hr>
+                                                    <dl class="font-weight-500">
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                                                            Quản lý</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/danh-sach-dau-gia" class="text-dark">
+                                                                <i class="las la-gavel mr-1"></i>
+                                                                Danh sách đấu giá
+                                                            </a>
+                                                        </dd>
+                                                       <!-- <dd class="ml-3 mb-2">
+                                                            <a href="/them-dau-gia" class="text-dark">
+                                                                <i class="las la-plus-circle mr-1"></i>
+                                                                Thêm đấu giá    
+                                                            </a>
+                                                        </dd> -->
+                                                        <dd class="ml-3 mb-1 pt-1">
+                                                            <a href="/danh-sach-tai-san"
+                                                                class="text-violet font-weight-bold">
+                                                                <i class="las la-city mr-1"></i>
+                                                                Danh sách tài sản
+                                                            </a>
+                                                        </dd>
+                                                        <!-- <dd class="ml-3 mb-2">
+                                                            <a href="/them-tai-san" class="text-dark">
+                                                                <i class="las la-plus-circle mr-1"></i>
+                                                                Thêm tài sản
+                                                            </a>
+                                                        </dd> -->
+                                                        <!--   -->
+                                                    </dl>
+                                                    <hr>
+                                                    <dl class="font-weight-500">
+                                                        <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                                                            Cá nhân</dt>
+                                                        <dd class="ml-3 mb-1">
+                                                            <a href="/tai-khoan" class="text-dark">
+                                                                <i class="las la-user mr-1"></i>
+                                                                Bảng chức năng cá nhân
+                                                            </a>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Title Page -->
+
+        <!-- Grid pro  -->
+        <!-- schedule  -->
+        <section id="liked" class="pb-4">
+
+            <div class="fw-box">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-12 col-xl-3 col-lg-4 d-none d-md-block">
+                            <!-- Menu Account -->
+                            <div class="side-right d-none d-xl-block">
+                                <div class="widget-right mg-b-20">
+                                    <div class="card border-0 rounded-0 shadow-sm">
+
+                                        <div class="card-body p-3 rounded-0 border-0">
+                                            <h3 class="card-title f-19 mb-3 font-weight-700 border-bottom pb-3">
+                                                Xin chào! <a href="ho-so-ca-nhan" class="font-weight-700"
+                                                    th:text="${user.name}"></a>
+                                            </h3>
+                                            <div class="card-text">
+                                                <dl>
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài
+                                                        khoản</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                            <i class="las la-border-all mr-1"></i>
+                                                            Bảng chính
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-1">
+                                                        <a href="/ho-so-dai-ly" class="text-dark">
+                                                            <i class="las la-user-cog mr-1"></i>
+                                                            Hồ sơ đại lý
+                                                        </a>
+                                                    </dd> -->
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dang-nhap" class="text-dark">
+                                                            <i class="las la-times-circle mr-1"></i>
+                                                            Đăng xuất
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                                <hr>
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Quản
+                                                        lý</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/danh-sach-dau-gia" class="text-dark">
+                                                            <i class="las la-gavel mr-1"></i>
+                                                            Danh sách đấu giá
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-2">
+                                                        <a href="/them-dau-gia" class="text-dark">
+                                                            <i class="las la-plus-circle mr-1"></i>
+                                                            Thêm đấu giá
+                                                        </a>
+                                                    </dd> -->
+                                                    <dd class="ml-3 mb-1 pt-1">
+                                                        <a href="/danh-sach-tai-san"
+                                                            class="text-violet font-weight-bold">
+                                                            <i class="las la-city mr-1"></i>
+                                                            Danh sách tài sản
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-2">
+                                                        <a href="/them-tai-san" class="text-dark">
+                                                            <i class="las la-plus-circle mr-1"></i>
+                                                            Thêm tài sản
+                                                        </a>
+                                                    </dd> -->
+
+                                                </dl>
+                                                <hr>
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Cá
+                                                        nhân</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/tai-khoan" class="text-dark">
+                                                            <i class="las la-user mr-1"></i>
+                                                            Bảng chức năng cá nhân
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Menu Account -->
+                        </div>
+                        <div class="col-12 col-xl-9 col-lg-12">
+                            <!-- <div class="title-panel pt-3 pr-3 pl-3 pb-3 bg-white mg-b-20 shadow-sm">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control form-control-user fs-090 rounded-0" maxlength="200" placeholder="Từ khóa...">
+                                            <select class="form-control form-control-sm select-default selectpickernone border-right-0" tabindex="-98">
+                                                <option value="0">Tất cả danh mục</option>
+                                                <option value="1">Bất động sản</option>
+                                                <option value="2">Xe hơi</option>
+                                                <option value="4">Đồ cổ</option>
+                                                <option value="5">Cây cảnh</option>
+                                                <option value="5">Sim số</option>
+                                                <option value="6">Đá quý</option>
+                                            </select>
+                                            <button class="btn btn-warning btn-sm"><i class="las la-search"></i></button>
+                                        </div>
+
+                                    </div>
+                                    <div class="ml-auto">
+                                        <a class="btn btn-warning btn-sm" href="/them-tai-san">
+                                            <i class="las la-plus"></i>
+                                            Thêm tài sản
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div> -->
+                            <!--Property-->
+                            <div class="start-pro-list cat-pro-list mini-col">
+
+                                <!-- Pro Item -->
+                                <h2 class="text-center" th:if="${user.assets.isEmpty()}">Hiện tại chưa đăng ký tài sản nào.</h2>
+                                <div id="ListAuction">
+                                    <div class="start-pro-item bg-white none-col mg-b-20" th:each="asset : ${user.assets}">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-3 col-md-6">
+                                                <div class="start-img-box">
+                                                    <a href="" class="d-block">
+                                                        <img class="w-100" th:src="${asset.images}" alt="Card image cap"
+                                                            style="height:200px; object-fit: contain;">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-9 col-md-6">
+                                                <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+    
+                                                    <div class="row h-100 align-items-center">
+                                                        <div class="col-12 col-xl-7 col-lg-7">
+                                                            <h3 class="f-17 mb-2 font-weight-bold">
+                                                                <a href="" class="d-block" th:text="${asset.name}"></a>
+                                                            </h3>
+                                                            <p class="mb-1">
+                                                                <span class="text-secondary f-13 mr-1">Người đăng: </span>
+                                                                <a href="" class="font-weight-bold text-violet"
+                                                                    th:text="${user.name}"></a>
+                                                            </p>
+                                                            <p class="mb-1">
+                                                                <span class="text-secondary f-13 mr-1">Loại: </span>
+                                                                <span class="font-weight-500"
+                                                                    th:text="${asset.category}"></span>
+                                                            </p>
+                                                            <p class="mb-0">
+                                                                <span class="f-11 mr-1 d-none d-lg-block mt-2">Ngày đăng:
+                                                                    <strong class="text-dark"
+                                                                        th:text="${#dates.format(new java.util.Date(asset.created), 'HH:mm dd-MM-yyyy')}"></strong>
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-12 col-xl-5 col-lg-5">
+                                                            <div class="text-right bid-pri-box">
+                                                                <div class="link-box">
+                                                                    <a th:href="@{/sua-tai-san/{id}(id = ${asset.id})}"
+                                                                        class="btn btn-primary btn-sm text-white">
+                                                                        <i class="las la-edit"></i>
+                                                                        Xem & Sửa tài sản
+                                                                    </a>
+                                                                </div>
+                                                                <div class="text-right bid-pri-box mt-2">
+                                                                    <div class="link-box">
+                                                                        <a th:href="@{/them-dau-gia/{id}(id = ${asset.id})}"
+                                                                            class="btn btn-success btn-sm text-white">
+                                                                            <i class="las la-edit"></i>
+                                                                            Thêm đấu giá cho tài sản này
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Pro Item -->
+
+                            </div>
+                            <!--Property-->
+                            <!-- Pagination -->
+                            <div th:if="${!user.assets.isEmpty()}">
+                                <div
+                                    class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4 ">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination pagination justify-content-center mb-0">
+                                        </ul>
+                                    </nav>
+                                    <!-- <div class="on-page f-13 d-none d-xl-block">
+                                    Đang ở trang <span class="font-weight-bold currPage"></span>
+                                    của
+                                    <span class="font-weight-bold numPages"></span> trang
+                                    <span class="ml-2 mr-2">|</span>
+                                    Có <span class="font-weight-bold numRecords"></span> bản ghi
+                                  </div> -->
+                                </div>
+                            </div>
+                            <!-- Pagination -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                pageMe({ pagerSelector: '#ListAuction', paginationSelector: '.pagination', perPage: 10 });
+                const url = new URL(window.location);
+                function setPathVariable(name, value) {
+                    url.searchParams.set(name, value);
+                    window.history.pushState({}, '', url);
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

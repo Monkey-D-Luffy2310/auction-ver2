@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- Main Tag -->
+	<title>Địa chỉ nhận hàng</title>
+	<style>
+		.spinning {
+			padding-right: 15px;
+		}
+
+		.spinning:before {
+			content: "";
+			width: 0px;
+			height: 0px;
+			border-radius: 50%;
+			/* right: -10px; */
+			top: 50%;
+			border: 2px solid white;
+			border-right: 3px solid #FAB414;
+			position: absolute;
+			animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+		}
+
+		@keyframes rotate360 {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes exist {
+			100% {
+				width: 15px;
+				height: 15px;
+				margin: -8px 5px 0 0;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="dg-content">
+			<div class="dg-list-address">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xl-3"></div>
+						<div class="col-xl-6">
+							<div class="list-address">
+								<div class="row">
+									<div class="col-xl-2 col-lg-2 col-md-1"></div>
+									<div class="col-xl-8 col-lg-8 col-md-10">
+										<div class="txt-title">Địa chỉ nhận hàng</div>
+										<div th:each="address : ${addresses}" onclick="showModalEditAddress(this)"
+											class="open-modal-edit-address" th:attr="data-id=${address.id}"
+											style="cursor: pointer;">
+											<div class="address-item">
+												<div class="d-flex justify-content-between">
+													<div class="info">
+														<div class="name" th:text="${address?.name}"></div>
+														<div class="soc"></div>
+														<div class="name" th:text="${address?.mobile}"></div>
+													</div>
+													<div class="txt-default d-flex align-items-center"
+														th:if="${address.isDefault}">
+														<img src="images/thong-tin-ca-nhan/tick.svg" alt="">
+														Mặc định
+													</div>
+												</div>
+												<div class="txt-address" th:text="${address?.address}"></div>
+											</div>
+										</div>
+										<a href="javascript:void(0)" class="open-modal-add-address">
+											<div class="add-address">
+												<img src="images/thong-tin-ca-nhan/add.svg" alt="">
+											</div>
+										</a>
+									</div>
+									<div class="col-xl-2 col-lg-2 col-md-1"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- BEGIN: MODAL EDIT ADDRESS -->
+		<div class="modal fade modalEditAddress" th:each="address : ${addresses}"
+			th:id="'modalEditAddress' + ${address.id}" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="top:-20rem !important;">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="md-header d-flex justify-content-between align-items-center">
+							<div class="txt-1">Thêm địa chỉ</div>
+							<a href="javascript:void(0)" data-dismiss="modal"><img
+									src="/images/thong-tin-ca-nhan/close.svg" alt="" /></a>
+						</div>
+
+						<div class="dg-input-label-custom mt-24">
+							<label>Tên người nhận *</label>
+							<input type="text" class="form-control" th:value="${address.name}" placeholder=""
+								disabled />
+						</div>
+
+						<div class="dg-input-label-custom mt-24">
+							<label>Số điện thoại *</label>
+							<input type="text" class="form-control" th:value="${address.mobile}" placeholder=""
+								disabled />
+						</div>
+
+						<div class="dg-input-label-custom mt-24">
+							<label>Địa chỉ người nhận *</label>
+							<input type="text" class="form-control" th:value="${address.address}" placeholder=""
+								disabled />
+						</div>
+						<div class="loadding mt-20 text-center" style="position: relative;"></div>
+						<div class="AlertChange text-center"></div>
+						<div class="requestButton">
+							<div class="form-group box-1" th:attr="data-id=${address.id}" onclick="setDefault(this)"
+								style="cursor: pointer;">
+								Đặt lại địa chỉ mặc định
+							</div>
+
+							<div class="box-btn">
+								<div class="text-danger" th:attr="data-id=${address.id}" onclick="deleteAddress(this)"
+									style="cursor: pointer;">Xóa địa chỉ</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END: MODAL EDIT ADDRESS -->
+	</div>
+</body>
+
+</html>
+<script>
+	function showModalEditAddress(val) {
+		var id = val.getAttribute('data-id');
+		$('#modalEditAddress' + id).modal();
+	}
+	function deleteAddress(val) {
+		$(".loadding").addClass('spinning');
+		$('.requestButton').hide();
+		var id = val.getAttribute('data-id');
+		fetch('/user/address/' + id, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(res => res.text())
+			.then(results => {
+				if (results === "OK") {
+					$(".loadding").removeClass("spinning");
+					$(".AlertChange").removeClass("alert-danger")
+					$(".AlertChange").addClass("alert alert-success");
+					$(".AlertChange").html('Xoá địa chỉ thành công');
+					$(".AlertChange").fadeIn('slow');
+					setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+					location.reload();
+				}
+				else {
+					$(".loadding").removeClass("spinning");
+					$(".AlertChange").removeClass("alert-success")
+					$(".AlertChange").addClass("alert alert-danger");
+					$(".AlertChange").html('Xoá địa chỉ thất bại');
+					$(".AlertChange").fadeIn('slow');
+					setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+					location.reload();
+				}
+			})
+			.catch(error => {
+				console.log("Error: " + error);
+			});
+	}
+
+	function setDefault(val) {
+		$(".loadding").addClass('spinning');
+		$('.requestButton').hide();
+		var id = val.getAttribute('data-id');
+		fetch('/user/address/set_default/' + id, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(res => res.text())
+			.then(results => {
+				if (results === "OK") {
+					$(".loadding").removeClass("spinning");
+					$(".AlertChange").removeClass("alert-danger")
+					$(".AlertChange").addClass("alert alert-success");
+					$(".AlertChange").html('Đặt địa chỉ mặc định thành công');
+					$(".AlertChange").fadeIn('slow');
+					setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+					location.reload();
+				}
+				else {
+					$(".loadding").removeClass("spinning");
+					$(".AlertChange").removeClass("alert-success")
+					$(".AlertChange").addClass("alert alert-danger");
+					$(".AlertChange").html('Đặt địa chỉ mặc định thất bại');
+					$(".AlertChange").fadeIn('slow');
+					setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+					location.reload();
+				}
+			})
+			.catch(error => {
+				console.log("Error: " + error);
+			});
+	}
+</script>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{views/home/AC-Auction}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Tin tức</title>
+
+</head>
+
+<body>
+	<div layout:fragment="main-content">
+		<div class="blog-list mini-col" id="ListNews" >
+			<div class="post-item mb-4 bg-white" th:each="new_auction : ${news}">
+				<div class="row listNews">
+					<div class="col-12 col-xl-3 col-lg-4 col-md-4 ">
+						<a th:href="@{/AC-Auction/chi-tiet-tin-tuc/{alias}(alias = ${new_auction.alias})}">
+							<div class="card rounded-0 border-0 special-item bg-light hg-list mb-0">
+								<div class="date-fix">
+									<span
+										class="date-box d-block bg-primary text-center text-white pt-2 pb-2 pr-2 pl-2 text-uppercase">
+										<strong class="text-white time-format2"
+											th:text="${new_auction.created}"></strong>
+										<!-- <span class="d-block d-day font-weight-500">
+											22
+										</span>
+										<span class="d-block d-mon">
+											TH1
+										</span>
+										<span class="d-block d-yea">
+											2021
+										</span> -->
+									</span>
+								</div>
+							</div>
+							<img src="../../../../images/c1.jpg" class="w-100" th:src="${new_auction.image}"
+								style="height:140px; object-fit: contain;" />
+						</a>
+					</div>
+					<div class="col-12 col-xl-9 col-lg-8 col-md-8">
+						<div class="post-sum pb-3 pt-3">
+							<h2 class="f-19 mb-2">
+								<a th:href="@{/AC-Auction/chi-tiet-tin-tuc/{alias}(alias = ${new_auction.alias})}"
+									th:text="${new_auction.tittle}" class="text-dark d-block">
+									Hình thức đấu giá trực tuyến là gì?
+								</a>
+							</h2>
+							<p class="mb-2 mr-4" th:text="${new_auction.summary}" style="overflow: hidden;text-align: justify;">
+								Bên cạnh các hình thức đấu giá truyền thống (đấu giá trực tiếp tại nơi tổ chức đấu giá),
+								hiện nay hình thức đấu giá trực tuyến cũng dần trở nên phổ biến.
+							</p>
+							<a th:href="@{/AC-Auction/chi-tiet-tin-tuc/{alias}(alias = ${new_auction.alias})}"
+								class="text-violet">
+								Chi tiết
+								<i class="las la-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Pagination -->
+		<div th:if="${news != null}">
+			<div
+				class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4 ">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination pagination justify-content-center mb-0">
+					</ul>
+				</nav>
+				<div class="on-page f-13 d-none d-xl-block">
+				Đang ở trang <span class="font-weight-bold currPage"></span>
+				của
+				<span class="font-weight-bold numPages"></span> trang
+				<span class="ml-2 mr-2">|</span>
+				Có <span class="font-weight-bold numRecords"></span> tin tức
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script th:inline="javascript">
+	/*[+
+	var news = [[${news}]]; 
+	+]*/
+	document.addEventListener('DOMContentLoaded', (event) => {
+		pageMe({ pagerSelector: '#ListNews', paginationSelector: '.pagination',perPage: 6 });
+		fetch('/news', {
+			method: 'GET'
+			, headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(res => {
+				return res.text()
+			}
+			)
+			.then(results => {
+				// console.log(results);
+			})
+			.catch(error => {
+				console.log("Error: " + error);
+			});
+		for (let i = 0; i < $('.time-format2').length; i++) {
+			let d = new Date($('.time-format2').eq(i).html());
+			let hours = d.getHours();
+			if (hours < 10) hours = '0' + hours;
+			let minutes = d.getMinutes();
+			if (minutes < 10) minutes = '0' + minutes;
+			let date = d.getDate();
+			if (date < 10) date = '0' + date;
+			let month = d.getMonth() + 1;
+			if (month < 10) month = '0' + month;
+			let year = d.getFullYear();
+			$('.time-format2').eq(i).html(date + '/' + month + "</br>" + year);
+		}
+	});
+</script>

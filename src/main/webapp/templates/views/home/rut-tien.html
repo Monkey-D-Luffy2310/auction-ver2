@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/home}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Rút tiền</title>
+	</style>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="dg-content">
+			<div class="dg-wallet">
+				<div class="dg-wallet-left">
+					<div class="dg-withdrawal-content">
+						<div action="" id="withdrawal">
+							<div class="page-title">Rút tiền</div>
+							<div class="dg-withdrawal-method" id="accordion">
+								<div class="card">
+									<div class="dg-withdrawal-method__bank">
+										<input type="radio" name="reminder" id="withdrawal-bank" checked value="bank">
+										<label for="withdrawal-bank" data-toggle="collapse" data-target="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne">Qua tài khoản ngân
+											hàng</label>
+									</div>
+									<div id="collapseOne" class="collapse show" data-parent="#accordion">
+										<div class="withdrawal-method-wrapper">
+											<div class="withdrawal-method-content">
+												<div class="withdrawal-method-content-title">Chuyển đến</div>
+												<div class="list-bank-wrapper" style="cursor: pointer;">
+													<div class="bank-selected">
+														<div class="bank-selected-show">Chọn ngân hàng</div>
+														<div>
+															<img src="/images/ac-img/down.svg" alt="">
+														</div>
+													</div>
+													<div class="list-bank" id="list-bank" data-show="0">
+														<div class="list-bank-item" data-bank-id="">Chọn ngân hàng</div>
+														<div class="list-bank-item" data-bank-id="970454">
+															<span>(VIETCAPITAL)</span> Ngân hàng TMCP Bản Việt
+														</div>
+														<div class="list-bank-item" data-bank-id="970452">
+															<span>(KIENLONGBANK)</span> Ngân hàng TMCP Kiên Long
+														</div>
+														<div class="list-bank-item" data-bank-id="970400">
+															<span>(SAIGONBANK)</span> Ngân hàng TMCP Sài Gòn
+															Công Thương
+														</div>
+														<div class="list-bank-item" data-bank-id="970430">
+															<span>(PG BANK)</span> Ngân hàng TMCP Xăng Dầu
+															Petrolimex
+														</div>
+														<div class="list-bank-item" data-bank-id="970455">
+															<span>(IBK)</span> Ngân hàng Công nghiệp Hàn
+															Quốc
+														</div>
+														<div class="list-bank-item" data-bank-id="970421">
+															<span>(VRB)</span> Ngân hàng Liên Doanh Việt
+															Nga
+														</div>
+														<div class="list-bank-item" data-bank-id="970405">
+															<span>(AGRIBANK)</span> Ngân hàng NN và PTNN Việt
+															Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970408">
+															<span>(GPB)</span>Ngân hàng TM
+															TNHH MTV Dầu
+															Khí Toàn Cầu
+														</div>
+														<div class="list-bank-item" data-bank-id="970416">
+															<span>(ACB)</span>Ngân hàng TMCP
+															Á Châu
+														</div>
+														<div class="list-bank-item" data-bank-id="970425">
+															<span>(ABBANK)</span>Ngân hàng TMCP
+															An Bình
+														</div>
+														<div class="list-bank-item" data-bank-id="970438">
+															<span>(BVB)</span>Ngân hàng TMCP
+															Bảo Việt
+														</div>
+														<div class="list-bank-item" data-bank-id="970449">
+															<span>(LPB)</span>Ngân hàng TMCP
+															Bưu Điện
+															Liên Việt
+														</div>
+														<div class="list-bank-item" data-bank-id="970415">
+															<span>(VIETINBANK)</span>Ngân hàng TMCP
+															Công
+															Thương Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970412">
+															<span>(PVCOMBANK)</span>Ngân hàng TMCP
+															Đại Chúng
+															Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970414">
+															<span>(OCEANBANK)</span>Ngân hàng
+															TMCP Đại
+															Dương
+														</div>
+														<div class="list-bank-item" data-bank-id="970418">
+															<span>(BIDV)</span>Ngân hàng TMCP
+															Đầu tư và
+															Phát triển Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970406">
+															<span>(DONGABANK)</span>Ngân hàng TMCP
+															Đông Á
+														</div>
+														<div class="list-bank-item" data-bank-id="970440">
+															<span>(SEABANK)</span>Ngân hàng TMCP
+															Đông Nam Á
+														</div>
+														<div class="list-bank-item" data-bank-id="970426">
+															<span>(MSB)</span>Ngân hàng TMCP
+															Hàng Hải
+															Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970407">
+															<span>(TECHCOMBANK)</span>Ngân hàng TMCP
+															Kỹ thương
+															Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970428">
+															<span>(NAMABANK)</span>Ngân hàng TMCP
+															Nam Á
+														</div>
+														<div class="list-bank-item" data-bank-id="970436">
+															<span>(VIETCOMBANK)</span>Ngân hàng
+															TMCP Ngoại
+															Thương Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970437">
+															<span>(HDB)</span>Ngân hàng
+															TMCP Phát Triển
+															Thành Phố Hồ Chí Minh
+														</div>
+														<div class="list-bank-item" data-bank-id="970448">
+															<span>(OCB)</span>Ngân hàng
+															TMCP Phương
+															Đông
+														</div>
+														<div class="list-bank-item" data-bank-id="970422">
+															<span>(MB)</span>Ngân hàng
+															TMCP Quân Đội
+														</div>
+														<div class="list-bank-item" data-bank-id="970419">
+															<span>(NCB)</span>Ngân hàng
+															TMCP Quốc Dân
+														</div>
+														<div class="list-bank-item" data-bank-id="970441">
+															<span>(VIB)</span>Ngân hàng
+															TMCP Quốc Tế
+														</div>
+														<div class="list-bank-item" data-bank-id="970429">
+															<span>(SCB)</span>Ngân hàng
+															TMCP Sài Gòn
+														</div>
+														<div class="list-bank-item" data-bank-id="970443">
+															<span>(SHB)</span>Ngân hàng
+															TMCP Sài Gòn -
+															Hà Nội
+														</div>
+														<div class="list-bank-item" data-bank-id="970403">
+															<span>(SACOMBANK)</span>Ngân hàng
+															TMCP Sài Gòn
+															Thương Tín
+														</div>
+														<div class="list-bank-item" data-bank-id="970423">
+															<span>(TPBANK)</span>Ngân hàng
+															TMCP Tiên Phong
+														</div>
+														<div class="list-bank-item" data-bank-id="970427">
+															<span>(VAB)</span>Ngân hàng
+															TMCP Việt Á
+														</div>
+														<div class="list-bank-item" data-bank-id="970432">
+															<span>(VPBANK)</span>Ngân hàng
+															TMCP Việt Nam
+															Thịnh Vương
+														</div>
+														<div class="list-bank-item" data-bank-id="970433">
+															<span>(VIETBANK)</span>Ngân hàng
+															TMCP Việt Nam
+															Thương Tín
+														</div>
+														<div class="list-bank-item" data-bank-id="970434">
+															<span>(INDOVINA)</span>Ngân hàng
+															TNHH Indovina
+														</div>
+														<div class="list-bank-item" data-bank-id="422589">
+															<span>(CIMB)</span>Ngân hàng
+															TNHH MTV CIMB
+															Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970442">
+															<span>(HONGLEONG)</span>Ngân hàng
+															TNHH MTV
+															Hongleong Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970439">
+															<span>(PBVN)</span>Ngân hàng
+															TNHH MTV Public
+															Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970424">
+															<span>(SHBVN)</span>Ngân hàng
+															TNHH MTV
+															Shinhan Việt Nam
+														</div>
+														<div class="list-bank-item" data-bank-id="970458">
+															<span>(UOB)</span>Ngân hàng
+															TNHH MTV United
+															Overseas Bank
+														</div>
+														<div class="list-bank-item" data-bank-id="970457">
+															<span>(WOORIBANK)</span>Ngân hàng
+															Wooribank
+														</div>
+													</div>
+												</div>
+												<div class="text-center" id="bankCheckInfo" style="position: relative;">
+												</div>
+												<div id="bankListAlert">
+												</div>
+												<input type="hidden" class="bank-id" id="bankList">
+												<div class="withdrawal-method-content-title">Số tài khoản</div>
+												<div class="account-number-wrapper">
+													<input type="text" class="account-number form-control"
+														placeholder="Nhập số tài khoản" id="bankAcc">
+													<div class="d-flex justify-content-center align-items-center remember-bank-account"
+														data-toggle="modal" data-target="#remember-bank-account">
+														<img src="/images/ac-img/menu.svg" alt="">
+													</div>
+												</div>
+												<div class="withdrawal-next-step">
+													<div class="title">Tên chủ tài khoản</div>
+													<input type="text" id="bankAccName" disabled class="account-name">
+													<div class="remember-bank-address d-flex align-items-center">
+														Lưu địa chỉ
+														<label class="switch">
+															<input type="checkbox">
+															<span class="slider round"></span>
+														</label>
+													</div>
+													<div class="reminiscent-name-bank">
+														<div class="title">Tên gợi nhớ</div>
+														<input type="text" placeholder="Tên gợi nhớ"
+															class="form-control">
+													</div>
+													<div class="d-flex align-items-center main-wallet">
+														<div class="">Số lượng</div>
+														<div class="">Tài khoản chính: <span class="cur-format"
+																th:text="${user.getVNDTBalance()}"></span> VNDT</div>
+													</div>
+													<input type="text" placeholder="Nhập số lượng" class="form-control"
+														id="bankAmount">
+													<div id="bankAmountAlert"></div>
+													<!-- <p>Giới hạn rút 24h: 0.0/10 VND</p> -->
+													<p>Phí giao dịch: 1,000 VNDT</p>
+												</div>
+												<div class="modal fade" id="remember-bank-account" tabindex="-1"
+													role="dialog" aria-labelledby="exampleModalCenterTitle"
+													aria-hidden="true">
+													<div class="modal-dialog modal-dialog-centered" role="document">
+														<div class="modal-content list-bank-remember-wrapper">
+															<div class="list-bank-remember-content">
+																<div class="wrapper-title">
+																	<div
+																		class="wrapper-title-left d-flex align-items-center">
+																		<img src="/images/ac-img/menu-2.svg" alt="">
+																		Danh sách tài khoản ngân hàng
+																	</div>
+																	<div class="exit-modal" data-dismiss="modal"
+																		aria-label="Close">
+																		<img src="/images/ac-img/exit.svg" alt="">
+																	</div>
+																</div>
+																<div class="list-bank-remember">
+																	<div class="item" data-bank-id="VCB"
+																		data-bank-number="1090361321561"
+																		data-toggle="modal"
+																		data-target="#remember-bank-account">
+																		<div>Huy VIB</div>
+																		<div>PHAM NGOC HUY</div>
+																		<div class="bank-name"><span>(VIB)</span> Ngân
+																			hàng
+																			Thương mại Cổ phần
+																			Quốc tế Việt Nam
+																		</div>
+																		<div>1090361321561</div>
+																	</div>
+																	<div class="item" data-bank-id="TCB"
+																		data-bank-number="1234645656"
+																		data-toggle="modal"
+																		data-target="#remember-bank-account">
+																		<div>Huy VIB</div>
+																		<div>PHAM NGOC HUY</div>
+																		<div class="bank-name">
+																			<span>(Techcombank)</span>Ngân
+																			hàng Kỹ Thương
+																			Việt Nam
+																		</div>
+																		<div>1090361321561</div>
+																	</div>
+																	<div class="item" data-bank-id="VP"
+																		data-bank-number="64564564564"
+																		data-toggle="modal"
+																		data-target="#remember-bank-account">
+																		<div>Huy VIB</div>
+																		<div>PHAM NGOC HUY</div>
+																		<div class="bank-name">
+																			<span>(Techcombank)</span>Ngân
+																			hàng Kỹ Thương
+																			Việt Nam
+																		</div>
+																		<div>1090361321561</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="dg-withdrawal-method__agency" id="headingTwo">
+										<input type="radio" name="reminder" id="withdrawal-agency" class="form-control"
+											value="agency">
+										<label for="withdrawal-agency" data-toggle="collapse" data-target="#collapseTwo"
+											aria-expanded="false" aria-controls="collapseTwo">Rút tiền qua đại
+											lý</label>
+									</div>
+									<div id="collapseTwo" class="collapse" data-parent="#accordion">
+										<div class="withdrawal-method-wrapper">
+											<div class="ac-wallet d-flex align-items-center">
+												<div>Bạn có thể rút tiền thông qua các đại lý của ACwallet.</div>
+												<div>
+													<a href="https://ag.acwallet.net/" target="_blank">
+														Xem danh sách đại lý
+														<img src="/images/ac-img/right.svg" alt="">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="dg-withdrawal-method__ac-wallet" id="headingThree">
+										<input type="radio" name="reminder" id="withdrawal-ac-wallet" value='coin'>
+										<label for="withdrawal-ac-wallet" data-toggle="collapse"
+											data-target="#collapseThree" aria-expanded="false"
+											aria-controls="collapseThree">Rút tiền về ví điện tử</label>
+									</div>
+									<div id="collapseThree" class="collapse" data-parent="#accordion">
+										<div class="withdrawal-method-wrapper">
+											<div class="withdrawal-method-content">
+												<div class="withdrawal-method-content-title">Địa chỉ ví</div>
+												<div class="address-wallet">
+													<input type="text" value=""
+														placeholder="TXRJ7zi4sKFf9Ha72G2PrWxAWZGcXaZUiz" id="toAddress"
+														class="form-control">
+													<div class="d-flex justify-content-center align-items-center"
+														data-toggle="modal" data-target="#list-ac-wallet">
+														<img src="/images/ac-img/menu.svg" alt="">
+													</div>
+												</div>
+												<div id="walletAddressAlert"></div>
+												<div class="remember-wallet-address d-flex align-items-center">
+													Lưu địa chỉ
+													<label class="switch">
+														<input type="checkbox">
+														<span class="slider round"></span>
+													</label>
+												</div>
+												<div class="reminiscent-name">
+													<div class="withdrawal-method-content-title">Tên gợi nhớ</div>
+													<input type="text" placeholder="Tên gợi nhớ" class="form-control">
+												</div>
+												<div class="withdrawal-amount">
+													<div class="title">Số lượng</div>
+													<div class="amount">
+														Tài khoản chính: <span class="cur-format"
+															th:text="${user.getVNDTBalance()}"></span> VNDT
+													</div>
+													<input type="hidden" id="VNDTBalance" name="VNDTBalance"
+														th:value="${user.getVNDTBalance()}">
+												</div>
+												<div
+													class="amount-input d-flex justify-content-center align-items-center">
+													<input type="text" placeholder="Nhập số lượng" class="form-control"
+														id="amount">
+													<span>VNDT</span>
+												</div>
+												<div id="walletAmountAlert"></div>
+												<div class="withdrawal-amount">
+													<div class="title">Ghi chú</div>
+												</div>
+												<div
+													class="amount-input d-flex justify-content-center align-items-center">
+													<input type="text" placeholder="Ghi chú" class="form-control"
+														id="note">
+												</div>
+											</div>
+										</div>
+										<div class="modal fade" id="list-ac-wallet" tabindex="-1" role="dialog"
+											aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content list-ac-wallet-remember-wrapper">
+													<div class="list-ac-wallet-remember-content">
+														<div class="wrapper-title">
+															<div class="wrapper-title-left d-flex align-items-center">
+																<img src="/images/ac-img/menu-2.svg" alt="">
+																Danh sách ví
+															</div>
+															<div class="exit-modal" data-dismiss="modal"
+																aria-label="Close">
+																<img src="/images/ac-img/exit.svg" alt="">
+															</div>
+														</div>
+														<div class="list-wallet-remember">
+															<div class="item" data-toggle="modal"
+																data-target="#list-ac-wallet"
+																data-wallet-id="TXRJ7zi4sKFf9Ha72G2PrWxAWZGcXaZUiz">
+																<div>Huy - AC Wallet</div>
+																<div>TXRJ7zi4sKFf9Ha72G2PrWxAWZGcXaZUiz</div>
+															</div>
+															<div class="item" data-toggle="modal"
+																data-target="#list-ac-wallet"
+																data-wallet-id="werwJ7zi4sKFf9Ha72G2PrWxAWZGcXaZUiz">
+																<div>Huy VIB</div>
+																<div>TXRJ7zi4sKFf9Ha72G2PrWxAWZGcXaZUiz</div>
+															</div>
+															<div class="item"
+																data-wallet-id="fdghdfhzi4sKFf9Ha72G2AWZGcXaZUiz"
+																data-toggle="modal" data-target="#list-ac-wallet">
+																<div>Huy VIB</div>
+																<div>TXRJ7zi4sKFf9Ha72G2PrWxAWZGcXaZUiz</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="btn-withdrawal">
+								<button class="btn" id="withdraw" onclick="withdraw()">Tiếp tục</button>
+							</div>
+							<div class="text-center" id="withdrawLoading" style="position: relative;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="dg-wallet-right">
+					<div class="instruction-deposit d-flex align-items-center" data-toggle="collapse"
+						data-target="#dg-wallet-instruction" aria-expanded="true">
+						<div>
+							Hướng dẫn rút tiền
+						</div>
+						<img src="/images/ac-img/down.svg" alt="" width="12px">
+					</div>
+					<div class=" collapse show" id="dg-wallet-instruction">
+						<!-- <div class="dg-wallet-instruction-wrapper">
+							<div class="dg-wallet-instruction">
+								<div class="dg-wallet-title">Hướng dẫn rút tiền qua Đại lý của AC Wallet</div>
+								<div class="dg-wallet-video">
+									<iframe src="https://www.youtube.com/embed/twoT6hfDF0M"
+											title="YouTube video player" frameborder="0"
+											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+											allowfullscreen></iframe>
+								</div>
+							</div>
+							<div class="dg-wallet-instruction">
+								<div class="dg-wallet-title">Hướng dẫn rút tiền về ví điện tử</div>
+								<div class="dg-wallet-video">
+									<iframe src="https://www.youtube.com/embed/twoT6hfDF0M"
+											title="YouTube video player" frameborder="0"
+											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+											allowfullscreen></iframe>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script>
+	var autoSelect = 'default';
+	document.addEventListener('DOMContentLoaded', (event) => {
+		// BANK			
+		$("#bankAmount").keyup(function () {
+			formetAmount('bankAmount');
+		});
+
+		$("#bankAmount").blur(function () {
+			checkAmount('bankAmount');
+		});
+
+		$(".list-bank-item").click(function () {
+			getBankAccInfo();
+		});
+
+		$("#bankAcc").blur(function () {
+			getBankAccInfo();
+		});
+
+		$("#bankAcc").keyup(function () {
+			$("#bankAccName").val("");
+			formetBankAcc();
+		});
+		// WALLET			
+		$("#amount").keyup(function () {
+			formetAmount('amount');
+		});
+
+		$("#amount").blur(function () {
+			checkAmount('amount');
+		});
+
+		$("#toAddress").blur(function () {
+			checkWalletAddress();
+		});
+
+
+	});
+
+	// function showResults(type) {
+	// 	if (type == 'bank') {
+	// 		$('.bank').show();
+	// 		$(".coin").hide();
+	// 	}
+	// 	if (type == 'coin') {
+	// 		$('.coin').show();
+	// 		$(".bank").hide();
+	// 	}
+	// }
+
+	function formetAmount(id) {
+		var amountFormat = $("#" + id).val().replace(/[^\d]/g, '').replace(/^0+/, '');
+		$("#" + id).val("");
+		if (amountFormat != '') {
+			var format = amountFormat.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$("#" + id).val(format);
+		}
+	}
+
+	function formetBankAcc() {
+		var amountFormat = $("#bankAcc").val();
+		$("#bankAcc").val("");
+		if (amountFormat != '') {
+			var format = amountFormat.replace(/[^0-9]/g, '');
+			$("#bankAcc").val(format);
+		}
+
+	}
+
+	function checkAmount(id) {
+		var VNDTBalance = $('#VNDTBalance').val();
+		var amountInput = $('#' + id).val().replace(',', '');
+		var alertId = '';
+		if (id == 'bankAmount') {
+			alertId = '#bankAmountAlert';
+			if (amountInput != '' && amountInput != null) {
+				if (Number(amountInput) < 50000) {
+					$(alertId).addClass('alert alert-danger');
+					$(alertId).html("Số tiền rút tối thiểu là 50,000 VNDT");
+					$(alertId).fadeIn('slow');
+					setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+					return false;
+				}
+				if (Number(VNDTBalance) < Number(amountInput) + 1000) {
+					$(alertId).addClass('alert alert-danger');
+					$(alertId).html("Số tiền trong tài khoản không đủ để thực hiện giao dịch!");
+					$(alertId).fadeIn('slow');
+					setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+					return false;
+				}
+				return true;
+			} else {
+				$(alertId).addClass('alert alert-danger');
+				$(alertId).html("Vui lòng nhập số tiền!");
+				$(alertId).fadeIn('slow');
+				setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+				return false;
+			}
+		}
+		if (id == 'amount') {
+			alertId = '#walletAmountAlert';
+			if (amountInput != '' && amountInput != null) {
+				if (Number(amountInput) < 1000) {
+					$(alertId).addClass('alert alert-danger');
+					$(alertId).html("Số tiền rút tối thiểu là 1,000 VNDT");
+					$(alertId).fadeIn('slow');
+					setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+					return false;
+				}
+				if (Number(VNDTBalance) < Number(amountInput)) {
+					$(alertId).addClass('alert alert-danger');
+					$(alertId).html("Số tiền trong tài khoản không đủ để thực hiện giao dịch!");
+					$(alertId).fadeIn('slow');
+					setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+					return false;
+				}
+				return true;
+			} else {
+				$(alertId).addClass('alert alert-danger');
+				$(alertId).html("Vui lòng nhập số tiền!");
+				$(alertId).fadeIn('slow');
+				setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+				return false;
+			}
+		}
+
+	}
+
+	function checkWalletAddress() {
+		var walletAddress = $('#toAddress').val();
+		if (walletAddress != '') {
+			if (walletAddress.slice(0, 1) == 'T' && walletAddress.length == 34) return true;
+			else {
+				$("#walletAddressAlert").addClass('alert alert-danger');
+				$("#walletAddressAlert").html("Địa chỉ ví của bạn không đúng. Vui lòng nhập lại!");
+				$("#walletAddressAlert").fadeIn('slow');
+				setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+				return false;
+			}
+		} else {
+			$("#walletAddressAlert").addClass('alert alert-danger');
+			$("#walletAddressAlert").html("Vui lòng nhập địa chỉ ví!");
+			$("#walletAddressAlert").fadeIn('slow');
+			setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+			return false;
+		}
+	}
+
+	function getBankAccInfo() {
+		var bankCode = $('#bankList').val();
+		var bankAccNumber = $('#bankAcc').val();
+		var bankAccName = $('#bankAccName').val();
+		
+		
+		if (bankCode != '' && bankAccNumber != '' && ((autoSelect != bankCode) || (bankAccName == ''))) {
+			$('#bankCheckInfo').addClass('spinning');
+			$('#bankAccName').val();
+			fetch('/wallet/bank/account-info', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"accountNumber": bankAccNumber,
+					"bankCode": bankCode
+				})
+			}).then(res => res.text()).then(results => {
+				$('#bankCheckInfo').removeClass('spinning');
+				var accInfo = JSON.parse(results);
+				if (accInfo.accountName != '') $('#bankAccName').val(accInfo.accountName);
+				if (accInfo.bankCode != '') {
+					autoSelect = accInfo.bankCode;
+					// $('#bankList').val(accInfo.bankCode).change();
+					$('.bank-selected-show').html(accInfo.bankName);
+				}
+
+
+
+			}).catch(error => {
+				autoSelect = '';
+				$('#bankAccName').val('');
+				$("#bankListAlert").addClass("alert alert-danger");
+				//						$(".AlertRegister").removeClass("alert-success");
+				$("#bankListAlert").html("Số tài khoản ngân hàng của bạn không đúng. Vui lòng nhập lại!");
+				$("#bankListAlert").fadeIn('slow');
+				setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+
+			});
+
+
+		}
+	}
+	function withdraw() {
+		var check = false;
+		var bodyReq;
+		var url;
+		var checkType = $('input[name="reminder"]:checked').val();
+
+		//withdraw to wallet
+		if (checkType == 'coin') {
+			var walletAmount = $('#amount').val().replaceAll(',', '');
+			var walletAddress = $('#toAddress').val();
+			var walletNote = $('#note').val();
+
+			// $("#amount2").html(walletAmount);
+			// $("#addressTo").html(walletAddress);
+			// $("#noteShow").html(walletNote);
+			// $("#methodWithdraw").html("Rút về ví tiền điện tử");
+
+			if (checkAmount('amount') && checkWalletAddress()) {
+				url = 'withdraw';
+				bodyReq = {
+					amount: walletAmount,
+					description: walletNote,
+					to: walletAddress
+				}
+				check = true;
+			}
+		}
+
+		//withdraw to bank
+		if (checkType == 'bank') {
+			var bankCode = $('#bankList').val();
+			var bankAccNumber = $('#bankAcc').val();
+			var bankAccName = $('#bankAccName').val();
+			var bankAmount = (Number($('#bankAmount').val().replaceAll(',', '')) + 1000).toString();
+
+			$("#amount2").html($('#bankAmount').val());
+			$("#toBankAcc").html(bankAccNumber);
+			$("#toBankName").html($("#bankList option:selected").text());
+			$("#methodWithdraw").html("Rút về tài khoản ngân hàng");
+
+			var checkBankAmount = checkAmount('bankAmount');
+			if (bankCode != '' && bankAccNumber != '' && bankAccName != '' && bankAmount != '' && checkBankAmount) {
+				url = 'withdraw-to-bank';
+				bodyReq = {
+					bankCode: bankCode,
+					accountNumber: bankAccNumber,
+					accountName: bankAccName,
+					amount: bankAmount,
+					description: ''
+				}
+				check = true;
+			} else {
+				if (bankCode == '') {
+					$("#bankListAlert").addClass('alert alert-danger');
+					$("#bankListAlert").html("Vui lòng lựa chọn ngân hàng thụ hưởng!");
+					$("#bankListAlert").fadeIn('slow');
+				}
+				if (bankAccNumber == '') {
+					$("#bankListAlert").addClass('alert alert-danger');
+					$("#bankListAlert").html("Vui lòng nhập số tài khoản thụ hưởng!");
+					$("#bankListAlert").fadeIn('slow');
+				}
+				if (bankAccName == '' && bankAccNumber != '') {
+					$("#bankListAlert").addClass('alert alert-danger');
+					$("#bankListAlert").html("Số tài khoản ngân hàng của bạn không đúng. Vui lòng nhập lại!");
+					$("#bankListAlert").fadeIn('slow');
+				}
+				setTimeout(() => $(".alert").fadeOut('slow'), 6000);
+			}
+		}
+
+		if (check && checkType != '') {
+			$('#withdrawLoading').addClass('spinning text-spinning');
+			$('#withdraw').hide();
+			fetch('/wallet/' + url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(bodyReq)
+			}).then(res => res.text()).then(results => {
+				$('#withdrawLoading').removeClass('spinning text-spinning');
+				$('#withdraw').show();
+				console.log(results);
+				if (results == "OK") {
+					$('#modalTransactionSuccess').modal();
+				}
+				else {
+					$("#resultForFailtTransaction").addClass('alert alert-danger');
+					$('#resultForFailtTransaction').html(results);
+					$('#modalTransactionFalse').modal();
+					$("#resultForFailtTransaction").fadeIn('slow');
+				}
+			}).catch(error => {
+				console.log("Error: " + error);
+			});
+		}
+
+	}
+</script>

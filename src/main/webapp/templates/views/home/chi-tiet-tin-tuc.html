@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${news.tittle}"></title>
+    <style>
+        .hide{
+            visibility: hidden !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="dg-content">
+            <div class="dg-news-detail">
+                <div class="container-fluid">
+                    <div class="row box-new-detail">
+                        <div class="col-xl-1"></div>
+                        <div class="col-xl-7">
+                            <div class="dg-news-left">
+                                <div class="text-date time-format" th:text="${news.updated}">Thứ năm, 6/5/2021, 06:12 (GMT+7)</div>
+    
+                                <div class="text-title" th:text="${news.tittle}"></div>
+    
+                                <div class="text-desc" th:text="${news.summary}"></div>
+    
+                                <div class="box-social">
+                                    <a href="" class="dg-share"><div><img src="/images/tin-tuc/share2.svg" alt="" /></div></a>
+                                    <div class="list-social">
+                                        <a href="#"><img src="/images/tin-tuc/twitter.svg" alt="" /></a>
+                                        <a href="#"><img src="/images/tin-tuc/fb.svg" alt="" /></a>
+                                        <a href="#"><img src="/images/tin-tuc/link.svg" alt="" /></a>
+                                    </div>
+                                </div>
+    
+                                <div class="box-desc">
+                                    <div class="mb-2" style="font-weight: bold; font-size: 22px; color: #403946;">Giới thiệu</div>
+                                    <div class="content-news" th:utext="${news.content}"></div>
+                                </div>
+    
+                                <div class="box-tags">
+                                    <a th:href="@{/AC-Auction/danh-muc-tin-tuc/{type}(type = ${news.type})}"><div class="dg-tag" th:text="${news.type}">apple</div></a>
+                                    <!-- <a href="#"><div class="dg-tag">iphone 12</div></a>
+                                    <a href="#"><div class="dg-tag">công nghệ</div></a>
+                                    <a href="#"><div class="dg-tag">apple</div></a>
+                                    <a href="#"><div class="dg-tag">iphone 12</div></a>
+                                    <a href="#"><div class="dg-tag">công nghệ</div></a>
+                                    <a href="#"><div class="dg-tag">apple</div></a>
+                                    <a href="#"><div class="dg-tag">iphone 12</div></a>
+                                    <a href="#"><div class="dg-tag">công nghệ</div></a> -->
+                                </div>
+    
+                                <div class="box-pgn">
+                                    <a th:href="@{/chi-tiet-tin-tuc/{alias}(alias = ${news1st.alias})}" class="prev-itm" th:classappend="${news1st.alias == null ? 'hide' : ''}">
+                                        <img src="/images/tin-tuc/prev.svg" class="float-left" >
+                                        <div class="mt-6 ml-20">
+                                            <div class="text-1">Bài trước</div>
+                                            <div class="text-2" th:text="${news1st.tittle}">Chuyển VNDT qua AC Wallet</div>
+                                        </div>
+                                    </a>
+    
+    
+                                    <a th:href="@{/chi-tiet-tin-tuc/{alias}(alias = ${news3st.alias})}" class="next-itm" th:classappend="${news3st == news ? 'hide' : ''}">
+                                        <div class="mt-6 mr-20">
+                                            <div class="text-1">Tiếp theo</div>
+                                            <div class="text-2" th:text="${news3st.tittle}">Hướng dẫn mở tài khoản</div>
+                                        </div>
+                                        <img src="/images/tin-tuc/next.svg" class="float-right" >
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-1 col-custom-1"></div>
+                        <div class="col-xl-3">
+                            <div class="dg-news-right">
+                                <div class="title">Có thể bạn quan tâm</div>
+                                <div class="list-news">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6" th:each="newList : ${newsList}">
+                                            <div class="news-item">
+                                                <div class="box-img">
+                                                    <img th:src="${newList.image}" >
+                                                </div>
+                                                <div class="news-info">
+                                                    <div class="news-name" th:text="${news.tittle}"></div>
+                                                    <div class="news-date time-format" th:text="${news.created}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

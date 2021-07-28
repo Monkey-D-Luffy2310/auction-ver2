@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Sửa tài sản</title>
+</head>
+<body>
+    <div layout:fragment="content">
+	    <!-- Title Page -->
+	   <section id="title">
+	        <div class="fw-box">
+	            <div class="container-fluid">
+	                <div class="title-page d-flex align-items-center bd-highlight pt-4 pb-2">
+	                    <h1 class="bd-highlight f-24">
+	                        Sửa tài sản
+	                    </h1>
+	                    <div class="breadcrumb-box bd-highlight ml-auto">
+	                        <div class="d-inline-block">
+	                            <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-xl-flex">
+	                                <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+	                                    <li class="breadcrumb-item"><a href="/index">Trang chủ</a></li>
+	                                    <li class="breadcrumb-item"><a href="/bang-chinh-dai-ly">Đại lý</a></li>
+	                                    <li class="breadcrumb-item active" aria-current="page">Sửa tài sản</li>
+	                                </ol>
+	                            </nav>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <!-- Title Page -->
+
+        <!-- Grid pro  -->
+        <!-- schedule  -->
+        <section id="liked" class="pb-4">
+
+            <div class="fw-box">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-12 col-xl-3 col-lg-4 d-none d-md-block">
+                            <!-- Menu Account -->
+                            <div class="side-right d-none d-xl-block">
+                                <div class="widget-right mg-b-20">
+                                    <div class="card border-0 rounded-0 shadow-sm">
+
+                                        <div class="card-body p-3 rounded-0 border-0">
+                                            <h3 class="card-title f-19 mb-3 font-weight-700 border-bottom pb-3">
+                                                Xin chào! <a href="ho-so-ca-nhan" class="font-weight-700" th:text="${user.name}"></a>
+                                            </h3>
+                                            <div class="card-text">
+                                                <dl>
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài khoản</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/bang-chinh-dai-ly" class="text-dark">
+                                                            <i class="las la-border-all mr-1"></i>
+                                                            Bảng chính
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/ho-so-dai-ly" class="text-dark">
+                                                            <i class="las la-user-cog mr-1"></i>
+                                                            Hồ sơ đại lý
+                                                        </a>
+                                                    </dd>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/dang-nhap" class="text-dark">
+                                                            <i class="las la-times-circle mr-1"></i>
+                                                            Đăng xuất
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                                <hr>
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Quản lý</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/danh-sach-dau-gia" class="text-dark">
+                                                            <i class="las la-gavel mr-1"></i>
+                                                            Danh sách đấu giá
+                                                        </a>
+                                                    </dd>
+                                                   <!-- <dd class="ml-3 mb-2">
+                                                        <a href="/them-dau-gia" class="text-dark">
+                                                            <i class="las la-plus-circle mr-1"></i>
+                                                            Thêm đấu giá
+                                                        </a>
+                                                    </dd> -->
+                                                    <dd class="ml-3 mb-1 pt-1">
+                                                        <a href="/danh-sach-tai-san" class="text-violet font-weight-bold">
+                                                            <i class="las la-city mr-1"></i>
+                                                            Danh sách tài sản
+                                                        </a>
+                                                    </dd>
+                                                    <!-- <dd class="ml-3 mb-2">
+                                                        <a href="/them-tai-san" class="text-dark">
+                                                            <i class="las la-plus-circle mr-1"></i>
+                                                            Thêm tài sản
+                                                        </a>
+                                                    </dd> -->
+                                                     
+                                                </dl>
+                                                <hr>
+                                                <dl class="font-weight-500">
+                                                    <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Cá nhân</dt>
+                                                    <dd class="ml-3 mb-1">
+                                                        <a href="/tai-khoan" class="text-dark">
+                                                            <i class="las la-user mr-1"></i>
+                                                            Bảng chức năng cá nhân
+                                                        </a>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Menu Account -->
+                        </div>
+                        <div class="col-12 col-xl-9 col-lg-12">
+                            <div class="edit-profile">
+                                <div class="card border-0 rounded-0 shadow-sm">
+
+                                    <div class="card-body p-3 rounded-0 border-0">
+
+                                        <div class="card-text pt-1">
+                                            <div class="row justify-content-center">
+
+                                                <div class="col-12 col-xl-9 col-lg-10 col-md-12">
+
+                                                    <h3 class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3">
+                                                        Thông tin chung
+                                                    </h3>
+
+                                                    <div class="form-group" id="ImageAssets">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Ảnh đại diện<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-4">
+                                                                <div class="user-avatar mb-3 mb-sm-0 text-center">
+                                                                    <img id="avatarAssets" th:src="${asset.images}" class="edit-avatar" style="max-width:280px; width:100%;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click vào đây để thay avatar">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-5">
+                                                                <p class="pt-2 f-13 text-secondary">Ảnh đại diện phải là: <span class="font-weight-bold">jpg, png, gif</span> dung lượng tối đa <span class="font-weight-bold">500Kb</span>. Kích thước tối đa <span class="font-weight-bold">300px</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Mã tài sản<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-4">
+                                                                <input type="text" class="form-control form-control-user fs-090" maxlength="20">
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Tên tài sản<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input  th:field="${asset.name}"  type="text" class="form-control form-control-user fs-090" maxlength="200" id="assetsName">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Danh mục đấu giá<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <!-- <select class="form-control select-default selectpickernone" multiple data-actions-box="false" data-none-selected-text="Chưa chọn danh mục" id="category"></select> -->
+                                                                <select th:field="${asset.category}"  class="form-control select-default selectpickernone" data-actions-box="false" id="category">
+                                                                    <option value="">Chọn danh mục đấu giá</option>
+                                                                    <option value="Điện thoại">Điện thoại</option>
+                                                                    <option value="Sim số">Sim số</option>
+                                                                    <option value="Gia dụng">Gia dụng</option>\
+                                                                    <option value="Nghe nhìn">Nghe nhìn</option>
+                                                                    <option value="Xe hơi">Xe hơi</option> 
+                                                                    <option value="Bất động sản">Bất động sản</option>
+                                                                    <option value="Đồ cổ">Đồ cổ</option>
+                                                                    <option value="Cây cảnh">Cây cảnh</option>
+                                                                    <option value="Đá quý">Đá quý</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số lượng<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input  th:field="${asset.amount}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="amount">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Tình trạng (của sản phẩm)<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input  th:field="${asset.currentStatus}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="currentStatus">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Giá khởi điểm<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input th:field="${asset.initPrice}" type="text" class="cur-format form-control form-control-user fs-090" maxlength="200" id="initPrice">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text f-13" id="basic-addon2">VNDT</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Người bán<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-4">
+                                                                <select class="form-control select-default selectpickernone">
+                                                                    <option value="0">Chọn người bán</option>
+                                                                    <option value="1">Nguyễn Văn Hưng</option>
+                                                                    <option value="2">Nguyễn Tuấn Ngọc</option>
+                                                                    <option value="4">Hoàng Anh Mạnh</option>
+                                                                    <option value="5">Quách Tuấn Du</option>
+                                                                    <option value="5">Hoàng Ngọc Linh</option>
+                                                                    <option value="6">Trương Vĩnh Kiệt</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <h3 class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5">
+                                                        Thư viện ảnh
+                                                    </h3>
+                                                    <!-- <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="list-photo-pro mini-col">
+                                                                <div class="row">
+                                                                    <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                                        <div class="photo-item mg-b-20 position-relative">
+                                                                            <img class="w-100" src="http://auction.biso.vn/img/no-avatar.jpg" />
+                                                                            <a href="#" class="del-corner d-flex justify-content-center align-items-center">
+                                                                                <i class="las la-times"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="form-group">
+                                                        <div class="input-group rounded-0">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-danger" onclick="deleteImage()">
+                                                                    <i class="las la-minus-circle"></i>
+                                                                    Xoá
+                                                                </button>
+                                                            </div>
+                                                            <div class="custom-file rounded-0">
+                                                                <input type="file" class="custom-file-input rounded-0" id="inputGroupFile02" multiple="multiple" name="inputImage" >
+                                                                <label class="custom-file-label rounded-0" for="" aria-describedby="inputGroupFileAddon02" id="chooseImage">Chọn ảnh</label>
+                                                            </div>
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary" onclick="uploadImage()">
+                                                                    <i class="las la-plus-circle"></i>
+                                                                    Thêm
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <small id="emailHelp" class="form-text text-muted">Chọn một hoặc nhiều ảnh để thêm vào thư viện.</small>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="list-photo-pro mini-col">
+                                                                <div class="row" id="anhHienTai">
+                                                                    <!-- ảnh -->
+                                                                    <!-- <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                                        <div class="photo-item mg-b-20 position-relative">
+                                                                            <img class="w-100" src="img/s1.jpg" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                                        <div class="photo-item mg-b-20 position-relative">
+                                                                            <img class="w-100" src="img/s1.jpg" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                                        <div class="photo-item mg-b-20 position-relative">
+                                                                            <img class="w-100" src="img/s1.jpg" />
+                                                                        </div>
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <h3 class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5">
+                                                        Video gới thiệu
+                                                    </h3>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Giới thiệu tài sản</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control form-control-user fs-090" value="" maxlength="500">
+                                                                <small id="emailHelp" class="form-text text-muted">Link youtube video</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Cơ quan thẩm định </label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control form-control-user fs-090" value="" maxlength="500">
+                                                                <small id="emailHelp" class="form-text text-muted">Link youtube video</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Chuyên gia đánh giá</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control form-control-user fs-090" value="" maxlength="500">
+                                                                <small id="emailHelp" class="form-text text-muted">Link youtube video</small>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class=" align-items-center border-bottom mb-3 pb-2 mt-5 " id="properties" style="display:none;">
+                                                        <h3 class="card-title f-17 font-weight-700 bd-highlight mb-3 mb-sm-0">
+                                                            Thuộc tính tài sản
+                                                        </h3>
+                                                    </div>
+                                                    <!-- thuộc tính của xe hơi -->
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Hãng ô tô<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.trademark}" id="trademark" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn hãng ô tô</option>
+                                                                    <option value="Abarth">Abarth</option>
+                                                                    <option value="Zenos">Zenos</option>
+                                                                    <option value="Alfa Romeo">Alfa Romeo</option>
+                                                                    <option value="Volvo ">Volvo</option>
+                                                                    <option value="Aston Martin">Aston Martin</option>
+                                                                    <option value="Volkswagen">Volkswagen</option>
+                                                                    <option value="Audi">Audi</option>
+                                                                    <option value="Vauxhall">Vauxhall</option>
+                                                                    <option value="Bentley">Bentley</option>
+                                                                    <option value="Toyota">Toyota</option>
+                                                                    <option value="BMW">BMW</option>
+                                                                    <option value="Tesla">Tesla</option>
+                                                                    <option value="Bugatti">Bugatti</option>
+                                                                    <option value="Suzuki">Suzuki</option>
+                                                                    <option value="Cadillac">Cadillac</option>
+                                                                    <option value="Subaru">Subaru</option>
+                                                                    <option value="Caterham">Caterham</option>
+                                                                    <option value="Chevrolet">Chevrolet</option>
+                                                                    <option value="Vinfast">Vinfast</option>
+                                                                    <option value="Rolls-Royce">Rolls-Royce</option>
+                                                                    <option value="Ford">Ford</option>
+                                                                    <option value="Honda">Honda</option>
+                                                                    <option value="Hyundai">Hyundai</option>
+                                                                    <option value="Peugeot">Peugeot</option>
+                                                                    <option value="Lamborghini">Lamborghini</option>
+                                                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số chỗ<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.seatsNumber}" id="seatsNumber" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn số chỗ</option>
+                                                                    <option value="2">2 chỗ</option>
+                                                                    <option value="4">4 chỗ</option>
+                                                                    <option value="5">5 chỗ</option>
+                                                                    <option value="7">7 chỗ</option>
+                                                                    <option value="9">9 chỗ</option>
+                                                                    <option value="12">12 chỗ</option>
+                                                                    <option value="16">16 chỗ</option>
+                                                                    <option value="24">24 chỗ</option>
+                                                                    <option value="29">29 chỗ</option>
+                                                                    <option value="45">45 chỗ</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Hộp số<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.gear}" id="gear" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn loại hộp số</option>
+                                                                    <option value="Hộp số tay">Hộp số tay</option>
+                                                                    <option value="Hộp số tự động">Hộp số tự động</option>
+                                                                    <option value="Hộp số hỗn hợp">Hộp số hỗn hợp</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Nhiên liệu<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.fuel}" id="fuel" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn loại nhiên liệu</option>
+                                                                    <option value="Xăng">Xăng</option>
+                                                                    <option value="Diesel">Diesel</option>
+                                                                    <option value="Hybrid">Hybrid</option>
+                                                                    <option value="Điện">Điện</option>
+                                                                    <option value="Loại khác">Loại khác</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Màu sắc nội thất<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.interiorColor}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="interiorColor">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Màu sắc<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.color}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="color">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Xuất xứ<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.origin}" id="originCar" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn nơi xuất xứ</option>
+                                                                    <option value="Việt Nam">Việt Nam</option>
+                                                                    <option value="Nhật Bản">Nhật Bản</option>
+                                                                    <option value="Mỹ">Mỹ</option>
+                                                                    <option value="Nước khác">Nước khác</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Năm sản xuất<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.manufactureYear}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="manufactureYear">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group XeHoi" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Tiêu thụ nhiên liệu lít/km<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.consume}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="consume">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- thuộc tính của sim -->
+                                                    <div class="form-group SimSoDep" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Nhà mạng<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.homeNetwork}" id="homenetwork" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn nhà mạng</option>
+                                                                    <option value="Mobifone">Mobifone</option>
+                                                                    <option value="vietel">Viettel</option>
+                                                                    <option value="Vinafone">Vinafone</option>
+                                                                    <option value="Vietnamoblie">Vietnamoblie</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group SimSoDep" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Loại sim<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.type}" id="simtype" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn loại sim</option>
+                                                                    <option value="Lục Quý">Lục Quý</option>
+                                                                    <option value="Ngũ Quý">Ngũ Quý</option>
+                                                                    <option value="Tứ Quý">Tứ Quý</option>
+                                                                    <option value="Tam Hoa">Tam Hoa</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group SimSoDep" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số sim<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.simNumber}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="simnumber">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- thuộc tính của bất động sản -->
+                                                    <div class="form-group batDongSan" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số Tầng<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.floorsNumber}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="floorsNumber">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group batDongSan" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Diện tích<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.acreage}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="acreage">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group batDongSan" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Hướng nhà<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.direction}" id="direction" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn hướng nhà</option>
+                                                                    <option value="Đông">Đông</option>
+                                                                    <option value="Đông Nam">Đông Nam</option>
+                                                                    <option value="Nam">Nam</option>
+                                                                    <option value="Tây Nam">Tây Nam</option>
+                                                                    <option value="Tây">Tây</option>
+                                                                    <option value="Tây Bắc">Tây Bắc</option>
+                                                                    <option value="Bắc">Bắc</option>
+                                                                    <option value="Đông Bắc">Đông Bắc</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group batDongSan" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class=" col-form-label pb-1 pt-0 font-weight-600">Tỉnh thành<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.area}" id="area" class="form-control select-default selectpickernone">
+                                                                    <option selected="selected" value="">Chọn tỉnh thành</option>
+                                                                    <option value="Hà Nội">Hà Nội</option>
+                                                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                                                    <option value="Hải Phòng">Hải Phòng</option>
+                                                                    <option value="Cần Thơ">Cần Thơ</option>
+                                                                    <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>
+                                                                    <option value="Quảng Ninh">Quảng Ninh</option>
+                                                                    <option value="An Giang">An Giang</option>
+                                                                    <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>
+                                                                    <option value="Bắc Giang">Bắc Giang</option>
+                                                                    <option value="Bắc Kạn">Bắc Kạn</option>
+                                                                    <option value="Bạc Liêu">Bạc Liêu</option>
+                                                                    <option value="Bắc Ninh">Bắc Ninh</option>
+                                                                    <option value="Bến Tre">Bến Tre</option>
+                                                                    <option value="Bình Dương">Bình Dương</option>
+                                                                    <option value="Bình Định">Bình Định</option>
+                                                                    <option value="Bình Phước">Bình Phước</option>
+                                                                    <option value="Bình Thuận">Bình Thuận</option>
+                                                                    <option value="Cà Mau">Cà Mau</option>
+                                                                    <option value="Cao Bằng">Cao Bằng</option>
+                                                                    <option value="Đắk Lắk">Đắk Lắk</option>
+                                                                    <option value="Đắk Nông">Đắk Nông</option>
+                                                                    <option value="Điện Biên">Điện Biên</option>
+                                                                    <option value="Đồng Nai">Đồng Nai</option>
+                                                                    <option value="Đồng Tháp">Đồng Tháp</option>
+                                                                    <option value="Gia Lai">Gia Lai</option>
+                                                                    <option value="Hà Giang">Hà Giang</option>
+                                                                    <option value="Hà Nam">Hà Nam</option>
+                                                                    <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                                                    <option value="Hải Dương">Hải Dương</option>
+                                                                    <option value="Hậu Giang">Hậu Giang</option>
+                                                                    <option value="Hòa Bình">Hòa Bình</option>
+                                                                    <option value="Hưng Yên">Hưng Yên</option>
+                                                                    <option value="Kiên Giang">Kiên Giang</option>
+                                                                    <option value="Kon Tum">Kon Tum</option>
+                                                                    <option value="Khánh Hòa">Khánh Hòa</option>
+                                                                    <option value="Lai Châu">Lai Châu</option>
+                                                                    <option value="Lạng Sơn">Lạng Sơn</option>
+                                                                    <option value="Lào Cai">Lào Cai</option>
+                                                                    <option value="Lâm Đồng">Lâm Đồng</option>
+                                                                    <option value="Long An">Long An</option>
+                                                                    <option value="Nam Định">Nam Định</option>
+                                                                    <option value="Ninh Bình">Ninh Bình</option>
+                                                                    <option value="Ninh Thuận">Ninh Thuận</option>
+                                                                    <option value="Nghệ An">Nghệ An</option>
+                                                                    <option value="Phú Thọ">Phú Thọ</option>
+                                                                    <option value="Phú Yên">Phú Yên</option>
+                                                                    <option value="Quảng Bình">Quảng Bình</option>
+                                                                    <option value="Quảng Nam">Quảng Nam</option>
+                                                                    <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                                    <option value="Quảng Trị">Quảng Trị</option>
+                                                                    <option value="Sóc Trăng">Sóc Trăng</option>
+                                                                    <option value="Sơn La">Sơn La</option>
+                                                                    <option value="Tây Ninh">Tây Ninh</option>
+                                                                    <option value="Tiền Giang">Tiền Giang</option>
+                                                                    <option value="Tuyên Quang">Tuyên Quang</option>
+                                                                    <option value="Thái Bình">Thái Bình</option>
+                                                                    <option value="Thái Nguyên">Thái Nguyên</option>
+                                                                    <option value="Thanh Hóa">Thanh Hóa</option>
+                                                                    <option value="Trà Vinh">Trà Vinh</option>
+                                                                    <option value="Vĩnh Long">Vĩnh Long</option>
+                                                                    <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                                    <option value="Yên Bái">Yên Bái</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                     </div>
+                                                     <div class="form-group batDongSan" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số phòng ngủ<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.bedroomsNumber}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="bedroomsNumber">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group batDongSan" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Số phòng vệ sinh<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.toiletsNumber}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="toiletsNumber">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Đá quý -->
+                                                    <div class="form-group daQuy" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Trọng lượng<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.weight}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="weight">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group daQuy" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Độ sáng<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.brightness}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="brightness">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group daQuy" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Hình dạng<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select th:field="${asset.shape}" id="shape" class="form-control select-default selectpickernone" data-actions-box="false">
+                                                                    <option value="" selected="selected">Chọn dạng</option>
+                                                                    <option value="Tròn">Tròn</option>
+                                                                    <option value="Trái tim">Trái tim</option>
+                                                                    <option value="Vuông">Vuông</option>
+                                                                    <option value="Tam giác">Tam giác</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- cây cảnh -->
+                                                    <div class="form-group cayCanh" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Chiều cao<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input th:field="${asset.height}" type="text" class="form-control form-control-user fs-090" maxlength="200" id="height">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group cayCanh" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Đường kính gốc<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control form-control-user fs-090" maxlength="200" id="stumpDiameter">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- đồ cổ -->
+                                                    <div class="form-group doCo" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Loại đồ cổ<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control form-control-user fs-090" maxlength="200" id="antiques">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group doCo" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Tuổi đời<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control form-control-user fs-090" maxlength="200" id="yearOld">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dienThoai" style="display: none;">
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">Độ phân giải<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.resolution}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="resolution">
+                                                                <div class="input-group-append">
+                                                                  <span class="input-group-text f-13" id="basic-addon2">PIXELS</span>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">Kích thước màn hình<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.screenSize}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="screenSize">
+                                                                <div class="input-group-append">
+                                                                  <span class="input-group-text f-13" id="basic-addon2">INCH</span>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">Camera<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.camera}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="camera">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">Hệ điều hành<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.operatingSystem}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="operatingSystem">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">CPU<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.cpu}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="cpu">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">RAM<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.ram}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="ram" value="0">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">ROM<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.rom}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="rom" value="0">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">SIM<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.sim}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="sim">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">Dung lượng pin<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.batteryCapacity}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="batteryCapacity">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                              <div class="col-12 col-md-3">
+                                                                  <label class="col-form-label font-weight-600">Màu<span class="text-danger">*</span></label>
+                                                              </div>
+                                                              <div class="col-12 col-md-9">
+                                                                  <div class="input-group">
+                                                                      <input type="text" th:field="${asset.color}" class="form-control form-control-user fs-090" maxlength="200" id="color">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                       </div>
+                                                       <div class="form-group">
+                                                          <div class="row">
+                                                              <div class="col-12 col-md-3">
+                                                                  <label class="col-form-label font-weight-600">Xuất xứ<span class="text-danger">*</span></label>
+                                                              </div>
+                                                              <div class="col-12 col-md-9">
+                                                                  <div class="input-group">
+                                                                      <input type="text" th:field="${asset.origin}" class="form-control form-control-user fs-090" maxlength="200" id="origin">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                              <div class="col-12 col-md-3">
+                                                                  <label class="col-form-label font-weight-600">Thương hiệu<span class="text-danger">*</span></label>
+                                                              </div>
+                                                              <div class="col-12 col-md-9">
+                                                                  <div class="input-group">
+                                                                      <input type="text" th:field="${asset.trademark}" class="form-control form-control-user fs-090" maxlength="200" id="trademark">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                       </div>
+                                                      </div>
+                                                      <div class="giaDung" style="display: none;">
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                              <label class="col-form-label font-weight-600">Thương hiệu<span
+                                                                  class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                              <div class="input-group">
+                                                                <input type="text" th:field="${asset.trademark}" class="form-control form-control-user fs-090" maxlength="200"
+                                                                  id="trademark">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <div class="row">
+                                                              <div class="col-12 col-md-3">
+                                                                  <label class="col-form-label font-weight-600">Màu<span class="text-danger">*</span></label>
+                                                              </div>
+                                                              <div class="col-12 col-md-9">
+                                                                  <div class="input-group">
+                                                                      <input type="text" th:field="${asset.color}" class="form-control form-control-user fs-090" maxlength="200" id="color">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                       </div>
+                                                       <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Xuất xứ<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text" th:field="${asset.origin}" class="form-control form-control-user fs-090" maxlength="200" id="origin">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Công xuất<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text" th:field="${asset.wattage}" class="form-control form-control-user fs-090" maxlength="200" id="wattage">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-3">
+                                                                <label class="col-form-label font-weight-600">Bảo hành<span class="text-danger">*</span></label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <div class="input-group">
+                                                                    <input type="text" th:field="${asset.guarantee}" class="form-control form-control-user fs-090" maxlength="200" id="guarantee">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                      </div>
+                                                    <h3 class="card-title f-17 mb-3 font-weight-700 border-bottom pb-3 mt-5">
+                                                        Chi tiết tài sản
+                                                    </h3>
+                                                    <div class="form-group">
+                                                        <textarea th:field="${asset.description}" class="form-control" rows="8" id="assetDescription"></textarea>
+                                                    </div>
+                                                    <hr class="pt-3 mb-1" />
+                                                    <div class="clearfix">
+                                                        <button class="btn btn-primary mb-2" onclick="fixAssets()">
+                                                            <i class="las la-save"></i>
+                                                            Sửa tài sản
+                                                        </button>
+                                                        <em class="text-danger f-13 d-block d-sm-inline float-left float-sm-right">* là trường bắt buộc nhập dữ liệu</em>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- thông báo -->
+            <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Sửa tài sản</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h1 class="text-center">Thành công</h1>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Quay về</button>
+                      <a type="button" class="btn btn-primary" href="/danh-sach-tai-san">Danh sách tài sản</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="modalFail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Sửa tài sản</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h1 class="text-center">Thất bại</h1>
+                      <div class="AlertChange"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Danh sách tài sản</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+<script th:inline="javascript">
+     /*[+
+    let asset = [[${asset}]];
+    +]*/
+    var firebaseConfig = {
+    apiKey: "AIzaSyAgT9AnK8vAq4HuiB0Ch4pJS8RafVjvtic",
+    authDomain: "achauauction.firebaseapp.com",
+    projectId: "achauauction",
+    storageBucket: "achauauction.appspot.com",
+    messagingSenderId: "461753979976",
+    appId: "1:461753979976:web:7d25a36d53c495a527f47d",
+    measurementId: "G-GW36BEF4PQ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Upload image
+    const images = asset.images.split(",");
+    images.unshift(0);
+    const file = asset.images.split(",");
+    function deleteImage(){
+        $("#anhHienTai").empty();
+        images.splice(0, images.length)
+    }
+    function uploadImage() {
+      var amountImage=file.length;
+      console.log(amountImage);
+      const ref = firebase.storage().ref();
+      let n = document.querySelector("#inputGroupFile02").files.length;
+        for(var i = 0; i<n ; i++){
+            file.push(document.querySelector("#inputGroupFile02").files[i])
+        }
+        const metadata = {
+            contentType: file.type
+        };
+        for(var i = amountImage; i<n+amountImage ; i++)
+        {
+            var name = +new Date() + "-" + file[i].name;
+            if(file[i] == null || i == 0){
+                var task = ref.child(name).put(file[i], metadata);
+                task
+                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(url => {
+                    images.push(url);
+                    showImage(url);
+                    // $("#avatarAssets").attr('src',url);
+                    // $("#ImageAssets").show()
+                    // document.getElementById("ImageAssets").src=url;
+                })
+                .catch(console.error);
+            }
+            else
+                {
+                var task = ref.child(name).put(file[i], metadata);
+                task
+                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(url => {
+                    images.push(url);
+                    showImage(url);
+                    })
+                    .catch(console.error);
+                }
+        }
+    }
+    function showImage(url){
+        $( "<div class='col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6' ><div class='photo-item mg-b-20 position-relative' onclick='"+'mainImg('+'"'+url+'"'+')'+"'><img class='w-100' src='"+url+"' /></div></div>' ").appendTo( "#anhHienTai" );
+        console.log(images);
+    }
+    function mainImg(url){
+        var mainImage = url;
+        for(var i=1;i<images.length;i++){
+            if(images[i]==url){
+                images[i]=images[0];
+            }
+        }
+        images[0]=url;
+        $("#avatarAssets").attr('src',url);
+        $("#ImageAssets").show()
+        console.log(images)
+    }
+    document.addEventListener('DOMContentLoaded', (event) => {
+        $("#initPrice").on({
+				    keyup: function() {
+				    	$(this).eq(0).val(Number($(this).eq(0).val().replace(/,/g, '')).toLocaleString('en'))
+				    },
+				    blur: function() { 
+				    	$(this).eq(0).val(Number($(this).eq(0).val().replace(/,/g, '')).toLocaleString('en'))
+				    }
+				});
+        // lấy ảnh để sửa assets
+        const file = asset.images.split(",");
+    var amountImage=file.length;  
+    for(var i = 0;i<amountImage;i++){
+        console.log(i);
+        $( "<div class='col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6' ><div class='photo-item mg-b-20 position-relative' onclick='"+'mainImg('+'"'+file[i]+'"'+')'+"'><img class='w-100' src='"+file[i]+"' /></div></div>' ").appendTo( "#anhHienTai" );
+    }
+        $("#category").change(function(){
+             $("#properties").show()
+            if($("#category").val()==""){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $("#properties").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Bất động sản"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").show()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Xe hơi"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").show()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Đồ cổ"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $(".doCo").show()
+            }
+            if($("#category").val()=="Cây cảnh"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").show()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Đá quý"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").show()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Sim số"){
+                $(".SimSoDep").show()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if ($("#category").val() == "Điện thoại") {
+            $(".SimSoDep").hide()
+            $(".XeHoi").hide()
+            $(".batDongSan").hide()
+            $(".cayCanh").hide()
+            $(".doCo").hide()
+            $(".dienThoai").show()
+            $(".giaDung").hide()
+          }
+          if ($("#category").val() == "Gia dụng") {
+            $(".SimSoDep").hide()
+            $(".XeHoi").hide()
+            $(".batDongSan").hide()
+            $(".cayCanh").hide()
+            $(".doCo").hide()
+            $(".dienThoai").hide()
+            $(".giaDung").show()
+          }
+        })
+        $("#category").ready(function(){
+             $("#properties").show()
+            if($("#category").val()==""){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $("#properties").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Bất động sản"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").show()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Xe hơi"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").show()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Đồ cổ"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").hide()
+                $(".doCo").show()
+            }
+            if($("#category").val()=="Cây cảnh"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").hide()
+                $(".cayCanh").show()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Đá quý"){
+                $(".SimSoDep").hide()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".daQuy").show()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if($("#category").val()=="Sim số"){
+                $(".SimSoDep").show()
+                $(".XeHoi").hide()
+                $(".batDongSan").hide()
+                $(".cayCanh").hide()
+                $(".doCo").hide()
+            }
+            if ($("#category").val() == "Điện thoại") {
+            $(".SimSoDep").hide()
+            $(".XeHoi").hide()
+            $(".batDongSan").hide()
+            $(".cayCanh").hide()
+            $(".doCo").hide()
+            $(".dienThoai").show()
+            $(".giaDung").hide()
+          }
+          if ($("#category").val() == "Gia dụng") {
+            $(".SimSoDep").hide()
+            $(".XeHoi").hide()
+            $(".batDongSan").hide()
+            $(".cayCanh").hide()
+            $(".doCo").hide()
+            $(".dienThoai").hide()
+            $(".giaDung").show()
+          }
+        })
+
+        var nameImage="";
+        $("input[name='inputImage']").change(function(){
+        nameImage = ""
+        // const file = new Array(document.querySelector("#inputGroupFile02").files[0]);
+        let n = document.querySelector("#inputGroupFile02").files.length;
+        for(var i = 0; i<n ; i++){
+            // file.push(document.querySelector("#inputGroupFile02").files[i])
+            nameImage = nameImage +"  "+ document.querySelector("#inputGroupFile02").files[i].name
+        }
+        document.getElementById("chooseImage").innerHTML=nameImage;
+        })
+
+        $( "#close" ).click(function() {
+            window.location.assign("/danh-sach-tai-san");
+        });
+    })
+    function fixAssets(){
+        // console.log(originCar.value)
+        for(var i=0;i<images.length;i++){
+            if(i==0){
+                var urlImage=images[i];
+            }
+            else{
+                urlImage=urlImage +','+ images[i];
+            }
+        }
+        //let assetsName = $("#assetsName")[0];
+        let initPrice = parseInt($('#initPrice').val().replace(/,/g, ''));
+        let description = document.getElementById("assetDescription").value;
+        let amount = document.getElementById("amount").value;
+        fetch('/asset/update/'+asset.id, {
+				   	  method: 'PUT',
+				   	  headers: {
+				   		 'Content-Type': 'application/json'
+				      },
+				   	  body: JSON.stringify({
+                        "category": category.value,
+                        "images": urlImage,
+                        "initPrice": initPrice,
+                        "name": assetsName.value,
+                        "description": description,
+                        "amount": amount,
+                        "homeNetwork": homenetwork.value,
+                        "type": simtype.value,
+                        "simNumber": simnumber.value,
+                        "trademark": trademark.value,
+                        "seatsNumber": seatsNumber.value,
+                        "gear": gear.value,
+                        "fuel": fuel.value,
+                        "color": color.value,
+                        "interiorColor": interiorColor.value,
+                        "origin": originCar.value,
+                        "manufactureYear": manufactureYear.value,
+                        "consume": consume.value,
+                        "currentStatus": currentStatus.value,
+                        "floorsNumber": floorsNumber.value,
+                        "acreage": acreage.value,
+                        "direction": direction.value,
+                        "area": area.value,
+                        "bedroomsNumber": bedroomsNumber.value,
+                        "toiletsNumber": toiletsNumber.value,
+                        "weight": weight.value,
+                        "brightness": brightness.value,
+                        "shape": shape.value,
+                        "height": height.value,
+                        "stumpDiameter": stumpDiameter.value,
+                        "antiques": antiques.value,
+                        "yearOld": yearOld.value,
+                        "resolution": resolution.value,
+                        "screenSize": screenSize.value,
+                        "camera": camera.value,
+                        "operatingSystem": operatingSystem.value,
+                        "cpu": cpu.value,
+                        "ram": ram.value,
+                        "rom": rom.value,
+                        "sim": sim.value,
+                        "batteryCapacity": batteryCapacity.value,
+                        "wattage": wattage.value,
+                        "guarantee": guarantee.value
+				   	  })
+                   }).then(res => res.text())
+                   .then(results => {
+                       console.log(results);
+                       if(results == "OK"){
+                        $("#modalSuccess").modal();
+                       }
+                       else{
+                        $(".AlertChange").addClass("alert alert-danger");
+                        $(".AlertChange").html('Sửa tài sản không thành công</br>'+results);
+                        $(".AlertChange").fadeIn('slow');
+                        setTimeout(() => $(".AlertChange").fadeOut('slow'),20000);
+                        $("#modalFail").modal();  
+                       }
+                   });
+    }
+</script>
+    </div>
+</body>
+</html>

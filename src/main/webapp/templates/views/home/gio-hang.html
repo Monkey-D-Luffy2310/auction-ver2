@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/home}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Giỏ hàng</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="dg-content">
+            <div class="dg-cart">
+                <div class="switch-address-mobile item d-flex">
+                    <div class="">
+                        Địa chỉ nhận hàng
+                        <div class="title" th:if="${addressDefault != null}"><span
+                                th:text="${addressDefault.name}"></span> | <span
+                                th:text="${addressDefault.mobile}"></span></div>
+                        <div th:if="${addressDefault != null}" th:text="${addressDefault.address}"></div>
+                    </div>
+                    <a href="/dia-chi-van-chuyen" th:if="${addressDefault != null}"
+                        class="font-italic change-address">Thay đổi</a>
+                    <a href="/dia-chi-van-chuyen" th:if="${addressDefault == null}"
+                        class="font-italic change-address">Chọn</a>
+                </div>
+                <div class="d-flex top-content">
+                    <div class="dg-cart-left">
+                        <div class="title-wrapper d-flex align-items-center">
+                            <div class="title">
+                                Sản phẩm đấu giá thành công
+                            </div>
+                            <div class="cart-action">
+                                <span class="choose">Lựa chọn</span>
+                                <span class="done">Xong</span>
+                            </div>
+                        </div>
+                        <div class="auction-complete">
+                            <div class="auction-complete-content">
+                                <div>
+                                    <div class="item d-flex align-items-center"
+                                        th:each="win_auctions : ${win_auctions}">
+                                        <div class="left d-flex align-items-center">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    th:id="'customCheck'+${win_auctions.id}" name="example1"
+                                                    onclick="totalAmount(this)"
+                                                    th:attr="data-amount=${win_auctions.getWinPrice()}">
+                                                <label class="custom-control-label"
+                                                    th:for="'customCheck'+${win_auctions.id}">
+                                                </label>
+                                            </div>
+                                            <div class="image">
+                                                <img th:src="${win_auctions.getAssest().images}" alt="" width="116"
+                                                    height="69">
+                                            </div>
+                                            <div class="info">
+                                                <div class="title" th:text="${win_auctions.getAssest().name}"></div>
+                                                <div class="amount"
+                                                    th:text="'Số lượng: ' + ${win_auctions.getAssest().amount}"></div>
+                                                <div class="win-at">Thời gian thắng đấu giá: <span class="time-format"
+                                                        th:text="${win_auctions.endAt}"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <div class="title"><span class="cur-format title"
+                                                    th:text="${win_auctions.getWinPrice()}"></span> VNDT</div>
+                                            <div class="deposited-at">Đã đặt cọc: <span class="cur-format"
+                                                    th:text="${win_auctions.warranty}"></span> VNDT</div>
+                                            <div class="payment-timing">
+                                                <span class="mobile-hidden">Thời gian thanh toán:</span>
+                                                <span class="time">5 ngày <span class="mobile-show">còn
+                                                        lại</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="item-hover">
+                                            <div class="image-wrapper d-flex justify-content-center align-items-center" th:attr="data-id=${win_auctions.id}" onclick="pay(this)">
+                                                <img src="/images/ac-img/card.svg"  alt="">
+                                            </div>
+                                            <div class="image-wrapper d-flex justify-content-center align-items-center" th:attr="data-id=${win_auctions.id}" onclick="sellOff(this)">
+                                                <img src="/images/ac-img/cart-up.svg"  alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dg-cart-right" style="margin: 0px auto;">
+                        <div class="title">Thanh toán ngay</div>
+                        <div class="box-payment">
+                            <div class="box-payment-content">
+                                <div class="item d-flex align-items-center">
+                                    <div class="">Số dư khả dụng</div>
+                                    <div class="balance"><span id="balanceavAilable" class="balance cur-format"
+                                            th:text="${user.getVNDTBalance()}"></span> VNDT</div>
+                                </div>
+                                <div class="switch-address item d-flex mobile-hidden">
+                                    <div class="">
+                                        Địa chỉ nhận hàng
+                                        <div class="title" th:if="${addressDefault != null}"><span
+                                                th:text="${addressDefault.name}"></span> | <span
+                                                th:text="${addressDefault.mobile}"></span></div>
+                                        <div th:if="${addressDefault != null}" th:text="${addressDefault.address}">505
+                                            Minh Khai - Hai Bà Trưng - Hà Nội</div>
+                                    </div>
+                                    <a href="/dia-chi-van-chuyen" th:if="${addressDefault != null}"
+                                        class="font-italic change-address">Thay đổi</a>
+                                    <a href="/dia-chi-van-chuyen" th:if="${addressDefault == null}"
+                                        class="font-italic change-address">Chọn</a>
+                                </div>
+                                <!-- phí ship -->
+                                <!-- <div class="shipping item d-flex align-items-center">
+                                    <div>Phí ship</div>
+                                    <div>0 VNDT</div>
+                                </div> -->
+                                <div class="item total-amount d-flex">
+                                    <div class="font-sz-18">Tạm tính</div>
+                                    <div class="total-wrapper">
+                                        <div class="number font-weight-bold"><span
+                                                class="cur-format number font-weight-bold"
+                                                id="total-amount-show"></span> VNDT</div>
+                                        <div class="text font-italic">(Tương đương: <span class="readNumber">0 VNDT</span>)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button class="btn" onclick="payAllAuctionChoosed()">THANH TOÁN TẤT CẢ</button>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button class="btn resell">BÁN LẠI</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paid">
+                    <div class="title-wrapper d-flex align-items-center" data-toggle="collapse" data-target="#paid"
+                        aria-expanded="true">
+                        <div class="title">
+                            Đã thanh toán
+                        </div>
+                        <img src="/images/ac-img/down.svg" alt="" width="12px">
+                    </div>
+                    <div class="collapse show" id="paid">
+                        <div class="paid-content">
+                            <div class="row" id="listPaidAuction">
+                                <div class="item d-flex align-items-center col-md-10 col-xl-6"
+                                    th:each="paid_auctions : ${paid_auctions}">
+                                    <div class="left">
+                                        <div class="image">
+                                            <img th:src="${paid_auctions.getAssest().images}" alt="" width="116"
+                                                height="69" style="object-fit: contain;">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="title" th:text="${paid_auctions.getAssest().name}"></div>
+                                        <div class="amount"><span class="cur-format"
+                                                th:text="${paid_auctions.getWinPrice()}"></span> VNDT</div>
+                                        <div class="pay-at time-format" th:text="${paid_auctions.endAt}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dg-paginate mt-4 d-flex justify-content-center">
+                                <nav aria-label="...">
+                                    <ul class="pagination">
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script th:inline="javascript">
+    /*[+
+    var balance = [[${user.getVNDTBalance()}]];
+    +]*/
+    var amount = 0;
+    paginations({ pagerSelector: '#listPaidAuction', paginationSelector: '.pagination', perPage: 4, scrollPage    : false });
+    function totalAmount(val) {
+        amount += Number(val.getAttribute('data-amount'));
+        val.setAttribute('data-amount', -val.getAttribute('data-amount'));
+        $('#total-amount-show').html(amount.toLocaleString());
+        console.log(amount);
+        changeToText(amount);
+    }
+    function payAllAuctionChoosed() {
+        if (amount > balance)
+            alert('Đéo đủ');
+        else alert('Quá đụ');
+    }
+    function changeToText(amount){
+        let num = amount + '';
+        let needZeroCount = num.length % 3;
+        if (needZeroCount != 0)
+            needZeroCount = 3 - needZeroCount;
+
+        num = '0'.repeat(needZeroCount) + num;
+
+        const UNITS = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn'];
+
+        const DIGITS = [
+            'không', 'một', 'hai', 'ba', 'bốn',
+            'năm', 'sáu', 'bảy', 'tám', 'chín'
+        ];
+        function readTwo(b, c, hasHundred) {
+            const output = [];
+
+            switch (b) {
+                case 0: {
+                    if (hasHundred && c == 0)
+                        break;
+                    if (hasHundred)
+                        output.push("lẻ");
+                    output.push(DIGITS[c]);
+                    break;
+                }
+                case 1: {
+                    output.push("mười");
+                    if (c == 5)
+                        output.push("lăm");
+                    else if (c != 0)
+                        output.push(DIGITS[c]);
+                    break;
+                }
+                default: {
+                    output.push(DIGITS[b], "mươi");
+                    if (c == 1)
+                        output.push("mốt");
+                    else if (c == 4)
+                        output.push("tư");
+                    else if (c == 5)
+                        output.push("lăm");
+                    else if (c != 0)
+                        output.push(DIGITS[c]);
+                    break;
+                }
+            }
+            return output;
+        }
+        function readThree(a, b, c, readZeroHundred) {
+            const output = [];
+            if (a != 0 || b != 0 || c != 0) {
+                if (a != 0 || readZeroHundred)
+                    output.push(DIGITS[a], 'trăm');
+            }
+            output.push(...readTwo(b, c, a != 0 || readZeroHundred));
+            return output;
+        }
+        const output = [];
+        for (let i = 0; i < num.length / 3; i++) {
+            let [a, b, c] = num.substr(i * 3, 3);
+            a = parseInt(a);
+            b = parseInt(b);
+            c = parseInt(c);
+            const isFirstGroup = i == 0;
+            output.push(...readThree(a, b, c, !isFirstGroup));
+            if (a != 0 || b != 0 || c != 0) {
+                output.push(UNITS[num.length / 3 - 1 - i]);
+            }
+        }
+        $('.readNumber').html(output.join(' ').charAt(0).toUpperCase() + output.join(' ').slice(1) + ' VNDT');
+    }
+    function pay(val) {
+        console.log(val.getAttribute('data-id'));
+    }
+    function sellOff(val){
+        console.log(val.getAttribute('data-id'));
+    }
+</script>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/home}">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div layout:fragment="content">
+
+	    <div class="dg-content">
+	        <div class="dg-content-wrapper">
+	            <div class="dg-detail-wrapper">
+	                <div class="dg-detail">
+	                	<div class="dg-detail-notice text-center" th:unless="${auctionAttendAll}">Bạn chưa tham gia đấu giá nào.</div>
+	                    <div class="dg-detail-menu">
+	                        <ul class="nav nav-tabs">
+	                            <li th:each="auc, state : ${auctionAttendAll}" th:class="${state.index} == 0 ? 'active' : ''">
+	                                <a href="javascript:void(0)" class="nav-tab-item" data-toggle="tab" th:attr="data-tab-id=${auc.auction.id}" th:classappend="${state.index} == 0 ? 'active show' : ''">
+	                                    <div class="list-style"></div>
+	                                    <span th:text="${auc.auction.getAssest().name}"></span>
+	                                </a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                    <div class="tab-content">
+	                    	<div class="tab-pane" th:each="auc, state : ${auctionAttendAll}" th:classappend="${state.index} == 0 ? 'active' : ''" 
+	                    		th:attr="data-nav-link-id=${auc.auction.id},data-auction-id=${auc.auction.id}">
+			                    <div class="dg-detail-product-content">
+			                        <div class="dg-detail-product-content-left">
+			                            <div class="dg-detail-product-content-left-body">
+				                        	<div class="blur-img"></div>
+			                                <div class="dg-status-wrapper d-flex justify-content-center align-items-center">
+			                                    <div class="dg-status d-flex justify-content-center align-items-center">
+			                                        Đang đấu giá
+			                                    </div>
+			                                    <div class="favorite" th:attr="data-id=${auc.auction.id}">
+			                                        <img src="/images/ac-img/like.svg" alt="">
+			                                    </div>
+			                                </div>
+			                                <img th:src="${auc.auction.getAssest().images}" alt="" class="dg-product-image">
+			                            </div>
+			                            <div class="dg-detail-product-content-left-footer">
+			                                <div class="dg-detail-info-wrapper">
+			                                    <div class="dg-detail-product-title" th:text="${auc.auction.getAssest().name}"></div>
+			                                </div>
+			                                <div class="time-remaining">
+			                                    <div>
+			                                        <img src="/images/ac-img/eva_clock-outline.svg" alt="">
+			                                        <span class="timing time-auction" th:attr="data-action-time=${auc.auction.endAt}">
+			                                        	<span class="time-num"></span> <span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+			                                        </span>
+			                                    </div>
+			                                    <div class="dg-detail-person-join">
+			                                        <img src="/images/ac-img/akar-icons_person.svg" alt="">
+			                                        <span class="numRegister" th:attr="data-register-auction-id=${auc.auction.id}"></span>
+			                                    </div>
+			                                </div>
+			                                <div class="dg-detail-info">
+			                                    <div class="dg-detail-category" th:text="${auc.auction.category}"></div>
+			                                    <div class="dg-detail-start-price">
+			                                        Khởi điểm: <span class="cur-format" th:text="${auc.auction.bidPrice}"></span> VNDT
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                        <div class="dg-detail-product-content-separate"></div>
+			                        <div class="dg-detail-product-content-right dg-detail-active">
+			                        	<div id="ContextualStatus" 
+			                        		th:text="${auc.auction.currentWinner == user.id ? 'Bạn là người có giá đấu cao nhất hiện tại.' : 'Bạn chưa phải là người đấu giá cao nhất. Bạn có thể tăng giá đấu bất kì lúc nào.'}"
+			                        		th:class="${auc.auction.currentWinner == user.id ? 'alert alert-success' : 'alert alert-danger'}">
+			                        	</div>
+			                            <div class="dg-detail-auction-price">
+			                                <div class="dg-detail-auction-price-title">
+			                                    <div>
+			                                        GIÁ CAO NHẤT HIỆN TẠI (VNDT)
+			                                    </div>
+			                                    <div class="dg-detail-auction-more">
+			                                        <img src="/images/ac-img/more.svg" alt="">
+			                                    </div>
+			                                </div>
+			                                <div class="dg-detail-auction-highest-price cur-format font-weight-bold currentPrice" th:text="${auc.auction.currentPrice == 0 ? ac.auction.bidPrice : ac.auction.currentPrice}">
+			                                    <div></div>
+			                                    <div>5</div>
+			                                    <div>3,</div>
+			                                    <div>2</div>
+			                                    <div>7</div>
+			                                    <div>5,</div>
+			                                    <div>3</div>
+			                                    <div>0</div>
+			                                    <div>0,</div>
+			                                    <div>0</div>
+			                                    <div>0</div>
+			                                    <div>0</div>
+			                                </div>
+			                            </div>
+			                            <div class="dg-detail-auction-content">
+			                                <div class="dg-detail-auction-content-payment list-bid-history-top">
+				                               <div th:if="${auc.auction.bids.size() > 0}">
+					                                <div th:each="bid : ${auc.auction.bids}">
+				                                    	<div class="dg-detail-auction-other-payment dg-detail-auction-item-payment" th:unless="${bid.getUser().id == user.id}">
+					                                        <div class="dg-detail-person-avatar">
+					                                            <img th:src="${bid.getUser().avatar} ? ${bid.getUser().avatar} : '/images/ac-img/no-avatar.jpg'" height="32" width="32" alt="avatar">
+					                                        </div>
+					                                        <div class="dg-detail-auction-other-payment-price">
+					                                            <span class="cur-format" th:text="${bid.bidPrice}"></span> VNDT
+					                                        </div>
+				                                        </div>
+				                                    	<div class="dg-detail-auction-me-payment dg-detail-auction-item-payment" th:if="${bid.getUser().id == user.id}">
+					                                        <div class="dg-detail-auction-me-payment-price">
+					                                            <span class="cur-format" th:text="${bid.bidPrice}"></span> VNDT
+					                                        </div>
+					                                        <div class="dg-detail-person-avatar">
+					                                            <img th:src="${bid.getUser().avatar} ? ${bid.getUser().avatar} : '/images/ac-img/no-avatar.jpg'" height="32" width="32" alt="avatar">
+					                                        </div>
+					                                	</div>
+				                                    </div>
+				                            	</div>
+			                                </div>
+			                                <div class="dg-detail-auction-content-active-time notice-time-rest" th:classappend ="${auc.auction.bids.size() > 0} ? '' : 'd-none'">
+			                                    Nếu không có ai đặt giá thêm, phiên đấu giá sẽ kết thúc trong
+			                                    <span class="time-box-rest" th:attr="data-action-time=${(auc.auction.bids.size() > 0) ? auc.auction.bids[auc.auction.bids.size() - 1].created : ''}">
+		                                        	<span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+		                                        </span>
+			                                </div>
+			                            </div>
+			                            <div class="dg-detail-auction-footer bid-auction-active">
+			                                <div class="dg-detail-auction-footer-wrapper-header">
+			                                    <div class="dg-detail-quantity">
+			                                        <div class="dg-detail-quantity-sub">
+			                                            -
+			                                        </div>
+			                                        <input type="text" class="dg-detail-quantity-content text-center BidStep" maxlength=6 value="0" style="width: 68.75px; height: 46px; border: 1px solid #707070; border: none; outline:none;">
+			                                        </input>
+			                                        <div class="dg-detail-quantity-add">
+			                                            +
+			                                        </div>
+			                                    </div>
+			                                    <h3 class="curPrice d-none" th:text="${auc.auction.currentPrice == 0 ? ac.auction.bidPrice : ac.auction.currentPrice}"></h3>
+			                                    <button class="dg-detail-payment-now buttonBid" data-toggle="modal" th:attrappend="data-target=${user} ? '#MdlBidAuction' : '#modalLogin'">
+			                                        ĐẶT <span class="cur-format font-weight-bold BidPrice" 
+			                                        th:text="${auction.currentPrice == 0 ? auction.bidPrice + (auction.stepPrice * (auction.currentPrice == 0 ? 0 : 1)) : auction.currentPrice + (auction.stepPrice * (auction.currentPrice == 0 ? 0 : 1))}"></span> VNDT
+			                                    </button>
+			                                </div>
+		                                    <div class="errorBidStep text-danger"></div>
+		                                    <div class="AlertBid mt-2"></div>
+			                                <div class="dg-detail-auction-footer-wrapper-footer">
+			                                    <div class="dg-detail-price-step">
+			                                        Bước giá: <span class="cur-format StepPrice" th:text="${auc.auction.stepPrice}"></span> VNDT
+			                                    </div>
+			                                    <div class="dg-detail-deposit">
+			                                        Đặt cọc (10%): <span class="cur-format" th:text="${auc.auction.getWarranty()}"></span> VNDT
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            
+			                            <!-- BEGIN: MODAL BID AUCTION -->
+							            <div class="modal fade" th:id="${'MdlBidAuction' + auc.auction.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						                    <div class="modal-dialog" role="document">
+						                        <div class="modal-content">
+						                            <div class="modal-header pt-3 pb-3 f-13">
+						                                <h6 class="mb-0 block">
+						                                    Số tiền cọc tạm đóng băng là 
+						                                    <strong class="text-danger"><span class="cur-format FrozenMoney" th:text="${auc.auction.getWarranty()}"></span> VNDT</strong>.
+						                                </h6>
+										        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                            	<span aria-hidden="true">&times;</span>
+										        	</button>
+						                            </div>
+						                            <div class="card-footer text-right">
+						                                <button type="button" class="btn btn-primary SubmitBid" data-dismiss="modal">
+						                                    <i class="las la-check-circle"></i>
+						                                    Đồng ý
+						                                </button>
+						                                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">
+						                                    <i class="las la-ban"></i>
+						                                    Hủy
+						                                </button>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <!-- END: MODAL BID AUCTION -->
+						                
+						                <script type="text/javascript" th:inline="javascript">
+						                    document.addEventListener('DOMContentLoaded', (event) => {
+							          			let id = [(${auc.auction.id})];
+							          			function calculateBidPrice() {
+								          			let currentPrice = parseInt($(`[data-auction-id='${id}']`).find(".currentPrice").html().replace(/,/g, ''));
+								          			let bidStep = parseInt($(`[data-auction-id='${id}']`).find(".BidStep").val());
+								          			let stepPrice = parseInt($(`[data-auction-id='${id}']`).find(".StepPrice").html().replace(/,/g, ''));
+							          				return currentPrice + bidStep * stepPrice;
+							          			}
+							          			$(`[data-auction-id='${id}']`).find(".BidStep").keyup(function() {
+							    					let val = $(this).val();
+							    					if (Number.isInteger(Number(val)) && Number(val) >= 0) {
+							    						BidPrice = calculateBidPrice();
+							    					}
+							    					else {
+							    						BidPrice = 0;
+							    					}
+							    					$(`[data-auction-id='${id}']`).find(".BidPrice").html(BidPrice.toLocaleString('en'));
+							    				});
+							    				
+							    				function checkBidStep(str) {
+							    					if (Number.isInteger(Number(str)) && Number(str) >= 0) {
+							    						$(`[data-auction-id='${id}']`).find(".errorBidStep").html('');
+							    						return true;
+							    					}
+							    					else {
+							    						$(`[data-auction-id='${id}']`).find(".errorBidStep").html("Vui lòng nhập số tự nhiên dương.");
+							    						return false;
+							    					}
+							    				}
+							    				$(`[data-auction-id='${id}']`).find(".dg-detail-quantity-sub").click(function() {
+							    					let step = parseInt($(this).parent().find(".BidStep").val());
+							    					if (step > 0 && Number.isInteger(Number(step))) {
+							    						$(this).parent().find(".BidStep").eq(0).val(step - 1);
+							    						$(`[data-auction-id='${id}']`).find(".BidPrice").html(calculateBidPrice().toLocaleString('en'));
+							    					}
+							    				});
+							    				$(`[data-auction-id='${id}']`).find(".dg-detail-quantity-add").click(function() {
+							    					let step = parseInt($(this).parent().find(".BidStep").val());
+							    					if (Number.isInteger(Number(step)) && Number(step) >= 0) {
+							    						$(this).parent().find(".BidStep").eq(0).val(step + 1);
+							    						$(`[data-auction-id='${id}']`).find(".BidPrice").html(calculateBidPrice().toLocaleString('en'));
+							    					}
+							    				});
+							    				// submit bid auction
+							    				SubmitBid = function(event) {
+							    					let CurPrice = parseInt($(`[data-auction-id='${id}']`).find(".curPrice").html());
+							    					let bidStep = $(`[data-auction-id='${id}']`).find(".BidStep").val();
+							    					let currentPrice = parseInt($(`[data-auction-id='${id}']`).find(".currentPrice").html().replace(/,/g, ''));
+							    					let bidPrice = $(`[data-auction-id='${id}']`).find(".BidPrice").eq(0).html().replace(/,/g, '');
+							    					let stepPrice = parseInt($(`[data-auction-id='${id}']`).find(".StepPrice").html().replace(/,/g, ''))
+							    					if (checkBidStep(bidStep) && CurPrice === currentPrice && parseInt(bidPrice) === CurPrice + bidStep * stepPrice) {
+							    						$('.buttonBid').attr("disabled", true);
+							    						event.preventDefault();
+							    					    if (!checkUserLoggedIn()) {
+							    					    	$("#modalLogin").modal("show");
+							    					    	$('.buttonBid').attr("disabled", false);
+							    					    }
+							    					    else {
+							    						    fetch('/bid', {
+							    						   	    method: 'POST',
+							    						   	    headers: {
+							    						   		   'Content-Type': 'application/json',
+							    						        },
+							    						   	    body: JSON.stringify({
+							    						   		   'auction': id,
+							    						   	  	   'bidPrice': bidPrice
+							    						   	    })
+							    					   	    })
+							    					   	    .then(res => res.text())
+							    					   	    .then(results => {
+							    					   		    if (results === "OK") {
+							    					   		    	$(`[data-auction-id='${id}']`).find(".AlertBid").addClass("alert alert-success");
+							    					   		    	$(`[data-auction-id='${id}']`).find(".AlertBid").removeClass("alert-danger");
+							    					   		    	$(`[data-auction-id='${id}']`).find(".AlertBid").html("Đấu giá thành công");
+							    					   		    	$(`[data-auction-id='${id}']`).find(".AlertBid").fadeIn('slow');
+							    					   			    setTimeout(() => {
+							    					   			    	$(`[data-auction-id='${id}']`).find(".AlertBid").fadeOut('slow')
+							    					   			    	$('.buttonBid').attr("disabled", false);
+							    					   			    },10000);
+							    						   		}
+							    						   		else {
+							    						   			$(`[data-auction-id='${id}']`).find(".AlertBid").addClass("alert alert-danger");
+							    						   			$(`[data-auction-id='${id}']`).find(".AlertBid").removeClass("alert-success");
+							    						   			$(`[data-auction-id='${id}']`).find(".AlertBid").html(results);
+							    						   			$(`[data-auction-id='${id}']`).find(".AlertBid").fadeIn('slow');
+							    						   			setTimeout(() => {
+							    						   				$(`[data-auction-id='${id}']`).find(".AlertBid").fadeOut('slow');
+							    						   				$('.buttonBid').attr("disabled", false);
+							    						   			},10000);
+							    						   		}
+							    					   	 	})  
+							    					        .catch(error => {
+							    					    	    console.log(error)
+							    					        }); 
+							    					    }
+							    					}
+							    					else {
+							    						event.preventDefault();
+							    					}
+							    				}
+							    				$(".SubmitBid").click((e) => SubmitBid(e));
+						                    });
+					                   	</script>
+                   	
+			                        </div>
+			                        <div class="dg-detail-product-auction-right d-none dg-detail-ended">
+			                            <div class="dg-detail-product-detail">
+			                                <div class="dg-detail-product-detail-title font-weight-bold"></div>
+			                                <div class="dg-detail-winner">
+			                                    <div class="dg-detail-winner-content">
+			                                        <div class="dg-detail-winner-content-left">
+			                                            <div class="title">
+			                                                <img src="/images/ac-img/cup.svg" alt="">
+			                                                Người thắng phiên đấu giá
+			                                            </div>
+			                                            <div class="person-info">
+			                                                <div class="avatar-person-winner">
+			                                                    <img src="" height="40" width="40" alt="">
+			                                                </div>
+			                                                <div class="username-wrapper">
+			                                                    <div class="username"></div>
+			                                                    <div class="user-id"></div>
+			                                                </div>
+			                                            </div>
+			                                        </div>
+			                                        <div class="dg-detail-winner-content-right">
+			                                            <div class="title">
+			                                                <img src="/images/ac-img/cup.svg" alt="">
+			                                                Giá thắng phiên
+			                                            </div>
+			                                            <div class="price">
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+		                    </div>
+	                    </div>
+	                </div>
+	            </div>
+	            
+	            <div class="tab-content">
+                   	<div class="tab-pane tab-detail" th:each="auc, state : ${auctionAttendAll}" th:classappend="${state.index} == 0 ? 'active' : ''" th:attr="data-nav-link-id=${auc.auction.id}">
+			            <div class="dg-winner-wrapper" th:attr="data-auction-id=${auc.auction.id}">
+			                <div class="dg-winner-wrapper-left">
+			                    <div class="dg-winner-wrapper-left-title font-weight-bold">
+			                        Thông tin sản phẩm
+			                    </div>
+			                    <div class="dg-winner-wrapper-left-content">
+			                        <div class="dg-detail-product-wrapper">
+			                            <div class="dg-detail-product-image">
+			                                <img th:src="${auc.auction.getAssest().images}" alt="">
+			                            </div>
+			
+			                            <div class="dg-detail-product-detail">
+			                                <div class="dg-detail-product-detail-title" th:text="${auc.auction.getAssest().name}"></div>
+			                                <div class="dg-detail-product-detail-content" th:utext="${auc.auction.getAssest().description}"></div>
+			                                <div class="dg-detail-product-detail-more">
+			                                    <a href="javascript:void(0)">
+			                                        <div class="dg-detail-product-detail-more-text">
+			                                            Xem thêm
+			                                        </div>
+			                                    </a>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="dg-winner-wrapper-right">
+				                <div>
+				                    <div class="dg-winner-title font-weight-bold">
+				                        Người chiến thắng
+				                    </div>
+				                    <div class="dg-winner-ranking">
+				                    	<div class="tbl-list">
+					                        <table class="tbl-list-ranking">
+					                            <thead>
+						                            <tr>
+						                                <td class="dg-detail-col-winner">Người thắng cuộc</td>
+						                                <td>Giá thắng cuộc (VNDT)</td>
+						                                <td>Thời gian</td>
+						                            </tr>
+					                            </thead>
+					                           	<tbody class="list-bid-histoty" t>
+						                            <tr th:if="${auc.auction.bids.size() > 0}" th:each="i : ${#numbers.sequence(auc.auction.bids.size() - 1, 0, -1)}" th:with="bid=${auc.auction.bids[i]}">
+						                                <td class="dg-detail-col-person">
+						                                    <div class="dg-detail-person-avatar">
+						                                        <img th:src="${bid.getUser().avatar} ? ${bid.getUser().avatar} : '/images/ac-img/no-avatar.jpg'" height="32" width="32" alt="">
+						                                    </div>
+						                                    <div th:text="${bid.getUser().name}"></div>
+						                                </td>
+						                                <td class="cur-format" th:text="${bid.bidPrice}"></td>
+						                                <td class="time-format-history" th:text="${bid.created}"></td>
+						                            </tr>
+				                            	</tbody>
+					                        </table>
+				                        </div>
+				                        <div class="dg-detail-pagination-wrapper text-center">
+				                            <div class="dg-detail-total-page">
+				                                Tổng: <span class="userBidNum" th:text="${#lists.size(auc.auction.bids)}"></span> <span>Phiên đấu giá</span>
+				                            </div>
+				                        </div>
+				                    </div>.
+				                </div>
+				        	</div>
+			            </div>
+		            </div>
+	            </div>
+	            
+	            <div class="dg-detail-suggest-wrapper">
+	                <div class="dg-detail-suggest">
+	                    <div class="dg-detail-suggest-title">
+	                        <div class="care">
+	                            Có thể bạn quan tâm
+	                        </div>
+	                        <a href="/danh-sach-phien-dau-gia">
+	                            <div class="load-more">
+	                                Xem tất cả
+	                                <div class="load-more-icon">
+	                                </div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                    <div class="dg-detail-suggest-list-product row">
+	                        <div class="item col-xl-2 col-md-6 col-8" th:each="auc : ${auctionRandom}" th:attr="data-auction-id=${auc.id}">
+	                            <div class="dg-detail-suggest-product-wrapper">
+	                                <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}">
+	                                	<div class="blur-img"></div>
+		                                <div class="dg-detail-suggest-product">
+		                                    <div class="timing" th:attr="data-action-time=${auc.end_at}" th:if="${auc.status == 'Active'}">
+												<span class="time-num"></span> <span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+											</div>
+	                                        <div class="timing active" th:attr="data-action-time=${auc.start_at}" th:if="${auc.status == 'Upcoming'}">
+												<span class="time-num"></span> <span class="time-num"></span>:<span class="time-num"></span>:<span class="time-num"></span>
+											</div>
+		                                    <a href="javascript:void(0)" class="favorite" th:attr="data-id=${auc.id}">
+		                                        <img src="/images/ac-img/like.svg" alt="">
+		                                    </a>
+		                                </div>
+	                                    <div class="dg-detail-suggest-product-image">
+	                                        <img th:src="${auc.images}" alt="">
+	                                    </div>
+	                                </a>
+	                            </div>
+	                            <div class="dg-detail-suggest-product-detail">
+	                                <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.id})}" class="dg-detail-suggest-product-title" th:text="${auc.name}"></a>
+	                                <div class="dg-detail-suggest-product-info">
+	                                    <div class="price">
+	                                        <span class="cur-format" th:text="${auc.current_price == 0 ? auc.bid_price : auc.current_price}"></span> VNDT
+	                                    </div>
+	                                    <div class="number-join">
+	                                        <img src="/images/ac-img/akar-icons_person.svg" alt="">
+	                                        <span class="numRegister" th:attr="data-register-auction-id=${auc.id}"></span>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+                </div>
+	        </div>
+	    </div>
+	    <script>
+	    	document.addEventListener('DOMContentLoaded', (event) => {
+	    		$(".nav.nav-tabs .nav-tab-item").click(function() {
+	    			$(".nav.nav-tabs .nav-tab-item.show.active").parents().removeClass("active");
+	    			$(this).parents().eq(0).addClass("active");
+	    			
+	    			let tabId = $(this).attr("data-tab-id");
+	    			$(".tab-content .tab-pane.active").removeClass("active");
+	    			$(".tab-content").find(`[data-nav-link-id='${tabId}']`).addClass("active");
+	    		});
+	    		
+	    		$(".dg-detail-product-detail-more-text").click(function() {
+	        		if ($(this).parents().eq(2).find(".dg-detail-product-detail-content").css("display") === "block") {
+	        			$(this).parents().eq(2).find(".dg-detail-product-detail-content").css("display", "-webkit-box");
+	        			$(this).html("Xem thêm");
+	        		}
+	        		else {
+	        			$(this).parents().eq(2).find(".dg-detail-product-detail-content").css("display", "block");
+	        			$(this).html("Ẩn bớt");
+	        		}
+	        	});
+	    	});
+	    </script>
+    </div>
+</body>
+</html>
+

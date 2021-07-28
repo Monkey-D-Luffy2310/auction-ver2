@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/home}">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Tài khoản</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <!-- Title Page -->
+    <section id="title">
+      <div class="fw-box">
+        <div class="container-fluid">
+          <div class="title-page d-flex align-items-center bd-highlight pt-4 pb-2">
+            <h1 class="bd-highlight f-24">
+              Bảng chính
+            </h1>
+            <div class="breadcrumb-box bd-highlight ml-auto">
+              <div class="d-inline-block">
+                <nav aria-label="breadcrumb" class="bd-highlight bc-cus d-none d-xl-flex">
+                  <ol class="breadcrumb fs-085 bg-transparent p-0 f-13">
+                    <li class="breadcrumb-item"><a href="/index">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/tai-khoan">Tài khoản</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Bảng chính</li>
+                  </ol>
+                </nav>
+              </div>
+              <div class="menu-account-drop d-inline-block d-xl-none mb-3">
+                <div class="btn-group dropdown">
+                  <a href="#" class="dropdown-toggle font-weight-600" data-toggle="dropdown" data-flip="false"
+                    aria-haspopup="false" aria-expanded="false">
+                    <span class="text-secondary"></span><span th:text="${user.name}"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right border-0 shadow-sm rounded-0 p-0">
+                    <div class="card border-0 rounded-0 shadow-sm">
+
+                      <div class="card-body p-3 rounded-0 border-0 f-13">
+                        <div class="card-text">
+                          <dl>
+                            <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                              Tài khoản</dt>
+                            <dd class="ml-3 mb-1">
+                              <a href="/tai-khoan" class="text-violet font-weight-bold">
+                                <i class="las la-border-all mr-1"></i>
+                                Bảng chính
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/ho-so-ca-nhan" class="text-dark">
+                                <i class="las la-user-cog mr-1"></i>
+                                Hồ sơ cá nhân
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dia-chi-van-chuyen" class="text-dark">
+                                <i class="las la-directions mr-1"></i>
+                                Địa chỉ nhận hàng
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/thay-doi-mat-khau" class="text-dark">
+                                <i class="las la-lock mr-1"></i>
+                                Thay đổi mật khẩu
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/chuong-trinh-affiliate" class="text-dark">
+                                <i class="las la-handshake"></i>
+                                Chương trình Affiliate
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dang-nhap" class="text-dark">
+                                <i class="las la-times-circle mr-1"></i>
+                                Đăng xuất
+                              </a>
+                            </dd>
+                          </dl>
+                          <hr>
+                          <dl class="font-weight-500">
+                            <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                              Đấu giá</dt>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dau-gia-yeu-thich" class="text-dark">
+                                <i class="lar la-heart mr-1"></i>
+                                Đấu giá yêu thích
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dau-gia-dang-tham-du" class="text-dark">
+                                <i class="las la-gavel mr-1"></i>
+                                Đấu giá đang tham dự
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dau-gia-da-dang-ky" class="text-dark">
+                                <i class="las la-calendar-check mr-1"></i>
+                                Đấu giá đã đăng ký
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dau-gia-da-thang" class="text-dark">
+                                <i class="las la-trophy mr-1"></i>
+                                Đấu giá đã thắng
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dau-gia-da-mua" class="text-dark">
+                                <i class="las la-shopping-basket mr-1"></i>
+                                Đấu giá đã mua
+                              </a>
+                            </dd>
+                          </dl>
+                          <hr>
+                          <dl class="font-weight-500">
+                            <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                              Tài chính</dt>
+                            <dd class="ml-3 mb-1">
+                              <a href="/vi-va-so-du" class="text-dark">
+                                <i class="las la-wallet mr-1"></i>
+                                Ví và số dư
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/dat-coc-dau-gia" class="text-dark">
+                                <i class="las la-comment-dollar mr-1"></i>
+                                Đặt cọc đấu giá
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/nhap-giftcode" class="text-dark">
+                                <i class="las la-gift mr-1"></i>
+                                Nhập Giftcode
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/nap-tien" class="text-dark">
+                                <i class="las la-sign-in-alt mr-1"></i>
+                                Nạp tiền
+                              </a>
+                            </dd>
+                            <dd class="ml-3 mb-1">
+                              <a href="/rut-tien" class="text-dark">
+                                <i class="las la-sign-out-alt mr-1"></i>
+                                Rút tiền
+                              </a>
+                            </dd>
+                          </dl>
+                          <dl class="font-weight-500" th:if="${user.group == 'Agency' || user.group == 'Admin'}">
+                            <hr />
+                            <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">
+                              Đại lý</dt>
+                            <dd class="ml-3 mb-1">
+                              <a href="/bang-chinh-dai-ly" class="text-dark">
+                                <i class="las la-building mr-1"></i>
+                                Bảng chức năng đại lý
+                              </a>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Title Page -->
+
+    <!-- Grid pro  -->
+    <!-- schedule  -->
+    <section id="liked" class="pb-4">
+
+      <div class="fw-box">
+        <div class="container-fluid">
+
+          <div class="row">
+
+            <div class="col-12 col-xl-3 col-lg-4 d-none d-md-block">
+              <!-- Menu Account -->
+              <div class="side-right d-none d-xl-block">
+                <div class="widget-right mg-b-20">
+                  <div class="card border-0 rounded-0 shadow-sm">
+
+                    <div class="card-body p-3 rounded-0 border-0">
+                      <h3 class="card-title f-19 mb-3 font-weight-700 border-bottom pb-3">
+                        Xin chào! <a href="/ho-so-ca-nhan" class="font-weight-700" th:text="${user.name}"></a>
+                      </h3>
+                      <div class="card-text">
+                        <dl>
+                          <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài
+                            khoản</dt>
+                          <dd class="ml-3 mb-1">
+                            <a href="/tai-khoan" class="text-violet font-weight-bold">
+                              <i class="las la-border-all mr-1"></i>
+                              Bảng chính
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/ho-so-ca-nhan" class="text-dark">
+                              <i class="las la-user-cog mr-1"></i>
+                              Hồ sơ cá nhân
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dia-chi-van-chuyen" class="text-dark">
+                              <i class="las la-directions mr-1"></i>
+                              Địa chỉ nhận hàng
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/thay-doi-mat-khau" class="text-dark">
+                              <i class="las la-lock mr-1"></i>
+                              Thay đổi mật khẩu
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/chuong-trinh-affiliate" class="text-dark">
+                              <i class="las la-handshake"></i>
+                              Chương trình Affiliate
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dang-nhap" class="text-dark">
+                              <i class="las la-times-circle mr-1"></i>
+                              Đăng xuất
+                            </a>
+                          </dd>
+                        </dl>
+                        <hr />
+                        <dl class="font-weight-500">
+                          <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Đấu
+                            giá</dt>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dau-gia-yeu-thich" class="text-dark">
+                              <i class="lar la-heart mr-1"></i>
+                              Đấu giá yêu thích
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dau-gia-dang-tham-du" class="text-dark">
+                              <i class="las la-gavel mr-1"></i>
+                              Đấu giá đang tham dự
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dau-gia-da-dang-ky" class="text-dark">
+                              <i class="las la-calendar-check mr-1"></i>
+                              Đấu giá đã đăng ký
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dau-gia-da-thang" class="text-dark">
+                              <i class="las la-trophy mr-1"></i>
+                              Đấu giá đã thắng
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dau-gia-da-mua" class="text-dark">
+                              <i class="las la-shopping-basket mr-1"></i>
+                              Đấu giá đã mua
+                            </a>
+                          </dd>
+                        </dl>
+                        <hr />
+                        <dl class="font-weight-500">
+                          <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Tài
+                            chính</dt>
+                          <dd class="ml-3 mb-1">
+                            <a href="/vi-va-so-du" class="text-dark">
+                              <i class="las la-wallet mr-1"></i>
+                              Ví và số dư
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/dat-coc-dau-gia" class="text-dark">
+                              <i class="las la-comment-dollar mr-1"></i>
+                              Đặt cọc đấu giá
+                            </a>
+                          </dd>
+                          <!-- <dd class="ml-3 mb-1">
+                                                        <a href="/nhap-giftcode" class="text-dark">
+                                                            <i class="las la-gift mr-1"></i>
+                                                            Nhập Giftcode
+                                                        </a>
+                                                    </dd> -->
+                          <dd class="ml-3 mb-1">
+                            <a href="/nap-tien" class="text-dark">
+                              <i class="las la-sign-in-alt mr-1"></i>
+                              Nạp tiền
+                            </a>
+                          </dd>
+                          <dd class="ml-3 mb-1">
+                            <a href="/rut-tien" class="text-dark">
+                              <i class="las la-sign-out-alt mr-1"></i>
+                              Rút tiền
+                            </a>
+                          </dd>
+                        </dl>
+                        <dl class="font-weight-500" th:if="${user.group == 'Agency' || user.group == 'Admin'}">
+                          <hr />
+                          <dt class="text-uppercase font-weight-800 text-gray mb-2 f-13">Đại
+                            lý</dt>
+                          <dd class="ml-3 mb-1">
+                            <a href="/bang-chinh-dai-ly" class="text-dark">
+                              <i class="las la-building mr-1"></i>
+                              Bảng chức năng đại lý
+                            </a>
+                          </dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Menu Account -->
+            </div>
+            <div class="col-12 col-xl-9 col-lg-12 mini-col">
+              <div class="row mg-b-10">
+                <div class="col-12 col-lg-4 col-md-12">
+                  <div class="card border-0 rounded-0 shadow-sm mg-b-20">
+                    <div class="card-body p-3 rounded-0 border-0">
+                      <div class="user-avatar" style="height:80px">
+                        <div class="d-flex align-items-center">
+                          <img th:src="${user.avatar}" style="object-fit: cover;" class="rounded-circle edit-avatar"
+                            width="80" height="80" data-toggle="tooltip" data-placement="top" title=""
+                            data-original-title="Click vào đây để thay avatar">
+                          <div class="user-sum ml-3">
+                            <h3 class="f-17 mb-0"><a href="#" th:text="${user.name}"></a>
+                            </h3>
+                            <div th:if="${user.fullname!=null&&user.lastname!=null}"
+                              th:text="${user.fullname+' '+user.lastname}"></div>
+                            <a class="f-13 font-weight-light" href="/ho-so-ca-nhan">
+                              <i class="las la-edit"></i>
+                              Sửa hồ sơ
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8 col-md-4">
+                  <div class="row">
+                    <div class="col-12 col-lg-6 col-md-6 ">
+                      <div class="card border-0 rounded-0 shadow-sm mg-b-20 bg-primary text-white">
+                        <div class="card-body p-3 align-items-center rounded-0 border-0">
+                          <a href="/vi-va-so-du" class="user-blance d-block text-white" style="height:80px">
+                            <div class="d-flex align-items-center h-100">
+                              <span class="mr-2 pr-1">
+                                <img src="http://auction.biso.vn/img/vndt.png" width="24" />
+                              </span>
+                              <div class="w-100">
+                                <span class="d-block font-weight-light text-uppercase f-11 font-weight-bold">Tài
+                                  khoản chính</span>
+                                <h3 class="f-21 mb-0 text-white mb-0"><span class="cur-format"
+                                    th:text="${user.getVNDTBalance() + user.getVNDTFreeze()}"></span>
+                                  VNDT </h3>
+                                <span class="d-block font-weight-light f-11">
+                                  Số tiền đặt cọc: <strong class="font-weight-800 mr-2"><span class="cur-format"
+                                      th:text="${user.getVNDTFreeze()}"></span>
+                                    VNDT</strong>
+                                </span>
+
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-md-6">
+                      <div class="card border-0 rounded-0 shadow-sm mg-b-20 bg-info text-white">
+                        <div class="card-body p-3 rounded-0 border-0">
+                          <a href="/vi-va-so-du" class="user-blance d-block text-white" style="height:80px">
+                            <div class="d-flex align-items-center h-100">
+                              <span class="mr-2 pr-1">
+                                <i class="las la-sign-in-alt f-30"></i>
+                              </span>
+                              <div class="w-100">
+                                <span class="d-block font-weight-light text-uppercase f-11">Tài
+                                  khoản phụ</span>
+                                <h3 class="f-14 mb-0 text-white"><span class="cur-format"
+                                    th:text="${user.getBonusBalance()}"></span> VNDT
+                                </h3>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav tab-account nav-tabs f-13 text-uppercase font-weight-600 border-0" id="myTab"
+                style="cursor: pointer;">
+                <li class="nav-item">
+                  <a class="nav-link rounded-0" id="yeu_thich">
+                    Đấu giá yêu thích
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link rounded-0" id="tham_du">
+                    Đấu giá đang tham dự
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link rounded-0" id="dang_ky">
+                    Đấu giá đã đăng ký
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link rounded-0" id="da_thang">
+                    Đấu giá đã thắng
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link rounded-0" id="da_mua">
+                    Đấu giá đã mua
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content bg-white pt-3 pb-1 pl-3 pr-3 clearfix">
+                <div class="dau_gia_yeu_thich">
+                  <div th:if="${liked_auction_all != null}">
+                    <div class="d-flex justify-content-center mb-2">
+                      <h5 class="bd-highlight mb-2 f-15 font-weight-600">Danh sách đấu giá yêu
+                        thích</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a href="/dau-gia-sap-bat-dau">
+                          Đấu giá sắp bắt đầu
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="ListAuction_yeu_thich" class="start-pro-list cat-pro-list mini-col">
+                      <!-- Pro Item -->
+                      <div class="start-pro-item bg-white  " th:each="auc : ${liked_auction_all}">
+                        <div class="row border-top none-col mg-b-20 pd-t-20" th:if="${auc.auction.status != 'Ended'}">
+                          <div class="col-12 col-lg-3 col-md-6">
+                            <div class="start-img-box">
+                              <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block">
+                                <img class="w-100"
+                                  th:src="${#strings.arraySplit(auc.auction.getAssest().images, ',')[0]}"
+                                  alt="Card image cap" style="height:200px; object-fit: contain;">
+                              </a>
+                              <!-- <span class="like-box d-inline-block liked">
+                                                                <i class="las la-heart"></i>
+                                                            </span>
+                                                            <a href="" class="del-corner d-flex justify-content-center align-items-center">
+                                                                <i class="las la-times"></i>
+                                                            </a> -->
+                            </div>
+                          </div>
+                          <div class="col-12 col-lg-9 col-md-6">
+                            <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                              <div class="row h-100 align-items-center">
+                                <div class="col-12 col-xl-7 col-lg-7">
+                                  <h3 class="f-17 mb-2 font-weight-bold">
+                                    <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block"
+                                      th:text=${auc.auction.getAssest().name}></a>
+                                  </h3>
+                                  <div class="pri-bid mb-3 mb-sm-0">
+                                    <span class="text-secondary f-13 mr-1 d-block mb-1">Thời
+                                      gian còn: </span>
+                                    <span class="time-box time-box-light time-box-sm lh-1 d-block"
+                                      th:attr="data-action-time=${auc.auction.endAt}">
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Ngày
+                                        </span>
+                                      </span>
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Giờ
+                                        </span>
+                                      </span>
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Phút
+                                        </span>
+                                      </span>
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Giây
+                                        </span>
+                                      </span>
+                                    </span>
+                                    <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết
+                                      thúc lúc: <strong class="text-violet"
+                                        th:text="${#dates.format(new java.util.Date(auc.auction.endAt), 'HH:mm dd-MM-yyyy')}"></strong>
+                                    </span>
+                                  </div>
+
+                                </div>
+                                <div class="col-12 col-xl-5 col-lg-5">
+                                  <div class="text-right bid-pri-box">
+                                    <div class="pri-bid mb-3">
+                                      <span class="text-secondary f-13 mr-1 d-block mb-1">Giá
+                                        hiện tại: </span>
+                                      <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span
+                                          class="cur-format" th:text="${auc.auction.getAssest().currentPrice}"></span>
+                                        VNDT</strong>
+                                    </div>
+                                    <div class="link-box">
+                                      <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}"
+                                        class="btn btn-warning btn-sm text-white">
+                                        <i class="las la-gavel"></i>
+                                        Đấu giá
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row border-top none-col mg-b-20 pd-t-20" th:if="${auc.auction.status == 'Ended'}">
+                          <div class="col-12 col-lg-3 col-md-6">
+                            <div class="start-img-box">
+                              <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block">
+                                <img class="w-100"
+                                  th:src="${#strings.arraySplit(auc.auction.getAssest().images, ',')[0]}"
+                                  alt="Card image cap">
+                              </a>
+                              <!-- <span class="like-box d-inline-block liked">
+                                                                <i class="las la-heart"></i>
+                                                            </span>
+                                                            <a href="" class="del-corner d-flex justify-content-center align-items-center">
+                                                                <i class="las la-times"></i>
+                                                            </a> -->
+                            </div>
+                          </div>
+                          <div class="col-12 col-lg-9 col-md-6">
+                            <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                              <div class="row h-100 align-items-center">
+                                <div class="col-12 col-xl-7 col-lg-7">
+                                  <h3 class="f-17 mb-3 font-weight-bold">
+                                    <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block"
+                                      th:text=${auc.auction.getAssest().name}></a>
+                                  </h3>
+                                  <div class="pri-bid mb-3 mt-3 mb-sm-0">
+                                    <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết
+                                      thúc lúc: <strong class="text-violet"
+                                        th:text="${#dates.format(new java.util.Date(auc.auction.endAt), 'HH:mm dd-MM-yyyy')}"></strong>
+                                    </span>
+                                  </div>
+
+                                </div>
+                                <div class="col-12 col-xl-5 col-lg-5">
+                                  <div class="text-right bid-pri-box">
+                                    <h2>Đã kết thúc</h2>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Pro Item -->
+                    </div>
+                  </div>
+                  <div th:if="${liked_auction_all == null}">
+                    <div class="text-center mt-2">
+                      <h5 class="bd-highlight mb-2 font-weight-600">Hiện tại quý khách chưa yêu
+                        thích sản phẩm đấu giá nào</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a class="btn btn-danger text-white" href="/dau-gia-sap-bat-dau">
+                          Xem tất cả sản phẩm đấu giá
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dau_gia_dang_tham_du" style="display: none;">
+                  <div th:if="${attend_auction_all != null}">
+                    <div class="d-flex justify-content-center mb-2">
+                      <h5 class="bd-highlight mb-2 f-15 font-weight-600">Danh sách đấu giá tham dự
+                      </h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a href="/dau-gia-sap-bat-dau">
+                          Đấu giá sắp bắt đầu
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="ListAuction_tham_du" class="start-pro-list cat-pro-list mini-col">
+                      <!-- Pro Item -->
+                      <div class="start-pro-item bg-white  " th:each="auc : ${attend_auction_all}">
+                        <div class="row border-top none-col mg-b-20 pd-t-20" th:if="${auc.auction.status != 'Ended'}">
+                          <div class="col-12 col-lg-3 col-md-6">
+                            <div class="start-img-box">
+                              <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block">
+                                <img class="w-100"
+                                  th:src="${#strings.arraySplit(auc.auction.getAssest().images, ',')[0]}"
+                                  alt="Card image cap" style="height:200px; object-fit: contain;">
+                              </a>
+                              <!-- <span class="like-box d-inline-block liked">
+                                                                <i class="las la-heart"></i>
+                                                            </span>
+                                                            <a href="" class="del-corner d-flex justify-content-center align-items-center">
+                                                                <i class="las la-times"></i>
+                                                            </a> -->
+                            </div>
+                          </div>
+                          <div class="col-12 col-lg-9 col-md-6">
+                            <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                              <div class="row h-100 align-items-center">
+                                <div class="col-12 col-xl-7 col-lg-7">
+                                  <h3 class="f-17 mb-2 font-weight-bold">
+                                    <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block"
+                                      th:text=${auc.auction.getAssest().name}></a>
+                                  </h3>
+                                  <div class="pri-bid mb-3 mb-sm-0">
+                                    <span class="text-secondary f-13 mr-1 d-block mb-1">Thời
+                                      gian còn: </span>
+                                    <span class="time-box time-box-light time-box-sm lh-1 d-block"
+                                      th:attr="data-action-time=${auc.auction.endAt}">
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Ngày
+                                        </span>
+                                      </span>
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Giờ
+                                        </span>
+                                      </span>
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Phút
+                                        </span>
+                                      </span>
+                                      <span class="time-info">
+                                        <span class="time-num">
+                                        </span>
+                                        <span class="time-name">
+                                          Giây
+                                        </span>
+                                      </span>
+                                    </span>
+                                    <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết
+                                      thúc lúc: <strong class="text-violet"
+                                        th:text="${#dates.format(new java.util.Date(auc.auction.endAt), 'HH:mm dd-MM-yyyy')}"></strong>
+                                    </span>
+                                  </div>
+
+                                </div>
+                                <div class="col-12 col-xl-5 col-lg-5">
+                                  <div class="text-right bid-pri-box">
+                                    <div class="pri-bid mb-3">
+                                      <span class="text-secondary f-13 mr-1 d-block mb-1">Giá
+                                        hiện tại: </span>
+                                      <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span
+                                          class="cur-format" th:text="${auc.auction.getAssest().currentPrice}"></span>
+                                        VNDT</strong>
+                                    </div>
+                                    <div class="link-box">
+                                      <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}"
+                                        class="btn btn-warning btn-sm text-white">
+                                        <i class="las la-gavel"></i>
+                                        Đấu giá
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row border-top none-col mg-b-20 pd-t-20" th:if="${auc.auction.status == 'Ended'}">
+                          <div class="col-12 col-lg-3 col-md-6">
+                            <div class="start-img-box">
+                              <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block">
+                                <img class="w-100"
+                                  th:src="${#strings.arraySplit(auc.auction.getAssest().images, ',')[0]}"
+                                  alt="Card image cap">
+                              </a>
+                              <!-- <span class="like-box d-inline-block liked">
+                                                                <i class="las la-heart"></i>
+                                                            </span>
+                                                            <a href="" class="del-corner d-flex justify-content-center align-items-center">
+                                                                <i class="las la-times"></i>
+                                                            </a> -->
+                            </div>
+                          </div>
+                          <div class="col-12 col-lg-9 col-md-6">
+                            <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                              <div class="row h-100 align-items-center">
+                                <div class="col-12 col-xl-7 col-lg-7">
+                                  <h3 class="f-17 mb-3 font-weight-bold">
+                                    <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block"
+                                      th:text=${auc.auction.getAssest().name}></a>
+                                  </h3>
+                                  <div class="pri-bid mb-3 mt-3 mb-sm-0">
+                                    <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết
+                                      thúc lúc: <strong class="text-violet"
+                                        th:text="${#dates.format(new java.util.Date(auc.auction.endAt), 'HH:mm dd-MM-yyyy')}"></strong>
+                                    </span>
+                                  </div>
+
+                                </div>
+                                <div class="col-12 col-xl-5 col-lg-5">
+                                  <div class="text-right bid-pri-box">
+                                    <h2>Đã kết thúc</h2>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Pro Item -->
+                    </div>
+                  </div>
+                  <div th:if="${attend_auction_all == null}">
+                    <div class="text-center mt-2">
+                      <h5 class="bd-highlight mb-2 font-weight-600">Hiện tại quý khách chưa tham
+                        dự đấu giá nào</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a class="btn btn-danger text-white" href="/dau-gia-sap-bat-dau">
+                          Xem tất cả sản phẩm đấu giá
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dau_gia_da_dang_ky" style="display: none;">
+                  <div th:if="${registrations != null}">
+                    <div class="d-flex justify-content-center mb-2">
+                      <h5 class="bd-highlight mb-2 f-15 font-weight-600">Danh sách đấu giá đã đăng
+                        ký</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a href="/dau-gia-sap-bat-dau">
+                          Đấu giá sắp bắt đầu
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="start-pro-list cat-pro-list mini-col">
+                      <div id="ListAuction_dang_ky" class="start-pro-list cat-pro-list mini-col">
+
+                        <!-- Pro Item -->
+                        <div class="start-pro-item bg-white none-col mg-b-20 pd-t-20 border-top"
+                          th:each="auc : ${registrations}">
+                          <div class="row" th:if="${auc.auction.status != 'Ended'}">
+                            <div class="col-12 col-lg-3 col-md-6">
+                              <div class="start-img-box">
+                                <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block">
+                                  <img class="w-100"
+                                    th:src="${#strings.arraySplit(auc.auction.getAssest().images, ',')[0]}"
+                                    alt="Card image cap" style="height:200px; object-fit: contain;">
+                                </a>
+                                <!-- <span class="like-box d-inline-block">
+                                  <i class="las la-heart"></i>
+                                </span> -->
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-9 col-md-6">
+                              <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                                <div class="row h-100 align-items-center">
+                                  <div class="col-12 col-xl-7 col-lg-7">
+                                    <h3 class="f-17 mb-2 font-weight-bold">
+                                      <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block"
+                                        th:text=${auc.auction.getAssest().name}></a>
+                                    </h3>
+                                    <div class="pri-bid mb-3 mb-sm-0">
+                                      <span class="text-secondary f-13 mr-1 d-block mb-1">Thời
+                                        gian còn: </span>
+                                      <span class="time-box time-box-light time-box-sm lh-1 d-block"
+                                        th:attr="data-action-time=${auc.auction.endAt}">
+                                        <span class="time-info">
+                                          <span class="time-num">
+                                          </span>
+                                          <span class="time-name">
+                                            Ngày
+                                          </span>
+                                        </span>
+                                        <span class="time-info">
+                                          <span class="time-num">
+                                          </span>
+                                          <span class="time-name">
+                                            Giờ
+                                          </span>
+                                        </span>
+                                        <span class="time-info">
+                                          <span class="time-num">
+                                          </span>
+                                          <span class="time-name">
+                                            Phút
+                                          </span>
+                                        </span>
+                                        <span class="time-info">
+                                          <span class="time-num">
+                                          </span>
+                                          <span class="time-name">
+                                            Giây
+                                          </span>
+                                        </span>
+                                      </span>
+                                      <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết
+                                        thúc lúc: <strong class="text-violet"
+                                          th:text="${#dates.format(new java.util.Date(auc.auction.endAt), 'HH:mm dd-MM-yyyy')}"></strong>
+                                      </span>
+                                    </div>
+
+                                  </div>
+                                  <div class="col-12 col-xl-5 col-lg-5">
+                                    <div class="text-right bid-pri-box">
+                                      <div class="pri-bid mb-3">
+                                        <span class="text-secondary f-13 mr-1 d-block mb-1">Giá
+                                          hiện tại: </span>
+                                        <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span
+                                            class="cur-format" th:text="${auc.auction.getAssest().currentPrice}"></span>
+                                          VNDT</strong>
+                                      </div>
+                                      <div class="link-box">
+                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}"
+                                          class="btn btn-warning btn-sm text-white">
+                                          <i class="las la-gavel"></i>
+                                          Đấu giá
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" th:if="${auc.auction.status == 'Ended'}">
+                            <div class="col-12 col-lg-3 col-md-6">
+                              <div class="start-img-box">
+                                <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block">
+                                  <img class="w-100"
+                                    th:src="${#strings.arraySplit(auc.auction.getAssest().images, ',')[0]}"
+                                    alt="Card image cap">
+                                </a>
+                                <!-- <span class="like-box d-inline-block">
+                                  <i class="las la-heart"></i>
+                                </span> -->
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-9 col-md-6">
+                              <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                                <div class="row h-100 align-items-center">
+                                  <div class="col-12 col-xl-7 col-lg-7">
+                                    <h3 class="f-17 mb-2 font-weight-bold">
+                                      <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auc.auction.id})}" class="d-block"
+                                        th:text=${auc.auction.getAssest().name}></a>
+                                    </h3>
+                                    <div class="pri-bid mb-3 mb-sm-0">
+                                      <span class="f-13 mr-1 d-none d-lg-block mt-2">Kết
+                                        thúc lúc: <strong class="text-violet"
+                                          th:text="${#dates.format(new java.util.Date(auc.auction.endAt), 'HH:mm dd-MM-yyyy')}"></strong>
+                                      </span>
+                                    </div>
+
+                                  </div>
+                                  <div class="col-12 col-xl-5 col-lg-5">
+                                    <div class="text-right bid-pri-box">
+                                      <h5>Đấu giá đã kết thúc</h5>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Pro Item -->
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <div th:if="${registrations == null}">
+                    <div class="text-center mt-2">
+                      <h5 class="bd-highlight mb-2 font-weight-600">Hiện tại quý khách chưa đăng
+                        ký tham dự phiên đấu giá nào</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a class="btn btn-danger text-white" href="/dau-gia-sap-bat-dau">
+                          Đăng ký ngay
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dau_gia_da_mua" style="display: none;">
+                  <div th:if="${!paid_auctions.isEmpty()}">
+                    <div class="d-flex justify-content-center mb-2">
+                      <h5 class="bd-highlight mb-2 f-15 font-weight-600">Danh sách đấu giá đã mua
+                      </h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a href="/dau-gia-sap-bat-dau">
+                          Đấu giá sắp bắt đầu
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="start-pro-list cat-pro-list mini-col">
+                      <div id="ListAuction_mua" class="start-pro-list cat-pro-list mini-col">
+                        <!-- Pro Item -->
+                        <div class="start-pro-item bg-white" th:each="auction : ${paid_auctions}">
+                          <div class="row border-top none-col mg-b-20 pd-t-20">
+                            <div class="col-12 col-lg-3 col-md-6">
+                              <div class="start-img-box">
+                                <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="d-block">
+                                  <img class="w-100" th:src="${#strings.arraySplit(auction.getAssest().images, ',')[0]}"
+                                    alt="Card image cap" style="height:200px; object-fit: contain;">
+                                </a>
+                                <!-- <span class="like-box d-inline-block" th:attr="data-id=${auction.getId()}">
+                                  <i class="las la-heart"></i>
+                                </span> -->
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-9 col-md-6">
+                              <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                                <div class="row h-100 align-items-center">
+                                  <div class="col-12 col-xl-7 col-lg-7">
+                                    <h3 class="f-17 mb-2 font-weight-bold">
+                                      <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}"
+                                        th:text="${auction.getAssest().name}" class="d-block">Biệt thự Vinhome Villa
+                                        Vân Đồn</a>
+                                    </h3>
+                                    <div class="pri-bid mb-3 mb-sm-0">
+                                      <span class="f-13 mr-1 d-none d-lg-block mt-2">Đã
+                                        kết thúc lúc: <strong class="text-violet time-format"
+                                          th:text="${auction.endAt}">10: 30
+                                          22-12-2020</strong> </span>
+                                      <div class="win-bid mb-2">
+                                        <span class="f-13 mr-1 mt-2">Số lượng
+                                          người đấu giá: <strong class="text-warning"
+                                            th:text="${#lists.size(auction.bids)}">231</strong>
+                                        </span>
+                                      </div>
+                                      <div class="mb-3 mb-sm-0">
+                                        <span class="badge badge-success">
+                                          <i class="las la-shopping-basket"></i>
+                                          Bạn đã mua
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                  <div class="col-12 col-xl-5 col-lg-5">
+                                    <div class="text-right bid-pri-box">
+                                      <div class="pri-bid mb-3">
+                                        <span class="text-secondary f-13 mr-1 d-block mb-1 ">Bạn
+                                          đã trả giá: </span>
+                                        <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span
+                                            class="cur-format" th:text="${auction.getAssest().currentPrice}"></span>
+                                          VNDT</strong>
+                                      </div>
+                                      <div class="link-box">
+                                        <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}"
+                                          class="text-violet f-13 font-weight-600">
+                                          Xem đơn hàng
+                                          <i class="las la-arrow-right"></i>
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Pro Item -->
+
+                      </div>
+                    </div>
+                  </div>
+                  <div th:if="${paid_auctions.isEmpty()}">
+                    <div class="text-center mt-2">
+                      <h5 class="bd-highlight mb-2 font-weight-600">Hiện tại quý khách chưa mua
+                        sản phẩm của phiên đấu giá nào</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a class="btn btn-danger text-white" href="/dau-gia-sap-bat-dau">
+                          Đăng ký ngay
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dau_gia_da_thang" style="display: none;">
+                  <div th:if="${!win_auctions.isEmpty()}">
+                    <div class="d-flex justify-content-center mb-2">
+                      <h5 class="bd-highlight mb-2 f-15 font-weight-600">Danh sách đấu giá đã
+                        thắng</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a href="/dau-gia-sap-bat-dau">
+                          Đấu giá sắp bắt đầu
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="ListAuction_thang" class="start-pro-list cat-pro-list mini-col">
+                      <!-- Pro Item -->
+                      <div class="start-pro-item bg-white"
+                        th:each="auction : ${win_auctions}">
+                        <div class="row border-top none-col mg-b-20 pd-t-20">
+                          <div class="col-12 col-lg-3 col-md-6">
+                            <div class="start-img-box">
+                              <a th:href="@{/chi-tiet-dau-gia/{id}(id = ${auction.id})}" class="d-block">
+                                <img class="w-100" th:src="${#strings.arraySplit(auction.getAssest().images, ',')[0]}"
+                                  alt="Card image cap" style="height:200px; object-fit: contain;">
+                                <span class="f-13 pt-1 pb-1 pr-2 pl-2">
+                                  <span class="badge badge-danger">
+                                    <i class="las la-trophy mr-1"></i>
+                                    Chờ thanh toán
+                                  </span>
+                                </span>
+                              </a>
+                              <!-- <span class="like-box d-inline-block" th:attr="data-id=${auction.getId()}">
+                                                                <i class="las la-heart"></i>
+                                                            </span> -->
+                            </div>
+                          </div>
+                          <div class="col-12 col-lg-9 col-md-6">
+                            <div class="start-pro-info p-3 p-md-4 p-lg-3 h-100">
+
+                              <div class="row h-100 align-items-center">
+                                <div class="col-12 col-xl-7 col-lg-7">
+                                  <h3 class="f-23 mb-2 font-weight-bold">
+                                    <a th:text="${auction.getAssest().name}" class="d-block">Biệt thự Vinhome Villa Vân
+                                      Đồn</a>
+                                  </h3>
+                                  <div class="pri-bid mb-3">
+                                    <span class="text-secondary f-20 mr-1 d-block mb-1">Mức
+                                      giá thắng: </span>
+                                    <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span
+                                        class="cur-format" th:text="${auction.getWinPrice()}"></span>
+                                      VNDT</strong>
+                                  </div>
+                                  <div class="pri-bid mb-3 mb-sm-0">
+                                    <span class="f-13 mr-1 d-none d-lg-block mt-2">Đã
+                                      kết thúc lúc: <strong class="text-violet time-format"
+                                        th:text="${auction.endAt}">10: 30
+                                        22-12-2020</strong> </span>
+                                  </div>
+
+                                </div>
+                                <div class="col-12 col-xl-5 col-lg-5">
+                                  <div class="text-right bid-pri-box">
+                                    <h3 class="text-danger pb-2" th:attr="data-id=${auction.id}" style="cursor:pointer"
+                                      onclick="selectpay(this)">
+                                      Thanh toán đơn hàng ngay
+                                      <i class="las la-shopping-basket"></i>
+                                    </h3>
+                                    <div class="text-dark" th:attr="data-id=${auction.id}" style="cursor:pointer"
+                                      onclick="selectdontpay(this)">
+                                      Từ chối thanh toán
+                                      <i class="las la-ban"></i>
+                                    </div>
+                                    <!-- <span class="text-secondary f-20 mr-1 d-block mb-1" >Mức giá thắng: </span>
+                                                                        <strong class="text-danger font-weight-800 d-block lh-1 f-17"><span class="cur-format" th:text="${auction.getAssest().currentPrice}"></span> VNDT</strong> -->
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal fade pt-4" th:id="'modalSuccess' + ${auction.id}" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Thanh
+                                  toán sản phẩm</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <h6>Quý khách xác nhận thanh toán sản phẩm này</br>Mức
+                                  giá đã thắng là: <span class="text-danger font-weight-800 lh-1 f-17"><span
+                                      class="cur-format" th:text="${auction.getWinPrice()}"></span>
+                                    VNDT</span>
+                                </h6>
+                                <div class="AlertChange"></div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" style="display: none;" class="btn btn-danger buttonModalPay"
+                                  th:attr="data-id=${auction.id}" onclick="pay(this)">Thanh toán ngay</button>
+                                <div class="f-13 mb-0 text-center mt-3 text-center buttonModalPayDone"
+                                  style="display:none;">
+                                  <p class="text-violet" style="cursor: pointer;" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="las la-arrow-left"></i>
+                                    Quay lại
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal fade pt-4" th:id="'modalDonPay' + ${auction.id}" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Từ chối
+                                  thanh toán</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <h6>Quý khách xác nhận chắc chắn từ chối thanh toán sản
+                                  phẩm này</h6>
+                                <h7 class="text-danger">Lưu ý:</br> Số tiền đặt cọc sẽ
+                                  bị trừ như nội quy trong đấu giá là: <span
+                                    class="text-danger font-weight-800 lh-1 f-17"><span class="cur-format"
+                                      th:text="${auction.warranty}"></span>
+                                    VNDT</span>
+                                  <div></div>
+                                  <div class="AlertChange"></div>
+                                </h7>
+                                <div class="modal-footer">
+                                  <button type="button" style="display: none;" class="btn btn-danger buttonModalDontPay"
+                                    th:attr="data-id=${auction.id}" onclick="dontpay(this)">Xác nhận từ chối thanh
+                                    toán</button>
+                                  <div class="f-13 mb-0 text-center mt-3 text-center buttonModalDontPayDone"
+                                    style="display:none;">
+                                    <p class="text-violet" style="cursor: pointer;" data-dismiss="modal"
+                                      aria-label="Close">
+                                      <i class="las la-arrow-left"></i>
+                                      Quay lại
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Pro Item -->
+                      </div>
+                    </div>
+                  </div>
+                  <div th:if="${win_auctions.isEmpty()}">
+                    <div class="text-center mt-2">
+                      <h5 class="bd-highlight mb-2 font-weight-600">Hiện tại quý khách chưa thắng
+                        phiên đấu giá nào</h5>
+                      <div class="bd-highlight ml-auto f-13 mb-2">
+                        <a class="btn btn-danger text-white" href="/dau-gia-sap-bat-dau">
+                          Đăng ký ngay
+                          <i class="las la-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Pagination dau_gia_yeu_thich-->
+              <div class="dau_gia_yeu_thich" th:if="${liked_auction_all != null}">
+                <div class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4 ">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination1 justify-content-center mb-0">
+                    </ul>
+                  </nav>
+                  <!-- <div class="on-page f-13 d-none d-xl-block">
+                    Đang ở trang <span class="font-weight-bold currPage"></span>
+                    của
+                    <span class="font-weight-bold numPages"></span> trang
+                    <span class="ml-2 mr-2">|</span>
+                    Có <span class="font-weight-bold numRecords"></span> bản ghi
+                  </div> -->
+                </div>
+              </div>
+              <!-- Pagination dau_gia_dang_tham_du-->
+              <div class="dau_gia_dang_tham_du" th:if="${attend_auction_all != null}" style="display: none;">
+                <div class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4 ">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination2 justify-content-center mb-0">
+                    </ul>
+                  </nav>
+                  <!-- <div class="on-page f-13 d-none d-xl-block">
+                    Đang ở trang <span class="font-weight-bold currPage"></span>
+                    của
+                    <span class="font-weight-bold numPages"></span> trang
+                    <span class="ml-2 mr-2">|</span>
+                    Có <span class="font-weight-bold numRecords"></span> bản ghi
+                  </div> -->
+                </div>
+              </div>
+              <!-- Pagination dau_gia_da_dang_ky-->
+              <div class="dau_gia_da_dang_ky" th:if="${registrations != null}" style="display: none;">
+                <div class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4 ">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination3 justify-content-center mb-0">
+                    </ul>
+                  </nav>
+                  <!-- <div class="on-page f-13 d-none d-xl-block">
+                    Đang ở trang <span class="font-weight-bold currPage"></span>
+                    của
+                    <span class="font-weight-bold numPages"></span> trang
+                    <span class="ml-2 mr-2">|</span>
+                    Có <span class="font-weight-bold numRecords"></span> bản ghi
+                  </div> -->
+                </div>
+              </div>
+              <!-- Pagination dau_gia_da_mua-->
+              <div class="dau_gia_da_mua" th:if="${!paid_auctions.isEmpty()}" style="display: none;">
+                <div class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4 ">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination4 justify-content-center mb-0">
+                    </ul>
+                  </nav>
+                  <!-- <div class="on-page f-13 d-none d-xl-block">
+                    Đang ở trang <span class="font-weight-bold currPage"></span>
+                    của
+                    <span class="font-weight-bold numPages"></span> trang
+                    <span class="ml-2 mr-2">|</span>
+                    Có <span class="font-weight-bold numRecords"></span> bản ghi
+                  </div> -->
+                </div>
+              </div>
+              <!-- Pagination dau_gia_da_thang-->
+              <div class="dau_gia_da_thang" th:if="${!win_auctions.isEmpty()}" style="display: none;">
+                <div class="d-flex align-items-center justify-content-center justify-content-xl-between page-custom mb-4 mt-4">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination5 justify-content-center mb-0">
+                    </ul>
+                  </nav>
+                  <!-- <div class="on-page f-13 d-none d-xl-block">
+                    Đang ở trang <span class="font-weight-bold currPage"></span>
+                    của
+                    <span class="font-weight-bold numPages"></span> trang
+                    <span class="ml-2 mr-2">|</span>
+                    Có <span class="font-weight-bold numRecords"></span> bản ghi
+                  </div> -->
+                </div>
+              </div>
+              <!-- Pagination -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      var id;
+      function selectpay(val) {
+        id = val.getAttribute('data-id');
+        $('#modalSuccess' + id).modal();
+        $('.buttonModalPayDone').hide();
+        $('.buttonModalPay').show();
+      }
+      function selectdontpay(val) {
+        id = val.getAttribute('data-id');
+        $('#modalDonPay' + id).modal();
+        $('.buttonModalDontPayDone').hide();
+        $('.buttonModalDontPay').show();
+      }
+      function pay(val) {
+        $(".buttonModalPay").attr("disabled", true);
+        // $(".buttonModalPay").addClass('btn-default');
+        $(".buttonModalPay").removeClass('btn-danger');
+        $(".buttonModalPay").html('Đang tiến hành thanh toán');
+        id = val.getAttribute('data-id');
+        fetch('/auction/pay/' + id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res => { return res.text() })
+          .then(results => {
+            if (results === "OK") {
+              $(".AlertChange").addClass("alert alert-success");
+              $(".AlertChange").html('Thanh toán thành công');
+              $(".AlertChange").fadeIn('slow');
+              setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+              $('.buttonModalPay').hide();
+              $('.buttonModalPayDone').show();
+              location.reload();
+            }
+            else {
+              console.log(results);
+              $('.buttonModalPay').prop("disabled", false);
+              $(".buttonModalPay").addClass('btn-danger');
+              $(".buttonModalPay").html('Thanh toán ngay');
+              $(".AlertChange").addClass("alert alert-danger");
+              $(".AlertChange").html('Thanh toán thất bại lỗi: ' + results);
+              $(".AlertChange").fadeIn('slow');
+              setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+            }
+          })
+          .catch(error => {
+            console.log("Error: " + error);
+          });
+      }
+      function dontpay(val) {
+        $(".buttonModalDontPay").attr("disabled", true);
+        // $(".buttonModalPay").addClass('btn-default');
+        $(".buttonModalDontPay").removeClass('btn-danger');
+        $(".buttonModalDontPay").html('Đang tiến hành hủy thanh toán');
+        id = val.getAttribute('data-id');
+        fetch('/auction/refuse/' + id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res => { return res.text() })
+          .then(results => {
+            if (results === "OK") {
+              $(".AlertChange").addClass("alert alert-success");
+              $(".AlertChange").html('Từ chối thanh toán thành công');
+              $(".AlertChange").fadeIn('slow');
+              setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+              $('#buttonModalDontPay').hide();
+              $('.buttonModalDontPayDone').show();
+              location.reload();
+            }
+            else {
+              console.log(results);
+              $('.buttonModalDontPay').prop("disabled", false);
+              $(".buttonModalDontPay").addClass('btn-danger');
+              $(".buttonModalDontPay").html('Xác nhận từ chối thanh toán');
+              $(".AlertChange").addClass("alert alert-danger");
+              $(".AlertChange").html('Từ chối toán thất bại lỗi: ' + results);
+              $(".AlertChange").fadeIn('slow');
+              setTimeout(() => $(".AlertChange").fadeOut('slow'), 10000);
+            }
+          })
+          .catch(error => {
+            console.log("Error: " + error);
+          });
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        pageMe({ pagerSelector: '#ListAuction_yeu_thich', paginationSelector: '.pagination1' });
+        pageMe({ pagerSelector: '#ListAuction_tham_du', paginationSelector: '.pagination2' });
+        pageMe({ pagerSelector: '#ListAuction_dang_ky', paginationSelector: '.pagination3' });
+        pageMe({ pagerSelector: '#ListAuction_mua', paginationSelector: '.pagination4' });
+        pageMe({ pagerSelector: '#ListAuction_thang', paginationSelector: '.pagination5' });
+        $("#yeu_thich").attr('class', 'nav-link rounded-0 active');
+        $("#yeu_thich").click(function () {
+          $("#yeu_thich").attr('class', 'nav-link rounded-0 active');
+          $("#tham_du").attr('class', 'nav-link rounded-0');
+          $("#dang_ky").attr('class', 'nav-link rounded-0');
+          $("#da_mua").attr('class', 'nav-link rounded-0');
+          $("#da_thang").attr('class', 'nav-link rounded-0');
+          $(".dau_gia_yeu_thich").show('fast');
+          $(".dau_gia_dang_tham_du").hide('fast');
+          $(".dau_gia_da_dang_ky").hide('fast');
+          $(".dau_gia_da_mua").hide('fast');
+          $(".dau_gia_da_thang").hide('fast');
+        })
+        $("#tham_du").click(function () {
+          $("#yeu_thich").attr('class', 'nav-link rounded-0');
+          $("#tham_du").attr('class', 'nav-link rounded-0 active');
+          $("#dang_ky").attr('class', 'nav-link rounded-0');
+          $("#da_mua").attr('class', 'nav-link rounded-0');
+          $("#da_thang").attr('class', 'nav-link rounded-0');
+          $(".dau_gia_yeu_thich").hide('fast');
+          $(".dau_gia_dang_tham_du").show('fast');
+          $(".dau_gia_da_dang_ky").hide('fast');
+          $(".dau_gia_da_mua").hide('fast');
+          $(".dau_gia_da_thang").hide('fast');
+        })
+        $("#dang_ky").click(function () {
+          $("#yeu_thich").attr('class', 'nav-link rounded-0');
+          $("#tham_du").attr('class', 'nav-link rounded-0');
+          $("#dang_ky").attr('class', 'nav-link rounded-0 active');
+          $("#da_mua").attr('class', 'nav-link rounded-0');
+          $("#da_thang").attr('class', 'nav-link rounded-0');
+          $(".dau_gia_yeu_thich").hide('fast');
+          $(".dau_gia_dang_tham_du").hide('fast');
+          $(".dau_gia_da_dang_ky").show('fast');
+          $(".dau_gia_da_mua").hide('fast');
+          $(".dau_gia_da_thang").hide('fast');
+        })
+        $("#da_mua").click(function () {
+          $("#yeu_thich").attr('class', 'nav-link rounded-0');
+          $("#tham_du").attr('class', 'nav-link rounded-0');
+          $("#dang_ky").attr('class', 'nav-link rounded-0');
+          $("#da_mua").attr('class', 'nav-link rounded-0 active');
+          $("#da_thang").attr('class', 'nav-link rounded-0');
+          $(".dau_gia_yeu_thich").hide('fast');
+          $(".dau_gia_dang_tham_du").hide('fast');
+          $(".dau_gia_da_dang_ky").hide('fast');
+          $(".dau_gia_da_thang").hide('fast');
+          $(".dau_gia_da_mua").show('fast');
+        })
+        $("#da_thang").click(function () {
+          $("#yeu_thich").attr('class', 'nav-link rounded-0');
+          $("#tham_du").attr('class', 'nav-link rounded-0');
+          $("#dang_ky").attr('class', 'nav-link rounded-0');
+          $("#da_mua").attr('class', 'nav-link rounded-0');
+          $("#da_thang").attr('class', 'nav-link rounded-0 active');
+          $(".dau_gia_yeu_thich").hide('fast');
+          $(".dau_gia_dang_tham_du").hide('fast');
+          $(".dau_gia_da_dang_ky").hide('fast');
+          $(".dau_gia_da_mua").hide('fast');
+          $(".dau_gia_da_thang").show('fast');
+        })
+      });
+    </script>
+  </div>
+</body>
+
+</html>
