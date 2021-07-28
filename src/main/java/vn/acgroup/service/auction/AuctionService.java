@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -301,54 +299,59 @@ public class AuctionService {
 
     return auctionRepository.findAuctionByStatus(status, limit);
   }
-  
-  
-  public Map<String,String> payList(List<Long> auction_id, long user_id) throws CustomException {
-	  	Map<String,String> result = new HashMap<String, String>();
-	  	BigDecimal totalAmount = BigDecimal.ZERO;
-	  	BigDecimal totalWarranty = BigDecimal.ZERO;
-	    User user = userRepository.findById(user_id).get();	    
-	    Iterable<Auction> auctions = auctionRepository.findByIdIn(auction_id);	    
-	    Iterable<AuctionRegister> auctionRegisters = auctionRegisterRepository.findByUserIdAndIsDeletedAndAuctionIdIn(user_id,false,auction_id);	    
-	    for (Auction e: auctions) {
-	    	AuctionRegister auctionRegister = null;	
-		    for (AuctionRegister auc : auctionRegisters) {
-		   		if(auc.getAuction().getId() == e.getId()) {
-	    			 auctionRegister = auc;
-	    			 totalWarranty = totalWarranty.add(totalWarranty);
-	    		}  
-			}
-	    	if(auctionRegister == null) result.put(String.valueOf(e.getId()), "Không tìm thấy lịch sử đăng kí đấu giá hoặc cọc đấu giá");
-	    	if (Strings.isBlank(result.get(String.valueOf(e.getId()))) && e.getWinner() != user.getId()) result.put(String.valueOf(e.getId()), "Bạn không phải người thắng đấu giá này");
-	    	long time = ChronoUnit.SECONDS.between(e.getEndAt(), LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
-	    	if (Strings.isBlank(result.get(String.valueOf(e.getId())))   &&  (time > 5 * 24 * 60 * 60))
-	    		result.put(String.valueOf(e.getId()), "Hết hạn thanh toán");  	
-	    	totalAmount = totalAmount.add(e.getWinPrice());		
-		}	    	    	    
-	    if (user.getVNDTBalance().add(totalWarranty).compareTo(totalAmount) < 0)result.put("balance", "Không đủ tiền thanh toán");	    	    
-	    if (result.size() == 0) {
-	    	 user.unfreeze(totalWarranty);
-			 userRepository.save(user);
-	    	 auctions.forEach(auction -> {
-	    		 WithdrawRequest withdrawRequest = new WithdrawRequest(
-				            LightwalletConfig.productAddress,
-				            auction.getWinPrice(),
-				            "Khách hàng " + user.getId() + " thanh toán đấu giá " + auction_id);
-				    try {
-				      walletService.sendVNDT(user, withdrawRequest);
-				    } catch (Exception e) {
-				      System.out.println(e.getMessage());
-				    }
-	    		 
-	    	});
-	    	auctionRegisterRepository.updateAuctionRegisterPayList(user_id,auction_id);
-	    	auctionRepository.updateAuctionPayList("Paid", auction_id);
-	 	       
-		    result.put("status", "OK");
-		}else result.put("status", "ERROR");
-	    return result;
-	  }
-  
-  
 
+  public Map<String, String> payList(List<Long> auction_id, long user_id) throws CustomException {
+    Map<String, String> result = new HashMap<String, String>();
+    BigDecimal totalAmount = BigDecimal.ZERO;
+    BigDecimal totalWarranty = BigDecimal.ZERO;
+    User user = userRepository.findById(user_id).get();
+    Iterable<Auction> auctions = auctionRepository.findByIdIn(auction_id);
+    Iterable<AuctionRegister> auctionRegisters =
+        auctionRegisterRepository.findByUserIdAndIsDeletedAndAuctionIdIn(
+            user_id, false, auction_id);
+    for (Auction e : auctions) {
+      AuctionRegister auctionRegister = null;
+      for (AuctionRegister auc : auctionRegisters) {
+        if (auc.getAuction().getId() == e.getId()) {
+          auctionRegister = auc;
+          totalWarranty = totalWarranty.add(totalWarranty);
+        }
+      }
+      if (auctionRegister == null)
+        result.put(
+            String.valueOf(e.getId()), "Không tìm thấy lịch sử đăng kí đấu giá hoặc cọc đấu giá");
+      if (Strings.isBlank(result.get(String.valueOf(e.getId()))) && e.getWinner() != user.getId())
+        result.put(String.valueOf(e.getId()), "Bạn không phải người thắng đấu giá này");
+      long time =
+          ChronoUnit.SECONDS.between(
+              e.getEndAt(), LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
+      if (Strings.isBlank(result.get(String.valueOf(e.getId()))) && (time > 5 * 24 * 60 * 60))
+        result.put(String.valueOf(e.getId()), "Hết hạn thanh toán");
+      totalAmount = totalAmount.add(e.getWinPrice());
+    }
+    if (user.getVNDTBalance().add(totalWarranty).compareTo(totalAmount) < 0)
+      result.put("balance", "Không đủ tiền thanh toán");
+    if (result.size() == 0) {
+      user.unfreeze(totalWarranty);
+      userRepository.save(user);
+      auctions.forEach(
+          auction -> {
+            WithdrawRequest withdrawRequest =
+                new WithdrawRequest(
+                    LightwalletConfig.productAddress,
+                    auction.getWinPrice(),
+                    "Khách hàng " + user.getId() + " thanh toán đấu giá " + auction_id);
+            try {
+              walletService.sendVNDT(user, withdrawRequest);
+            } catch (Exception e) {
+              System.out.println(e.getMessage());
+            }
+          });
+      auctionRegisterRepository.updateAuctionRegisterPayList(user_id, auction_id);
+      auctionRepository.updateAuctionPayList("Paid", auction_id);
+
+      result.put("status", "OK");
+    } else result.put("status", "ERROR");
+    return result;
+  }
 }

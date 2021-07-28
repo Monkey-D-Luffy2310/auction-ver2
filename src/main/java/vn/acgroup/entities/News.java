@@ -104,11 +104,11 @@ public class News {
     this.content = content;
   }
 
-public Integer getView() {
-	return view;
-}
+  public Integer getView() {
+    return view;
+  }
 
-public void setView(Integer view) {
-	this.view = view;
-}
+  public void setView(Integer view) {
+    this.view = view;
+  }
 }

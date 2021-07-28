@@ -1,7 +1,6 @@
 package vn.acgroup.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -106,17 +105,19 @@ public class HomeController {
         return null;
       }
     }
-    
+
     @ModelAttribute("auctionAttendAll")
-    public Iterable<AuctionRegister> attendAuctionAll() throws InterruptedException, ExecutionException {
-    	try {
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
-            return auctionRegisterRepository
-                    .findByUserAndIsDeletedAndAuction_status(optional.get(), false, "Active").get();
-        } catch (Exception e) {
-        	return null;
-        }
+    public Iterable<AuctionRegister> attendAuctionAll()
+        throws InterruptedException, ExecutionException {
+      try {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
+        return auctionRegisterRepository
+            .findByUserAndIsDeletedAndAuction_status(optional.get(), false, "Active")
+            .get();
+      } catch (Exception e) {
+        return null;
+      }
     }
 
     @ModelAttribute("user")
@@ -128,13 +129,13 @@ public class HomeController {
         return null;
       }
     }
-    
+
     @ModelAttribute("system_time")
     public long systemTime() {
       return System.currentTimeMillis();
     }
-}
-  
+  }
+
   @GetMapping(value = "/system-time")
   @ResponseBody
   @ApiOperation(
@@ -143,15 +144,17 @@ public class HomeController {
   public long systemTime() throws InterruptedException, ExecutionException {
     return System.currentTimeMillis();
   }
-  
+
   @GetMapping(value = "/")
   public String index(Model model) throws InterruptedException, ExecutionException {
 
     model.addAttribute("banner", true);
     model.addAttribute("category", "");
     model.addAttribute("categoriesTop6", categoryRepository.findTop6ByOrderByCreatedDesc());
-    model.addAttribute("auctionActiveTop6", auctionRepository.findTop6ByStatusOrderByCreatedAsc("Active"));
-    model.addAttribute("auctionActiveTop3", auctionRepository.findTop3ByStatusOrderByCreatedAsc("Active"));
+    model.addAttribute(
+        "auctionActiveTop6", auctionRepository.findTop6ByStatusOrderByCreatedAsc("Active"));
+    model.addAttribute(
+        "auctionActiveTop3", auctionRepository.findTop3ByStatusOrderByCreatedAsc("Active"));
     model.addAttribute(
         "auctionTop6Ended", auctionRepository.findTop6ByStatusOrderByEndAtDesc("Ended"));
     model.addAttribute(
@@ -177,11 +180,12 @@ public class HomeController {
     model.addAttribute("category", category);
     model.addAttribute("order", order);
     model.addAttribute("status", status);
-    model.addAttribute("auctionActiveAndUpcoming", auctionRepository.findByStatusOrStatus("Active", "Upcoming"));
+    model.addAttribute(
+        "auctionActiveAndUpcoming", auctionRepository.findByStatusOrStatus("Active", "Upcoming"));
     model.addAttribute("categoryAll", categoryRepository.findAll());
     return "views/home/danh-sach-phien-dau-gia";
   }
-  
+
   @GetMapping(value = "/dau-gia-sap-bat-dau")
   public String dau_gia_sap_bat_dau(Model model, @RequestParam Map<String, String> reqParam)
       throws InterruptedException, ExecutionException {
@@ -336,7 +340,8 @@ public class HomeController {
     try {
       Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
-      model.addAttribute("feedback", feedbackRepository.findFeedbackByUser(optional.get().getId(), id));
+      model.addAttribute(
+          "feedback", feedbackRepository.findFeedbackByUser(optional.get().getId(), id));
     } catch (Exception e) {
       model.addAttribute("feedback", null);
     }
@@ -370,8 +375,8 @@ public class HomeController {
 
   @GetMapping(value = "/dau-gia-da-tham-gia")
   public String dau_gia_da_tham_gia(Model model) throws InterruptedException, ExecutionException {
-	  
-	model.addAttribute("auctionRandom", auctionRepository.findLimit6RandomAuction());
+
+    model.addAttribute("auctionRandom", auctionRepository.findLimit6RandomAuction());
     return "views/home/dau-gia-da-tham-gia";
   }
 
@@ -406,14 +411,14 @@ public class HomeController {
     return "views/home/quen-mat-khau";
   }
 
-   @GetMapping(value = "/ho-so-ca-nhan")
+  @GetMapping(value = "/ho-so-ca-nhan")
   public String ho_so_ca_nhan(Model model) throws InterruptedException, ExecutionException {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
     long id = 0;
-    if (optional.isPresent())id =  optional.get().getId();  
+    if (optional.isPresent()) id = optional.get().getId();
     Optional<Address> op = addressRepository.findByUserAndIsDefault(id, true);
-    if (op.isPresent())model.addAttribute("addressDefault",op.get());
+    if (op.isPresent()) model.addAttribute("addressDefault", op.get());
     if (!optional.isPresent()) return "redirect:";
     return "views/home/ho-so-ca-nhan";
   }
@@ -438,7 +443,9 @@ public class HomeController {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
     if (!optional.isPresent()) return "redirect:";
-    else model.addAttribute("warranties",auctionRegisterRepository.findBiddingAuction(optional.get().getId()));
+    else
+      model.addAttribute(
+          "warranties", auctionRegisterRepository.findBiddingAuction(optional.get().getId()));
     return "views/home/dat-coc-dau-gia";
   }
 
@@ -530,12 +537,15 @@ public class HomeController {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
     if (!optional.isPresent()) return "redirect:";
-    model.addAttribute("win_auctions", auctionRepository.findByWinnerOrderByEndAtDesc(optional.get().getId()));
-    model.addAttribute("paid_auctions", auctionRepository.findByWinnerAndStatusOrderByEndAtDesc(optional.get().getId(), "Paid"));
+    model.addAttribute(
+        "win_auctions", auctionRepository.findByWinnerOrderByEndAtDesc(optional.get().getId()));
+    model.addAttribute(
+        "paid_auctions",
+        auctionRepository.findByWinnerAndStatusOrderByEndAtDesc(optional.get().getId(), "Paid"));
     long id = 0;
-    if (optional.isPresent())id =  optional.get().getId();  
+    if (optional.isPresent()) id = optional.get().getId();
     Optional<Address> op = addressRepository.findByUserAndIsDefault(id, true);
-    if (op.isPresent())model.addAttribute("addressDefault",op.get());
+    if (op.isPresent()) model.addAttribute("addressDefault", op.get());
     return "views/home/gio-hang";
   }
 
@@ -636,18 +646,20 @@ public class HomeController {
   }
 
   @GetMapping(value = "/tin-tuc")
-  public String tin_tuc(Model model) throws InterruptedException, ExecutionException{
+  public String tin_tuc(Model model) throws InterruptedException, ExecutionException {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Optional<User> optional = userRepository.findByEmailAndIsActive((String) principal, true);
     if (!optional.isPresent()) return "redirect:";
     model.addAttribute("news_1st", newsRepository.findTop1ByOrderByCreatedDesc());
     model.addAttribute("news", newsRepository.findAllByOrderByCreatedDesc());
     model.addAttribute("news_top3", newsRepository.findTop3ByOrderByViewDesc());
-    model.addAttribute("auction_is_comming", auctionRepository.findTop2ByStatusOrderByStartAtAsc("Upcoming"));
-    model.addAttribute("auction_is_active", auctionRepository.findTop2ByStatusOrderByStartAtAsc("Active"));
+    model.addAttribute(
+        "auction_is_comming", auctionRepository.findTop2ByStatusOrderByStartAtAsc("Upcoming"));
+    model.addAttribute(
+        "auction_is_active", auctionRepository.findTop2ByStatusOrderByStartAtAsc("Active"));
     return "views/home/tin-tuc";
   }
-  
+
   @GetMapping(value = "/tao-tin-tuc")
   public String tao_tin_tuc(Model model) throws InterruptedException, ExecutionException {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -666,7 +678,7 @@ public class HomeController {
       throws InterruptedException, ExecutionException {
     model.addAttribute("news", newsRepository.findByAlias(alias));
     News entity = newsRepository.findByAlias(alias);
-    entity.setView(entity.getView()+1);
+    entity.setView(entity.getView() + 1);
     newsRepository.save(entity);
     model.addAttribute("newsList", newsRepository.findRandomNewsTop8());
     Iterable<News> newslistcheck = newsRepository.findAllByOrderByCreatedDesc();
@@ -675,14 +687,14 @@ public class HomeController {
     News news3st = new News();
     boolean founded = false;
     for (News newForEach : newslistcheck) {
-    	System.out.println(newForEach.getTittle());
-    	news1st = news2st;
-    	news2st = news3st;
-    	news3st = newForEach;
-    	if(founded == true) break;
-    	if(newForEach == newsRepository.findByAlias(alias)) {
-    		founded = true;
-    	}
+      System.out.println(newForEach.getTittle());
+      news1st = news2st;
+      news2st = news3st;
+      news3st = newForEach;
+      if (founded == true) break;
+      if (newForEach == newsRepository.findByAlias(alias)) {
+        founded = true;
+      }
     }
     model.addAttribute("news1st", news1st);
     model.addAttribute("news2st", news2st);
