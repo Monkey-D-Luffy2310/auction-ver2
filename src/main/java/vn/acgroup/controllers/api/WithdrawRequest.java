@@ -39,22 +39,22 @@ public class WithdrawRequest {
   }
 
   public boolean isSaveInfo() {
-	return saveInfo;
-}
+    return saveInfo;
+  }
 
-public void setSaveInfo(boolean saveInfo) {
-	this.saveInfo = saveInfo;
-}
+  public void setSaveInfo(boolean saveInfo) {
+    this.saveInfo = saveInfo;
+  }
 
-public String getInformation() {
-	return information;
-}
+  public String getInformation() {
+    return information;
+  }
 
-public void setInformation(String information) {
-	this.information = information;
-}
+  public void setInformation(String information) {
+    this.information = information;
+  }
 
-public void setNote(String note) {
+  public void setNote(String note) {
     this.note = note;
   }
 

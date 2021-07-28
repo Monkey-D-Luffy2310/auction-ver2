@@ -38,9 +38,8 @@ public interface WalletService {
   public List<SavedBank> getDepositBank();
 
   public SavedBank getBankAccountInfo(String accountNumber, String bankCode) throws CustomException;
-  
+
   public String getBankNameFromCode(String code);
-  
+
   public String getBankCodeFromName(String name);
-  
 }

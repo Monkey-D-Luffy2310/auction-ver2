@@ -10,6 +10,5 @@ import vn.acgroup.entities.SavedWithdrawInfo;
 @Repository
 public interface SavedWithdrawInfoRepository extends CrudRepository<SavedWithdrawInfo, Long> {
 
-	Optional<SavedWithdrawInfo> findByUserAndType(long user, String type);
-
+  Optional<SavedWithdrawInfo> findByUserAndType(long user, String type);
 }
