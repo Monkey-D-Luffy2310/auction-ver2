@@ -659,8 +659,7 @@ public class AuctionController {
             });
     return reAuction;
   }
-  
-  
+
   @PostMapping(value = "/auction/pay-list")
   @ResponseBody
   @ApiOperation(
@@ -668,13 +667,13 @@ public class AuctionController {
       authorizations = {@Authorization(value = "JWT")})
   public ResponseEntity payList(@RequestBody List<Long> auctionIds) throws Exception {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User user = userRepository
+    User user =
+        userRepository
             .findByEmailAndIsActive((String) principal, true)
-            .orElseThrow(() -> new Exception("User not found"));  
-    Map<String,String> map = auctionService.payList(auctionIds, user.getId());  
-//    String result = auctionService.pay(id, user.getId());
+            .orElseThrow(() -> new Exception("User not found"));
+    Map<String, String> map = auctionService.payList(auctionIds, user.getId());
+    //    String result = auctionService.pay(id, user.getId());
     if (map.get("status").equals("OK")) return new ResponseEntity<>(map, HttpStatus.OK);
     else return new ResponseEntity<>(map, HttpStatus.FORBIDDEN);
   }
-  
 }

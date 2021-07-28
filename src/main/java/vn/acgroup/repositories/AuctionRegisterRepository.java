@@ -44,8 +44,9 @@ public interface AuctionRegisterRepository extends CrudRepository<AuctionRegiste
   Iterable<AuctionRegister> findByUser_IdOrderByUpdatedDesc(Long id);
 
   Optional<AuctionRegister> findByUser_IdAndAuction_Id(long idu, long ida);
-  
-  Iterable<AuctionRegister> findByUserIdAndIsDeletedAndAuctionIdIn(long userId,boolean isDeleted,List<Long> ids);
+
+  Iterable<AuctionRegister> findByUserIdAndIsDeletedAndAuctionIdIn(
+      long userId, boolean isDeleted, List<Long> ids);
 
   @Query(nativeQuery = true, value = "SELECT SUM(turn) FROM auction_register WHERE auction_id = ?1")
   int findTurnByAuction_Id(long id);
@@ -61,14 +62,11 @@ public interface AuctionRegisterRepository extends CrudRepository<AuctionRegiste
       value =
           "SELECT COUNT(user_id) FROM auction_register WHERE auction_id = ?1 AND is_deleted = false")
   int findAttendingUser(long auctionId);
-  
-  
+
   @Modifying
   @Transactional
   @Query(
       nativeQuery = true,
-      value =
-          "update auction_register set depositing = 1 where user_id = ?1  and auction_id in ?2")
-  public void updateAuctionRegisterPayList(long userId,List<Long> auctionId);
-  
+      value = "update auction_register set depositing = 1 where user_id = ?1  and auction_id in ?2")
+  public void updateAuctionRegisterPayList(long userId, List<Long> auctionId);
 }

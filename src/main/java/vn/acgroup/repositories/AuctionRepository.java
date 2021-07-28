@@ -22,9 +22,9 @@ public interface AuctionRepository extends CrudRepository<Auction, Long> {
       String status1, char c1, String status2, char c2);
 
   public Iterable<Auction> findTop6ByStatusAndShowInBanerOrderByStartAtAsc(String status, char c);
-  
+
   public Iterable<Auction> findTop2ByStatusOrderByStartAtAsc(String status);
-  
+
   public Iterable<Auction> findByStatusOrderByCreatedAsc(String status);
 
   public Iterable<Auction> findTop6ByStatusOrderByEndAtDesc(String status);
@@ -46,7 +46,7 @@ public interface AuctionRepository extends CrudRepository<Auction, Long> {
   public Iterable<Auction> findByWinner(Long id);
 
   public Iterable<Auction> findByWinnerOrderByEndAtDesc(Long id);
-  
+
   public Iterable<Auction> findByWinnerAndStatusOrderByEndAtDesc(Long id, String status);
 
   public int countByWinnerAndStatus(Long id, String status);
@@ -61,17 +61,17 @@ public interface AuctionRepository extends CrudRepository<Auction, Long> {
   public Iterable<Auction> findByStatusAndEndAtLessThan(String status, LocalDateTime endAt);
 
   public Iterable<Auction> findByStatusIn(ArrayList<String> status);
-  
+
   public Iterable<Auction> findTop6ByStatusOrderByCreatedAsc(String string);
-  
+
   public Iterable<Auction> findTop3ByStatusOrderByCreatedAsc(String string);
-  
+
   public Iterable<Auction> findByStatusOrStatus(String string, String string2);
-  
+
   public Iterable<Auction> findTop6ByStatusOrStatus(String string, String string2);
 
   public Object findTop3ByUserId(long id);
-  
+
   public Iterable<Auction> findByIdIn(List<Long> ids);
 
   @Query(nativeQuery = true, value = "SELECT * FROM auction WHERE start_at LIKE ?1 AND winner > 0")
@@ -118,21 +118,16 @@ public interface AuctionRepository extends CrudRepository<Auction, Long> {
               + " b.name as asset_name,b.images as asset_image "
               + " from auction a left join asset b on b.id = a.assest_id where a.status = ?1 order by created limit ?2")
   List<Map<String, Object>> findAuctionByStatus(String status, long limit);
- 
-  
+
   @Modifying
   @Transactional
+  @Query(nativeQuery = true, value = "update auction set status = ?1 where id in ?2")
+  public void updateAuctionPayList(String status, List<Long> auctionId);
+
   @Query(
       nativeQuery = true,
       value =
-          "update auction set status = ?1 where id in ?2")
-  public void updateAuctionPayList(String status,List<Long> auctionId);
-
-  @Query(
-		  nativeQuery = true,
-		  value =
-		  "select a.*, b.name, b.images from auction a left join asset b on b.id = a.assest_id"
-				  + " where a.status = \"Upcoming\" or a.status = \"Active\" order by rand() limit 6")
+          "select a.*, b.name, b.images from auction a left join asset b on b.id = a.assest_id"
+              + " where a.status = \"Upcoming\" or a.status = \"Active\" order by rand() limit 6")
   List<Map<String, Object>> findLimit6RandomAuction();
-
 }
